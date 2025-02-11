@@ -7,12 +7,24 @@ namespace shipdock
 {
     public partial class shipdock : Form
     {
+        private static byte[] userbuffer = new byte[1024]; // 设置一个字节缓冲区
+        private static int userbufferIndex = 0;
+        private static byte[] databuffer = new byte[1024]; // 设置一个字节缓冲区
+        private static int databufferIndex = 0;
         private StreamWriter logWriter;
+        private bool isLogWriterOpen = false;
         private Bitmap traBitmap;
         private Graphics traGraphics;
         private PointF rightTop, leftBottom;
         private float axisX, axisY;
-        SerialPort userPort, dataPort;
+        private SerialPort userPort = new SerialPort();
+        private SerialPort dataPort = new SerialPort();
+        private enum LogLevel
+        {
+            Info,
+            Warning,
+            Error
+        }
         public shipdock()
         {
             InitializeComponent();
@@ -30,12 +42,12 @@ namespace shipdock
                 {
                     // 创建文件夹
                     Directory.CreateDirectory(this.logPath.Text);
-                    UpdateLog("文件夹已创建: " + this.logPath.Text);
+                    UpdateLog("文件夹已创建: " + this.logPath.Text, LogLevel.Info);
                 }
                 catch (Exception ex)
                 {
                     // 捕获异常并输出错误信息
-                    UpdateLog("创建文件夹时发生错误: " + ex.Message);
+                    UpdateLog(ex.Message, LogLevel.Error);
                 }
             }
             if (string.IsNullOrWhiteSpace(this.DataPath.Text))
@@ -45,12 +57,12 @@ namespace shipdock
                 {
                     // 创建文件夹
                     Directory.CreateDirectory(this.DataPath.Text);
-                    UpdateLog("文件夹已创建: " + this.DataPath.Text);
+                    UpdateLog("文件夹已创建: " + this.DataPath.Text, LogLevel.Info);
                 }
                 catch (Exception ex)
                 {
                     // 捕获异常并输出错误信息
-                    UpdateLog("创建文件夹时发生错误: " + ex.Message);
+                    UpdateLog(ex.Message, LogLevel.Error);
                 }
             }
             string[] ports = SerialPort.GetPortNames();
@@ -63,16 +75,16 @@ namespace shipdock
             {
                 cbUserPort.Items.AddRange(ports);
                 cbDataPort.Items.AddRange(ports);
-                UpdateLog("端口可用数量:" + ports.Length.ToString());
+                UpdateLog("端口可用数量:" + ports.Length.ToString(), LogLevel.Info);
             }
             else
             {
-                UpdateLog("没有可用的端口！");
+                UpdateLog("没有可用的端口！", LogLevel.Warning);
             }
             this.cbUserBaudRate.Text = "115200";
             this.cbDataBaudRate.Text = "921600";
             this.ProgramStart.Text = "系统启动时间为:  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
+            userPort.DataReceived += new SerialDataReceivedEventHandler(UserPort_DataReceived);
             //画图初始化
             traBitmap = new Bitmap(pbTrajectory.Size.Width, pbTrajectory.Size.Height);
             traGraphics = Graphics.FromImage(traBitmap);
@@ -151,37 +163,53 @@ namespace shipdock
                 IsLog.ForeColor = System.Drawing.Color.Black;
                 string LogPathname = this.logPath.Text + "Log" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
                 logWriter = new StreamWriter(LogPathname, true);  // true 表示追加写入
-                UpdateLog("启动日志系统");
+                isLogWriterOpen = true;
+                UpdateLog("启动日志系统", LogLevel.Info);
             }
             else
             {
                 // 禁用控件时，更新提示信息或控件样式
                 IsLog.ForeColor = System.Drawing.Color.Gray;
                 logPath.BackColor = System.Drawing.Color.LightGray;
-                UpdateLog("关闭日志系统");
+                UpdateLog("关闭日志系统", LogLevel.Info);
+                isLogWriterOpen = false;
                 logWriter.Close();
 
             }
         }
 
         //更新Log
-        private void UpdateLog(string message)
+        private void UpdateLog(string message, LogLevel loglevel)
         {
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             message = message + $"{"     "}[{timestamp}]{Environment.NewLine}";
+            message = $"[{loglevel}]   " + message;
             // 检查是否在 UI 线程
             if (Log.InvokeRequired)
             {
                 // 如果在非 UI 线程，使用 Invoke 切换到 UI 线程
-                Log.Invoke(new Action<string>(UpdateLog), new object[] { message });
+                Log.Invoke(new Action<string, LogLevel>(UpdateLog), new object[] { message, loglevel });
             }
             else
             {
                 // 在 UI 线程中更新日志到 RichTextBox
-                Log.AppendText(message);
-
+                if(loglevel==LogLevel.Info)
+                {
+                    Log.SelectionColor = System.Drawing.Color.Black;
+                    Log.AppendText(message);
+                }
+                if (loglevel == LogLevel.Error)
+                {
+                    Log.SelectionColor = System.Drawing.Color.Red;
+                    Log.AppendText(message);
+                }
+                if (loglevel == LogLevel.Warning)
+                {
+                    Log.SelectionColor = System.Drawing.Color.Yellow;
+                    Log.AppendText(message);
+                }
                 // 将日志同时写入 txt 文件
-                if (logWriter != null)
+                if(isLogWriterOpen)
                 {
                     logWriter.WriteLine(message);
                     logWriter.Flush();  // 确保实时写入文件
@@ -246,6 +274,8 @@ namespace shipdock
             // 如果用户选择了文件夹
             if (result == DialogResult.OK)
             {
+
+
                 this.DataPath.Text = folderDialog.SelectedPath + @"\";
             }
         }
@@ -270,36 +300,74 @@ namespace shipdock
 
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void btnConnectPort_Click(object sender, EventArgs e)
         {
             //设置用户端口和数据端口
-            userPort.PortName = this.cbUserPort.Text;
-            userPort.BaudRate = int.Parse(this.cbUserBaudRate.Text);
-            dataPort.PortName = this.cbDataPort.Text;
-            dataPort.BaudRate = int.Parse(this.cbDataBaudRate.Text);
             try
             {
+                userPort.PortName = this.cbUserPort.Text;
+                userPort.BaudRate = int.Parse(this.cbUserBaudRate.Text);
+                dataPort.PortName = this.cbDataPort.Text;
+                dataPort.BaudRate = int.Parse(this.cbDataBaudRate.Text);
                 userPort.Open();
+                UpdateLog("用户端口已打开", LogLevel.Info);
                 dataPort.Open();
-                UpdateLog("串口已打开");
+                UpdateLog("数据端口已打开", LogLevel.Info);
+                Thread CheckPortThread = new Thread(IsConnectPort);
+                CheckPortThread.Start();
             }
             catch (Exception ex)
             {
-                UpdateLog("错误: " + ex.Message);
+                UpdateLog(ex.Message, LogLevel.Error);
             }
         }
-
+        //检测是否串口是否可以进行通信
+        private void IsConnectPort()
+        {
+            this.btnConnectPort.Enabled = false;
+            this.btnConnectPort.ForeColor = System.Drawing.Color.Gray;
+            for (int i = 0; i < 20; i++)
+            {
+                userPort.WriteLine("configDataPort " + this.cbDataBaudRate.Text + " 1");
+                Thread.Sleep(50);
+                if (userbufferIndex > 0)
+                {
+                    byte[] receiveData = new byte[userbufferIndex];
+                    Array.Copy(userbuffer, receiveData, 10);
+                    userbufferIndex = 0;
+                    if (BitConverter.ToString(receiveData) == "done")
+                    {
+                        UpdateLog("端口可进行正常通信", LogLevel.Info);
+                        this.btnConnectPort.Enabled = true;
+                        this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
+                        break;
+                    }
+                }
+            }
+            UpdateLog("端口不可进行正常通信", LogLevel.Error);
+            this.btnConnectPort.Enabled = true;
+            this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
+        }
+        //用户端口接收中断
+        private static void UserPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            // 获取接收到的数据的长度
+            int bytesToRead = sp.BytesToRead;
+            sp.Read(userbuffer, 0, bytesToRead);
+            userbufferIndex = userbufferIndex + bytesToRead;
+        }
         private void btnClosePort_Click(object sender, EventArgs e)
         {
             try
             {
                 userPort.Close();
                 dataPort.Close();
-                UpdateLog("串口已关闭");
+                UpdateLog("串口已关闭", LogLevel.Info);
             }
             catch (Exception ex)
             {
-                UpdateLog("错误: " + ex.Message);
+                UpdateLog(ex.Message, LogLevel.Error);
             }
         }
     }

@@ -27,3 +27,4 @@ D:\Microsoft Visual Studio\work\shipdock\bin\Debug\net6.0-windows8.0\runtimes\wi
 D:\Microsoft Visual Studio\work\shipdock\obj\Debug\net6.0-windows8.0\shipdock.ParamForm.resources
 D:\Microsoft Visual Studio\work\shipdock\obj\Debug\net6.0-windows8.0\shipdock.Properties.Resources.resources
 D:\Microsoft Visual Studio\work\shipdock\obj\Debug\net6.0-windows8.0\shipdock.csproj.Up2Date
+D:\Microsoft Visual Studio\work\shipdock\obj\Debug\net6.0-windows8.0\shipdock.sourcelink.json

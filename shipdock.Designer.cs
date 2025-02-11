@@ -276,7 +276,7 @@
             btnConnectPort.TabIndex = 17;
             btnConnectPort.Text = "连接";
             btnConnectPort.UseVisualStyleBackColor = true;
-            btnConnectPort.Click += btnConnect_Click;
+            btnConnectPort.Click += btnConnectPort_Click;
             // 
             // cbUserBaudRate
             // 
