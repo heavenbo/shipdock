@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using static System.Windows.Forms.DataFormats;
 using System.Threading.Channels;
+using System.Text;
 
 namespace shipdock
 {
@@ -379,8 +380,9 @@ namespace shipdock
                 UpdateLog("用户端口已打开", LogLevel.Info);
                 dataPort.Open();
                 UpdateLog("数据端口已打开", LogLevel.Info);
-                Thread CheckPortThread = new Thread(IsConnectPort);
-                CheckPortThread.Start();
+                //Thread CheckPortThread = new Thread(IsConnectPort);
+                //CheckPortThread.Start();
+                IsConnectPort();
             }
             catch (Exception ex)
             {
@@ -394,16 +396,15 @@ namespace shipdock
             this.btnConnectPort.ForeColor = System.Drawing.Color.Gray;
             for (int i = 0; i < 20; i++)
             {
-                userPort.WriteLine("configDataPort " + this.cbDataBaudRate.Text + " 1 \n");
+                userPort.WriteLine("configDataPort " + this.cbDataBaudRate.Text + " 1");
                 Thread.Sleep(50);
                 if (userbufferIndex > 0)
                 {
                     byte[] receiveData = new byte[userbufferIndex];
                     Array.Copy(userbuffer, receiveData, userbufferIndex);
                     userbufferIndex = 0;
-                    if (BitConverter.ToString(receiveData) == "Done")
+                    if (Encoding.ASCII.GetString(receiveData) == "Done")
                     {
-                        UpdateLog("端口可进行正常通信", LogLevel.Info);
                         this.btnConnectPort.Enabled = true;
                         this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
                         this.btnSendParam.Enabled = true;
@@ -414,6 +415,7 @@ namespace shipdock
                         this.btnStopLadar.ForeColor = System.Drawing.Color.Black;
                         break;
                     }
+                    UpdateLog(Encoding.ASCII.GetString(receiveData), LogLevel.Info);
                 }
             }
             UpdateLog("端口不可进行正常通信", LogLevel.Error);
