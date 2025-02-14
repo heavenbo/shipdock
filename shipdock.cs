@@ -2,6 +2,7 @@ using System.Reflection.Metadata;
 using System.Windows.Forms;
 using System.IO.Ports;
 using static System.Windows.Forms.DataFormats;
+using System.Threading.Channels;
 
 namespace shipdock
 {
@@ -13,6 +14,7 @@ namespace shipdock
         private static int databufferIndex = 0;
         private StreamWriter logWriter;
         private bool isLogWriterOpen = false;
+        private bool IsChangeStart = false;
         private Bitmap traBitmap;
         private Graphics traGraphics;
         private PointF rightTop, leftBottom;
@@ -32,9 +34,12 @@ namespace shipdock
         // 加载窗体
         private void shipdock_Load(object sender, EventArgs e)
         {
+            //时间标注
+            this.ProgramStart.Text = "系统启动时间为:  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //文件路径
             this.logPath.Text = Properties.Settings.Default.LogPath;
-            //this.firmwarePath.Text = Properties.Settings.Default.FirmwarePath;
             this.DataPath.Text = Properties.Settings.Default.DataPath;
+            this.cfgPath.Text = Properties.Settings.Default.CfgPath;
             if (string.IsNullOrWhiteSpace(this.logPath.Text))
             {
                 this.logPath.Text = Path.GetFullPath("../log/");
@@ -65,26 +70,23 @@ namespace shipdock
                     UpdateLog(ex.Message, LogLevel.Error);
                 }
             }
-            string[] ports = SerialPort.GetPortNames();
-
-            // 清空之前的端口
-            cbUserPort.Items.Clear();
-
-            // 如果有可用的端口，添加到ComboBox
-            if (ports.Length > 0)
+            if (string.IsNullOrWhiteSpace(this.cfgPath.Text))
             {
-                cbUserPort.Items.AddRange(ports);
-                cbDataPort.Items.AddRange(ports);
-                UpdateLog("端口可用数量:" + ports.Length.ToString(), LogLevel.Info);
+                this.cfgPath.Text = Path.GetFullPath("../../../Properties/default.cfg");
             }
-            else
-            {
-                UpdateLog("没有可用的端口！", LogLevel.Warning);
-            }
+            
             this.cbUserBaudRate.Text = "115200";
             this.cbDataBaudRate.Text = "921600";
-            this.ProgramStart.Text = "系统启动时间为:  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //添加中断函数
             userPort.DataReceived += new SerialDataReceivedEventHandler(UserPort_DataReceived);
+            //相关按钮disabled
+            this.btnSendParam.Enabled = false;
+            this.btnSendParam.ForeColor = System.Drawing.Color.Gray;
+            this.btnStartLadar.Enabled = false;
+            this.btnStartLadar.ForeColor = System.Drawing.Color.Gray;
+            this.btnStopLadar.Enabled = false;
+            this.btnStopLadar.ForeColor = System.Drawing.Color.Gray;
+
             //画图初始化
             traBitmap = new Bitmap(pbTrajectory.Size.Width, pbTrajectory.Size.Height);
             traGraphics = Graphics.FromImage(traBitmap);
@@ -123,6 +125,18 @@ namespace shipdock
                 }
             }
             pbTrajectory.Image = traBitmap;
+        }
+        private void shipdock_Close(object sender, FormClosingEventArgs e)
+        {
+            var confirmForm = new Form();
+            confirmForm.StartPosition = FormStartPosition.CenterParent;  // 设置在父窗体中央显示
+            var result = MessageBox.Show(this, "确定要退出吗?", "退出确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.No)
+            {
+                // 取消窗体关闭操作
+                e.Cancel = true;
+            }
         }
         //private void btnfirmware_Click(object sender, EventArgs e)
         //{
@@ -193,7 +207,7 @@ namespace shipdock
             else
             {
                 // 在 UI 线程中更新日志到 RichTextBox
-                if(loglevel==LogLevel.Info)
+                if (loglevel == LogLevel.Info)
                 {
                     Log.SelectionColor = System.Drawing.Color.Black;
                     Log.AppendText(message);
@@ -209,7 +223,7 @@ namespace shipdock
                     Log.AppendText(message);
                 }
                 // 将日志同时写入 txt 文件
-                if(isLogWriterOpen)
+                if (isLogWriterOpen)
                 {
                     logWriter.WriteLine(message);
                     logWriter.Flush();  // 确保实时写入文件
@@ -274,8 +288,6 @@ namespace shipdock
             // 如果用户选择了文件夹
             if (result == DialogResult.OK)
             {
-
-
                 this.DataPath.Text = folderDialog.SelectedPath + @"\";
             }
         }
@@ -288,16 +300,70 @@ namespace shipdock
 
         private void btnSetParam_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.LogPath = this.logPath.Text;
+            Properties.Settings.Default.DataPath = this.DataPath.Text;
+            Properties.Settings.Default.CfgPath = this.cfgPath.Text;
+            Properties.Settings.Default.Save();
+            if (string.IsNullOrEmpty(this.cfgPath.Text))
+            {
+                UpdateLog("cfg文件路径为空", LogLevel.Error);
+                return;
+            }
+            else if (!this.cfgPath.Text.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase) && !this.cfgPath.Text.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
+            {
+                UpdateLog("指定cfg文件错误,仅限于.cfg或.txt", LogLevel.Error);
+                return;
+            }
             // 创建一个新的窗体实例
             ParamForm paramForm = new ParamForm();
-
             // 显示新的窗体
             paramForm.Show();
         }
 
         private void btnSendParam_Click(object sender, EventArgs e)
         {
-
+            using (StreamReader reader = new StreamReader(this.cfgPath.Text))
+            {
+                string line;
+                int NumDone = 0;
+                int NumCLI = 0;
+                // 逐行读取文件内容
+                while ((line = reader.ReadLine()) != null)
+                {
+                    // 如果行首是 "%"，则跳过这行
+                    if (line.StartsWith("%"))
+                    {
+                        continue;
+                    }
+                    // 发送有效的行（非以%开头）
+                    userPort.WriteLine(line);
+                    NumCLI++;
+                    Thread.Sleep(50);
+                    if (userbufferIndex > 0)
+                    {
+                        byte[] receiveData = new byte[userbufferIndex];
+                        Array.Copy(userbuffer, receiveData, userbufferIndex);
+                        userbufferIndex = 0;
+                        if (BitConverter.ToString(receiveData) == "Done")
+                        {
+                            NumDone++;
+                        }
+                        else
+                        {
+                            UpdateLog(line, LogLevel.Warning);
+                        }
+                    }
+                }
+                if ((float)NumDone / NumCLI > 0.5)
+                {
+                    UpdateLog("指令发送成功，共发送了" + NumCLI.ToString() + "条指令，" + "共接收了" + NumDone.ToString() + "条Done", LogLevel.Info);
+                }
+                else
+                {
+                    UpdateLog("指令发送失败，共发送了" + NumCLI.ToString() + "条指令，" + "共接收了" + NumDone.ToString() + "条Done", LogLevel.Error);
+                }
+            }
+            IsChangeStart = true;
         }
 
         private void btnConnectPort_Click(object sender, EventArgs e)
@@ -328,18 +394,24 @@ namespace shipdock
             this.btnConnectPort.ForeColor = System.Drawing.Color.Gray;
             for (int i = 0; i < 20; i++)
             {
-                userPort.WriteLine("configDataPort " + this.cbDataBaudRate.Text + " 1");
+                userPort.WriteLine("configDataPort " + this.cbDataBaudRate.Text + " 1 \n");
                 Thread.Sleep(50);
                 if (userbufferIndex > 0)
                 {
                     byte[] receiveData = new byte[userbufferIndex];
-                    Array.Copy(userbuffer, receiveData, 10);
+                    Array.Copy(userbuffer, receiveData, userbufferIndex);
                     userbufferIndex = 0;
-                    if (BitConverter.ToString(receiveData) == "done")
+                    if (BitConverter.ToString(receiveData) == "Done")
                     {
                         UpdateLog("端口可进行正常通信", LogLevel.Info);
                         this.btnConnectPort.Enabled = true;
                         this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
+                        this.btnSendParam.Enabled = true;
+                        this.btnSendParam.ForeColor = System.Drawing.Color.Black;
+                        this.btnStartLadar.Enabled = true;
+                        this.btnStartLadar.ForeColor = System.Drawing.Color.Black;
+                        this.btnStopLadar.Enabled = true;
+                        this.btnStopLadar.ForeColor = System.Drawing.Color.Black;
                         break;
                     }
                 }
@@ -368,6 +440,88 @@ namespace shipdock
             catch (Exception ex)
             {
                 UpdateLog(ex.Message, LogLevel.Error);
+            }
+        }
+        private void btncfgPath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            // 设置文件类型过滤器
+            openFileDialog.Filter = "配置文件 (*.cfg)|*.cfg|文本文件 (*.txt)|*.txt";
+
+            // 只允许选择一个文件
+            openFileDialog.Multiselect = false;
+
+            // 打开文件选择对话框
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.cfgPath.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void btnStopLadar_Click(object sender, EventArgs e)
+        {
+            userPort.WriteLine("sensorStop \n");
+            Thread.Sleep(50);
+            if (userbufferIndex > 0)
+            {
+                byte[] receiveData = new byte[userbufferIndex];
+                Array.Copy(userbuffer, receiveData, userbufferIndex);
+                userbufferIndex = 0;
+                if (BitConverter.ToString(receiveData) == "Done")
+                {
+                    UpdateLog("雷达探测已关闭", LogLevel.Info);
+                }
+                else
+                {
+                    UpdateLog(BitConverter.ToString(receiveData), LogLevel.Error);
+                }
+            }
+        }
+
+        private void btnStartLadar_Click(object sender, EventArgs e)
+        {
+            if (IsChangeStart)
+            {
+                userPort.WriteLine("sensorStart \n");
+                IsChangeStart = false;
+            }
+            else
+            {
+                userPort.WriteLine("sensorStart 0 \n");
+            }
+            Thread.Sleep(50);
+            if (userbufferIndex > 0)
+            {
+                byte[] receiveData = new byte[userbufferIndex];
+                Array.Copy(userbuffer, receiveData, userbufferIndex);
+                userbufferIndex = 0;
+                if (BitConverter.ToString(receiveData) == "Done")
+                {
+                    UpdateLog("雷达探测已开启", LogLevel.Info);
+                }
+                else
+                {
+                    UpdateLog(BitConverter.ToString(receiveData), LogLevel.Error);
+                }
+            }
+        }
+
+        private void btnRefreshPort_Click(object sender, EventArgs e)
+        {
+            string[] ports = SerialPort.GetPortNames();
+            cbUserPort.Items.Clear();
+            cbDataPort.Items.Clear();
+            if (ports.Length > 0)
+            {
+                cbUserPort.Items.AddRange(ports);
+
+                cbDataPort.Items.AddRange(ports);
+                UpdateLog("端口可用数量:" + ports.Length.ToString(), LogLevel.Info);
+            }
+            else
+            {
+                UpdateLog("没有可用的端口！", LogLevel.Warning);
             }
         }
     }

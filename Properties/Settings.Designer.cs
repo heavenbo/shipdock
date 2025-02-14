@@ -98,84 +98,84 @@ namespace shipdock.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double K_near {
+        public double NearK {
             get {
-                return ((double)(this["K_near"]));
+                return ((double)(this["NearK"]));
             }
             set {
-                this["K_near"] = value;
+                this["NearK"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Sample_near {
+        public double SampleNear {
             get {
-                return ((double)(this["Sample_near"]));
+                return ((double)(this["SampleNear"]));
             }
             set {
-                this["Sample_near"] = value;
+                this["SampleNear"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Tr_near {
+        public double TrNear {
             get {
-                return ((double)(this["Tr_near"]));
+                return ((double)(this["TrNear"]));
             }
             set {
-                this["Tr_near"] = value;
+                this["TrNear"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double K_far {
+        public double FarK {
             get {
-                return ((double)(this["K_far"]));
+                return ((double)(this["FarK"]));
             }
             set {
-                this["K_far"] = value;
+                this["FarK"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Sample_far {
+        public double SampleFar {
             get {
-                return ((double)(this["Sample_far"]));
+                return ((double)(this["SampleFar"]));
             }
             set {
-                this["Sample_far"] = value;
+                this["SampleFar"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Tr_far {
+        public double TrFar {
             get {
-                return ((double)(this["Tr_far"]));
+                return ((double)(this["TrFar"]));
             }
             set {
-                this["Tr_far"] = value;
+                this["TrFar"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double ADC_start_time {
+        public double StartADC {
             get {
-                return ((double)(this["ADC_start_time"]));
+                return ((double)(this["StartADC"]));
             }
             set {
-                this["ADC_start_time"] = value;
+                this["StartADC"] = value;
             }
         }
         
@@ -188,6 +188,54 @@ namespace shipdock.Properties {
             }
             set {
                 this["StartFreq"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CfgPath {
+            get {
+                return ((string)(this["CfgPath"]));
+            }
+            set {
+                this["CfgPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double TxStart {
+            get {
+                return ((double)(this["TxStart"]));
+            }
+            set {
+                this["TxStart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double RxGain {
+            get {
+                return ((double)(this["RxGain"]));
+            }
+            set {
+                this["RxGain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DetectModel {
+            get {
+                return ((int)(this["DetectModel"]));
+            }
+            set {
+                this["DetectModel"] = value;
             }
         }
     }

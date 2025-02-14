@@ -42,6 +42,7 @@
             btnSetParam = new Button();
             btnStopLadar = new Button();
             PortGroups = new GroupBox();
+            btnClosePort = new Button();
             cbDataBaudRate = new ComboBox();
             label1 = new Label();
             label6 = new Label();
@@ -51,11 +52,14 @@
             label4 = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            btncfgPath = new Button();
+            cfgPath = new TextBox();
+            label7 = new Label();
             pbTrajectory = new PictureBox();
             ParamsGroup = new GroupBox();
             ProgramStart = new TextBox();
             label5 = new Label();
-            btnClosePort = new Button();
+            btnRefreshPort = new Button();
             PortGroups.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -78,7 +82,7 @@
             btnLog.AutoSize = true;
             btnLog.Enabled = false;
             btnLog.ForeColor = SystemColors.ControlText;
-            btnLog.Location = new Point(267, 81);
+            btnLog.Location = new Point(267, 85);
             btnLog.Margin = new Padding(2);
             btnLog.Name = "btnLog";
             btnLog.Size = new Size(69, 27);
@@ -92,10 +96,10 @@
             logPath.BackColor = SystemColors.ScrollBar;
             logPath.Enabled = false;
             logPath.ForeColor = SystemColors.ControlText;
-            logPath.Location = new Point(77, 83);
+            logPath.Location = new Point(83, 87);
             logPath.Margin = new Padding(2);
             logPath.Name = "logPath";
-            logPath.Size = new Size(184, 23);
+            logPath.Size = new Size(180, 23);
             logPath.TabIndex = 6;
             logPath.TextChanged += logPath_TextChanged;
             // 
@@ -103,7 +107,7 @@
             // 
             IsLog.AutoSize = true;
             IsLog.ForeColor = SystemColors.GrayText;
-            IsLog.Location = new Point(4, 81);
+            IsLog.Location = new Point(4, 89);
             IsLog.Margin = new Padding(2);
             IsLog.Name = "IsLog";
             IsLog.Size = new Size(75, 21);
@@ -115,26 +119,26 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(17, 34);
+            label3.Location = new Point(17, 18);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(56, 17);
             label3.TabIndex = 10;
-            label3.Text = "存储路径";
+            label3.Text = "数据文件";
             // 
             // DataPath
             // 
-            DataPath.Location = new Point(77, 31);
+            DataPath.Location = new Point(83, 15);
             DataPath.Margin = new Padding(2);
             DataPath.Name = "DataPath";
-            DataPath.Size = new Size(184, 23);
+            DataPath.Size = new Size(178, 23);
             DataPath.TabIndex = 11;
             DataPath.TextChanged += DataPath_TextChanged;
             // 
             // btnData
             // 
             btnData.AutoSize = true;
-            btnData.Location = new Point(267, 29);
+            btnData.Location = new Point(267, 13);
             btnData.Margin = new Padding(2);
             btnData.Name = "btnData";
             btnData.Size = new Size(69, 27);
@@ -171,6 +175,7 @@
             btnStartLadar.TabIndex = 15;
             btnStartLadar.Text = "程序启动";
             btnStartLadar.UseVisualStyleBackColor = true;
+            btnStartLadar.Click += btnStartLadar_Click;
             // 
             // btnSendParam
             // 
@@ -206,9 +211,11 @@
             btnStopLadar.TabIndex = 18;
             btnStopLadar.Text = "程序停止";
             btnStopLadar.UseVisualStyleBackColor = true;
+            btnStopLadar.Click += btnStopLadar_Click;
             // 
             // PortGroups
             // 
+            PortGroups.Controls.Add(btnRefreshPort);
             PortGroups.Controls.Add(btnClosePort);
             PortGroups.Controls.Add(cbDataBaudRate);
             PortGroups.Controls.Add(label1);
@@ -227,6 +234,17 @@
             PortGroups.TabIndex = 19;
             PortGroups.TabStop = false;
             PortGroups.Text = "端口连接";
+            // 
+            // btnClosePort
+            // 
+            btnClosePort.Location = new Point(197, 84);
+            btnClosePort.Margin = new Padding(2);
+            btnClosePort.Name = "btnClosePort";
+            btnClosePort.Size = new Size(71, 30);
+            btnClosePort.TabIndex = 22;
+            btnClosePort.Text = "关闭";
+            btnClosePort.UseVisualStyleBackColor = true;
+            btnClosePort.Click += btnClosePort_Click;
             // 
             // cbDataBaudRate
             // 
@@ -269,7 +287,7 @@
             // 
             // btnConnectPort
             // 
-            btnConnectPort.Location = new Point(67, 84);
+            btnConnectPort.Location = new Point(112, 84);
             btnConnectPort.Margin = new Padding(2);
             btnConnectPort.Name = "btnConnectPort";
             btnConnectPort.Size = new Size(71, 30);
@@ -313,6 +331,9 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(btncfgPath);
+            groupBox2.Controls.Add(cfgPath);
+            groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(IsLog);
             groupBox2.Controls.Add(btnData);
@@ -327,6 +348,36 @@
             groupBox2.TabIndex = 21;
             groupBox2.TabStop = false;
             groupBox2.Text = "文件";
+            // 
+            // btncfgPath
+            // 
+            btncfgPath.AutoSize = true;
+            btncfgPath.Location = new Point(267, 49);
+            btncfgPath.Margin = new Padding(2);
+            btncfgPath.Name = "btncfgPath";
+            btncfgPath.Size = new Size(69, 27);
+            btncfgPath.TabIndex = 15;
+            btncfgPath.Text = "浏览";
+            btncfgPath.UseVisualStyleBackColor = true;
+            btncfgPath.Click += btncfgPath_Click;
+            // 
+            // cfgPath
+            // 
+            cfgPath.Location = new Point(85, 51);
+            cfgPath.Margin = new Padding(2);
+            cfgPath.Name = "cfgPath";
+            cfgPath.Size = new Size(178, 23);
+            cfgPath.TabIndex = 14;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(17, 54);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(56, 17);
+            label7.TabIndex = 13;
+            label7.Text = "参数文件";
             // 
             // pbTrajectory
             // 
@@ -371,16 +422,16 @@
             label5.TabIndex = 25;
             label5.Text = "浮体轨迹图";
             // 
-            // btnClosePort
+            // btnRefreshPort
             // 
-            btnClosePort.Location = new Point(161, 84);
-            btnClosePort.Margin = new Padding(2);
-            btnClosePort.Name = "btnClosePort";
-            btnClosePort.Size = new Size(71, 30);
-            btnClosePort.TabIndex = 22;
-            btnClosePort.Text = "关闭";
-            btnClosePort.UseVisualStyleBackColor = true;
-            btnClosePort.Click += btnClosePort_Click;
+            btnRefreshPort.Location = new Point(29, 84);
+            btnRefreshPort.Margin = new Padding(2);
+            btnRefreshPort.Name = "btnRefreshPort";
+            btnRefreshPort.Size = new Size(71, 30);
+            btnRefreshPort.TabIndex = 23;
+            btnRefreshPort.Text = "刷新";
+            btnRefreshPort.UseVisualStyleBackColor = true;
+            btnRefreshPort.Click += btnRefreshPort_Click;
             // 
             // shipdock
             // 
@@ -398,6 +449,7 @@
             Margin = new Padding(2);
             Name = "shipdock";
             Text = "浮体检测程序";
+            FormClosing += shipdock_Close;
             Load += shipdock_Load;
             PortGroups.ResumeLayout(false);
             PortGroups.PerformLayout();
@@ -441,5 +493,9 @@
         private Label label6;
         private ComboBox cbDataPort;
         private Button btnClosePort;
+        private Button btncfgPath;
+        private TextBox cfgPath;
+        private Label label7;
+        private Button btnRefreshPort;
     }
 }
