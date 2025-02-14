@@ -17,6 +17,8 @@ namespace shipdock
     {
         //常数
         public const int SpeedOfLight = 299792458;
+
+        
         private const double dx = 1.8161e-3;
         private int Nant = 4;
         double pi = 3.1415926;
