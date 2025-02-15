@@ -404,6 +404,7 @@ namespace shipdock
                 this.tbTxStart.Text = string.Empty;  // 清空文本
             }
         }
+
         private void tbRxGain_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbRxGain.Text))
@@ -505,14 +506,14 @@ namespace shipdock
             //显示
             if (this.btnNearDetect.Checked || this.btnAllDetect.Checked)
             {
-                this.tbBnear.Text = (this.NearB / 1e6).ToString("F2");
+                this.tbBnear.Text = (this.NearB).ToString("F2");
                 this.tbRresNear.Text = (this.RresNear * 1e2).ToString("F2");
                 this.tbVresNear.Text = this.VresNear.ToString("F2");
                 this.tbSnear.Text = this.NearS.ToString("F2");
             }
             if (this.btnFarDetect.Checked || this.btnAllDetect.Checked)
             {
-                this.tbBfar.Text = (this.FarB / 1e6).ToString("F2");
+                this.tbBfar.Text = (this.FarB).ToString("F2");
                 this.tbRresFar.Text = (this.RresFar * 1e2).ToString("F2");
                 this.tbVresFar.Text = this.VresFar.ToString("F2");
                 this.tbSfar.Text = this.FarS.ToString("F2");
@@ -555,6 +556,8 @@ namespace shipdock
                 Properties.Settings.Default.TrFar = this.TrFar;
                 Properties.Settings.Default.StartADC = this.StartADC;
                 Properties.Settings.Default.StartFreq = this.StartFreq;
+                Properties.Settings.Default.TxStart = this.TxStart;
+                Properties.Settings.Default.RxGain = this.RxGain;
                 Properties.Settings.Default.Save();
                 //设置cfg文件
                 Writecfg();
@@ -586,7 +589,7 @@ namespace shipdock
             cfgwriter.Flush();
             cfgwriter.WriteLine("chirpCfg 1 1 1 0 0 0 0 1 ");
             cfgwriter.Flush();
-            if (this.DetectModel==1)
+            if (this.DetectModel == 1)
             {
                 cfgwriter.WriteLine($"frameCfg 0 0 32 0 {this.FrameT} 1 0 ");
                 cfgwriter.Flush();
@@ -639,7 +642,7 @@ namespace shipdock
             cfgwriter.Flush();
             cfgwriter.Close();
         }
-        private void ClosedParams_Click(object sender, EventArgs e)
+        private void btnClosedParams_Click(object sender, EventArgs e)
         {
             this.Close();
         }

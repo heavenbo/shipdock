@@ -38,17 +38,17 @@ namespace shipdock
             //时间标注
             this.ProgramStart.Text = "系统启动时间为:  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             //文件路径
-            this.logPath.Text = Properties.Settings.Default.LogPath;
-            this.DataPath.Text = Properties.Settings.Default.DataPath;
-            this.cfgPath.Text = Properties.Settings.Default.CfgPath;
-            if (string.IsNullOrWhiteSpace(this.logPath.Text))
+            this.tbLogPath.Text = Properties.Settings.Default.LogPath;
+            this.tbDataPath.Text = Properties.Settings.Default.DataPath;
+            this.tbCfgPath.Text = Properties.Settings.Default.CfgPath;
+            if (string.IsNullOrWhiteSpace(this.tbLogPath.Text))
             {
-                this.logPath.Text = Path.GetFullPath("../log/");
+                this.tbLogPath.Text = Path.GetFullPath("../log/");
                 try
                 {
                     // 创建文件夹
-                    Directory.CreateDirectory(this.logPath.Text);
-                    UpdateLog("文件夹已创建: " + this.logPath.Text, LogLevel.Info);
+                    Directory.CreateDirectory(this.tbLogPath.Text);
+                    UpdateLog("文件夹已创建: " + this.tbLogPath.Text, LogLevel.Info);
                 }
                 catch (Exception ex)
                 {
@@ -56,14 +56,14 @@ namespace shipdock
                     UpdateLog(ex.Message, LogLevel.Error);
                 }
             }
-            if (string.IsNullOrWhiteSpace(this.DataPath.Text))
+            if (string.IsNullOrWhiteSpace(this.tbDataPath.Text))
             {
-                this.DataPath.Text = Path.GetFullPath("../../../data/");
+                this.tbDataPath.Text = Path.GetFullPath("../../../data/");
                 try
                 {
                     // 创建文件夹
-                    Directory.CreateDirectory(this.DataPath.Text);
-                    UpdateLog("文件夹已创建: " + this.DataPath.Text, LogLevel.Info);
+                    Directory.CreateDirectory(this.tbDataPath.Text);
+                    UpdateLog("文件夹已创建: " + this.tbDataPath.Text, LogLevel.Info);
                 }
                 catch (Exception ex)
                 {
@@ -71,9 +71,9 @@ namespace shipdock
                     UpdateLog(ex.Message, LogLevel.Error);
                 }
             }
-            if (string.IsNullOrWhiteSpace(this.cfgPath.Text))
+            if (string.IsNullOrWhiteSpace(this.tbCfgPath.Text))
             {
-                this.cfgPath.Text = Path.GetFullPath("../../../Properties/default.cfg");
+                this.tbCfgPath.Text = Path.GetFullPath("../../../Properties/default.cfg");
             }
             
             this.cbUserBaudRate.Text = "115200";
@@ -167,16 +167,16 @@ namespace shipdock
         private void IsLog_CheckedChanged(object sender, EventArgs e)
         {
             // 启用或禁用指定的控件
-            logPath.Enabled = IsLog.Checked;
+            tbLogPath.Enabled = IsLog.Checked;
             btnLog.Enabled = IsLog.Checked;
 
             // 可选：根据状态改变控件的样式或提示信息
             if (IsLog.Checked)
             {
                 // 启用控件时，更新提示信息或控件样式
-                logPath.BackColor = System.Drawing.Color.White;
+                tbLogPath.BackColor = System.Drawing.Color.White;
                 IsLog.ForeColor = System.Drawing.Color.Black;
-                string LogPathname = this.logPath.Text + "Log" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+                string LogPathname = this.tbLogPath.Text + "Log" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
                 logWriter = new StreamWriter(LogPathname, true);  // true 表示追加写入
                 isLogWriterOpen = true;
                 UpdateLog("启动日志系统", LogLevel.Info);
@@ -185,7 +185,7 @@ namespace shipdock
             {
                 // 禁用控件时，更新提示信息或控件样式
                 IsLog.ForeColor = System.Drawing.Color.Gray;
-                logPath.BackColor = System.Drawing.Color.LightGray;
+                tbLogPath.BackColor = System.Drawing.Color.LightGray;
                 UpdateLog("关闭日志系统", LogLevel.Info);
                 isLogWriterOpen = false;
                 logWriter.Close();
@@ -197,7 +197,7 @@ namespace shipdock
         private void UpdateLog(string message, LogLevel loglevel)
         {
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            message = message + $"{"     "}[{timestamp}]{Environment.NewLine}";
+            message = message.Trim() + $"{"     "}[{timestamp}]{Environment.NewLine}";
             message = $"[{loglevel}]   " + message;
             // 检查是否在 UI 线程
             if (Log.InvokeRequired)
@@ -220,7 +220,7 @@ namespace shipdock
                 }
                 if (loglevel == LogLevel.Warning)
                 {
-                    Log.SelectionColor = System.Drawing.Color.Yellow;
+                    Log.SelectionColor = System.Drawing.Color.Orange;
                     Log.AppendText(message);
                 }
                 // 将日志同时写入 txt 文件
@@ -255,9 +255,9 @@ namespace shipdock
             }
             graphics.FillPolygon(brush, points); // 填充五角星
         }
-        private void logPath_TextChanged(object sender, EventArgs e)
+        private void tbLogPath_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.LogPath = this.logPath.Text;
+            Properties.Settings.Default.LogPath = this.tbLogPath.Text;
             Properties.Settings.Default.Save();
         }
 
@@ -274,7 +274,7 @@ namespace shipdock
             // 如果用户选择了文件夹
             if (result == DialogResult.OK)
             {
-                this.logPath.Text = folderDialog.SelectedPath + @"\";
+                this.tbLogPath.Text = folderDialog.SelectedPath + @"\";
             }
         }
 
@@ -289,28 +289,28 @@ namespace shipdock
             // 如果用户选择了文件夹
             if (result == DialogResult.OK)
             {
-                this.DataPath.Text = folderDialog.SelectedPath + @"\";
+                this.tbDataPath.Text = folderDialog.SelectedPath + @"\";
             }
         }
 
-        private void DataPath_TextChanged(object sender, EventArgs e)
+        private void tbDataPath_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.DataPath = this.DataPath.Text;
+            Properties.Settings.Default.DataPath = this.tbDataPath.Text;
             Properties.Settings.Default.Save();
         }
 
         private void btnSetParam_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.LogPath = this.logPath.Text;
-            Properties.Settings.Default.DataPath = this.DataPath.Text;
-            Properties.Settings.Default.CfgPath = this.cfgPath.Text;
+            Properties.Settings.Default.LogPath = this.tbLogPath.Text;
+            Properties.Settings.Default.DataPath = this.tbDataPath.Text;
+            Properties.Settings.Default.CfgPath = this.tbCfgPath.Text;
             Properties.Settings.Default.Save();
-            if (string.IsNullOrEmpty(this.cfgPath.Text))
+            if (string.IsNullOrEmpty(this.tbCfgPath.Text))
             {
                 UpdateLog("cfg文件路径为空", LogLevel.Error);
                 return;
             }
-            else if (!this.cfgPath.Text.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase) && !this.cfgPath.Text.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
+            else if (!this.tbCfgPath.Text.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase) && !this.tbCfgPath.Text.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
             {
                 UpdateLog("指定cfg文件错误,仅限于.cfg或.txt", LogLevel.Error);
                 return;
@@ -323,7 +323,7 @@ namespace shipdock
 
         private void btnSendParam_Click(object sender, EventArgs e)
         {
-            using (StreamReader reader = new StreamReader(this.cfgPath.Text))
+            using (StreamReader reader = new StreamReader(this.tbCfgPath.Text))
             {
                 string line;
                 int NumDone = 0;
@@ -403,7 +403,8 @@ namespace shipdock
                     byte[] receiveData = new byte[userbufferIndex];
                     Array.Copy(userbuffer, receiveData, userbufferIndex);
                     userbufferIndex = 0;
-                    if (Encoding.ASCII.GetString(receiveData) == "Done")
+                    string reveive = JudgeReceive(Encoding.ASCII.GetString(receiveData));
+                    if (reveive.Trim() == "Done")
                     {
                         this.btnConnectPort.Enabled = true;
                         this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
@@ -413,9 +414,10 @@ namespace shipdock
                         this.btnStartLadar.ForeColor = System.Drawing.Color.Black;
                         this.btnStopLadar.Enabled = true;
                         this.btnStopLadar.ForeColor = System.Drawing.Color.Black;
-                        break;
+                        UpdateLog("端口可进行正常通信", LogLevel.Info);
+                        return;
                     }
-                    UpdateLog(Encoding.ASCII.GetString(receiveData), LogLevel.Info);
+                    UpdateLog(reveive, LogLevel.Info);
                 }
             }
             UpdateLog("端口不可进行正常通信", LogLevel.Error);
@@ -428,7 +430,7 @@ namespace shipdock
             SerialPort sp = (SerialPort)sender;
             // 获取接收到的数据的长度
             int bytesToRead = sp.BytesToRead;
-            sp.Read(userbuffer, 0, bytesToRead);
+            sp.Read(userbuffer, userbufferIndex, bytesToRead);
             userbufferIndex = userbufferIndex + bytesToRead;
         }
         private void btnClosePort_Click(object sender, EventArgs e)
@@ -444,6 +446,14 @@ namespace shipdock
                 UpdateLog(ex.Message, LogLevel.Error);
             }
         }
+        //判断返回信息
+        private string JudgeReceive(string receivedata)
+        {
+            string[] lines = receivedata.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            // 去掉第一行和最后一行
+            string result = string.Join(Environment.NewLine, lines, 1, lines.Length - 2);
+            return result;
+        }
         private void btncfgPath_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -457,7 +467,7 @@ namespace shipdock
             // 打开文件选择对话框
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.cfgPath.Text = openFileDialog.FileName;
+                this.tbCfgPath.Text = openFileDialog.FileName;
             }
         }
 
@@ -479,6 +489,12 @@ namespace shipdock
                     UpdateLog(BitConverter.ToString(receiveData), LogLevel.Error);
                 }
             }
+        }
+
+        private void tbCfgPath_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.CfgPath = this.tbCfgPath.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void btnStartLadar_Click(object sender, EventArgs e)
