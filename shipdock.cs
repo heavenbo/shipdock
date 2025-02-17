@@ -13,6 +13,7 @@ namespace shipdock
         private static int userbufferIndex = 0;
         private static byte[] databuffer = new byte[1024]; // 设置一个字节缓冲区
         private static int databufferIndex = 0;
+        private static bool IsLogFolderExist = false;
         private StreamWriter logWriter;
         private bool isLogWriterOpen = false;
         private bool IsChangeStart = false;
@@ -41,14 +42,26 @@ namespace shipdock
             this.tbLogPath.Text = Properties.Settings.Default.LogPath;
             this.tbDataPath.Text = Properties.Settings.Default.DataPath;
             this.tbCfgPath.Text = Properties.Settings.Default.CfgPath;
-            if (string.IsNullOrWhiteSpace(this.tbLogPath.Text))
+            if (this.IsLog.Checked)
             {
-                this.tbLogPath.Text = Path.GetFullPath("../log/");
+                if (string.IsNullOrWhiteSpace(this.tbLogPath.Text))
+                {
+                    this.tbLogPath.Text = Path.GetFullPath("../log/");
+                }                
                 try
                 {
-                    // 创建文件夹
-                    Directory.CreateDirectory(this.tbLogPath.Text);
-                    UpdateLog("文件夹已创建: " + this.tbLogPath.Text, LogLevel.Info);
+                    if (!Directory.Exists(this.tbLogPath.Text))
+                    {
+                        // 创建文件夹
+                        Directory.CreateDirectory(this.tbLogPath.Text);
+                        UpdateLog("日志文件夹创建成功", LogLevel.Info);
+                        IsLogFolderExist = true;
+                    }
+                    else
+                    {
+                        IsLogFolderExist = true;
+                        UpdateLog("日志文件夹已存在", LogLevel.Info);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -61,9 +74,17 @@ namespace shipdock
                 this.tbDataPath.Text = Path.GetFullPath("../../../data/");
                 try
                 {
-                    // 创建文件夹
-                    Directory.CreateDirectory(this.tbDataPath.Text);
-                    UpdateLog("文件夹已创建: " + this.tbDataPath.Text, LogLevel.Info);
+                    if (!Directory.Exists(this.tbDataPath.Text))
+                    {
+                        // 创建文件夹
+                        Directory.CreateDirectory(this.tbDataPath.Text);
+                        UpdateLog("数据文件夹创建成功", LogLevel.Info);
+                    }
+                    else
+                    {
+                        UpdateLog("数据文件夹已存在", LogLevel.Info);
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -75,7 +96,7 @@ namespace shipdock
             {
                 this.tbCfgPath.Text = Path.GetFullPath("../../../Properties/default.cfg");
             }
-            
+
             this.cbUserBaudRate.Text = "115200";
             this.cbDataBaudRate.Text = "921600";
             //添加中断函数
@@ -186,10 +207,12 @@ namespace shipdock
                 // 禁用控件时，更新提示信息或控件样式
                 IsLog.ForeColor = System.Drawing.Color.Gray;
                 tbLogPath.BackColor = System.Drawing.Color.LightGray;
-                UpdateLog("关闭日志系统", LogLevel.Info);
-                isLogWriterOpen = false;
-                logWriter.Close();
-
+                UpdateLog("关闭日志系统", LogLevel.Info);                
+                if(isLogWriterOpen)
+                {
+                    isLogWriterOpen = false;
+                    logWriter.Close();
+                }                
             }
         }
 
@@ -223,8 +246,21 @@ namespace shipdock
                     Log.SelectionColor = System.Drawing.Color.Orange;
                     Log.AppendText(message);
                 }
+                if (!IsLogFolderExist)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(this.tbLogPath.Text);
+                        //UpdateLog("日志文件夹创建成功", LogLevel.Info);
+                        IsLogFolderExist = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        //UpdateLog(ex.Message, LogLevel.Error);
+                    }
+                }
                 // 将日志同时写入 txt 文件
-                if (isLogWriterOpen)
+                if (isLogWriterOpen && IsLogFolderExist)
                 {
                     logWriter.WriteLine(message);
                     logWriter.Flush();  // 确保实时写入文件
@@ -257,12 +293,14 @@ namespace shipdock
         }
         private void tbLogPath_TextChanged(object sender, EventArgs e)
         {
+            IsLogFolderExist = false;
             Properties.Settings.Default.LogPath = this.tbLogPath.Text;
             Properties.Settings.Default.Save();
         }
 
         private void btnLog_Click(object sender, EventArgs e)
         {
+            IsLogFolderExist = false;
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             folderDialog.Description = "请选择存放日志的文件夹";
 
@@ -307,12 +345,12 @@ namespace shipdock
             Properties.Settings.Default.Save();
             if (string.IsNullOrEmpty(this.tbCfgPath.Text))
             {
-                UpdateLog("cfg文件路径为空", LogLevel.Error);
+                UpdateLog("参数文件路径为空", LogLevel.Error);
                 return;
             }
             else if (!this.tbCfgPath.Text.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase) && !this.tbCfgPath.Text.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
             {
-                UpdateLog("指定cfg文件错误,仅限于.cfg或.txt", LogLevel.Error);
+                UpdateLog("指定参数文件错误,仅限于.cfg或.txt", LogLevel.Error);
                 return;
             }
             // 创建一个新的窗体实例

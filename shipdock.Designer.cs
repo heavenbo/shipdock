@@ -103,6 +103,8 @@
             // IsLog
             // 
             this.IsLog.AutoSize = true;
+            this.IsLog.Checked = true;
+            this.IsLog.CheckState = System.Windows.Forms.CheckState.Checked;
             this.IsLog.ForeColor = System.Drawing.SystemColors.GrayText;
             this.IsLog.Location = new System.Drawing.Point(6, 126);
             this.IsLog.Name = "IsLog";
