@@ -430,6 +430,7 @@
             this.Name = "shipdock";
             this.Text = "浮体检测程序";
             this.Load += new System.EventHandler(this.shipdock_Load);
+            this.FormClosing += shipdock_Close;
             this.PortGroups.ResumeLayout(false);
             this.PortGroups.PerformLayout();
             this.groupBox1.ResumeLayout(false);

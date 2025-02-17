@@ -23,6 +23,8 @@ namespace shipdock
         private float axisX, axisY;
         private SerialPort userPort = new SerialPort();
         private SerialPort dataPort = new SerialPort();
+        //端口相关变量
+        private string userPortCLI;
         private int userPortWait = 30;
         private enum LogLevel
         {
@@ -358,37 +360,21 @@ namespace shipdock
             }
             using (StreamReader reader = new StreamReader(this.tbCfgPath.Text))
             {
-                string line;
                 int NumDone = 0;
                 int NumCLI = 0;
                 // 逐行读取文件内容
-                while ((line = reader.ReadLine()) != null)
+                while ((userPortCLI = reader.ReadLine()) != null)
                 {
                     // 如果行首是 "%"，则跳过这行
-                    if (line.StartsWith("%"))
+                    if (userPortCLI.StartsWith("%"))
                     {
                         continue;
                     }
-                    // 发送有效的行（非以%开头）
-
-
-                    userPort.WriteLine(line);
                     NumCLI++;
-                    Thread.Sleep(userPortWait);
-                    if (userbufferIndex > 0)
+                    // 发送有效的行（非以%开头）
+                    if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
                     {
-                        byte[] receiveData = new byte[userbufferIndex];
-                        Array.Copy(userbuffer, receiveData, userbufferIndex);
-                        userbufferIndex = 0;
-                        string receive = Encoding.ASCII.GetString(receiveData);
-                        if (JudgeReceive(Encoding.ASCII.GetString(receiveData)).Trim() == "Done")
-                        {
-                            NumDone++;
-                        }
-                        else
-                        {
-                            UpdateLog(receive, LogLevel.Warning);
-                        }
+                        NumDone++;
                     }
                 }
                 if ((float)NumDone / NumCLI > 0.5)
@@ -412,8 +398,12 @@ namespace shipdock
                 userPort.BaudRate = int.Parse(this.cbUserBaudRate.Text);
                 dataPort.PortName = this.cbDataPort.Text;
                 dataPort.BaudRate = int.Parse(this.cbDataBaudRate.Text);
+                userPort.DtrEnable = false;
+                userPort.RtsEnable = false;
                 userPort.Open();
                 UpdateLog("用户端口已打开", LogLevel.Info);
+                dataPort.DtrEnable = false;
+                dataPort.RtsEnable = false;
                 dataPort.Open();
                 UpdateLog("数据端口已打开", LogLevel.Info);
                 //Thread CheckPortThread = new Thread(IsConnectPort);
@@ -430,30 +420,21 @@ namespace shipdock
         {
             this.btnConnectPort.Enabled = false;
             this.btnConnectPort.ForeColor = System.Drawing.Color.Gray;
+            userPortCLI = "configDataPort " + this.cbDataBaudRate.Text + " 1";
             for (int i = 0; i < 5; i++)
             {
-                userPort.WriteLine("configDataPort " + this.cbDataBaudRate.Text + " 1");
-                Thread.Sleep(userPortWait);
-                if (userbufferIndex > 0)
+                if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
                 {
-                    byte[] receiveData = new byte[userbufferIndex];
-                    Array.Copy(userbuffer, receiveData, userbufferIndex);
-                    userbufferIndex = 0;
-                    string reveive = Encoding.ASCII.GetString(receiveData);
-                    if (JudgeReceive(reveive).Trim() == "Done")
-                    {
-                        this.btnConnectPort.Enabled = true;
-                        this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
-                        this.btnSendParam.Enabled = true;
-                        this.btnSendParam.ForeColor = System.Drawing.Color.Black;
-                        this.btnStartLadar.Enabled = true;
-                        this.btnStartLadar.ForeColor = System.Drawing.Color.Black;
-                        this.btnStopLadar.Enabled = true;
-                        this.btnStopLadar.ForeColor = System.Drawing.Color.Black;
-                        UpdateLog("端口可进行正常通信", LogLevel.Info);
-                        return;
-                    }
-                    //UpdateLog(reveive, LogLevel.Info);
+                    this.btnConnectPort.Enabled = true;
+                    this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
+                    this.btnSendParam.Enabled = true;
+                    this.btnSendParam.ForeColor = System.Drawing.Color.Black;
+                    this.btnStartLadar.Enabled = true;
+                    this.btnStartLadar.ForeColor = System.Drawing.Color.Black;
+                    this.btnStopLadar.Enabled = true;
+                    this.btnStopLadar.ForeColor = System.Drawing.Color.Black;
+                    UpdateLog("端口可进行正常通信", LogLevel.Info);
+                    return;
                 }
             }
             UpdateLog("端口不可进行正常通信", LogLevel.Error);
@@ -485,19 +466,14 @@ namespace shipdock
         //判断返回信息
         private string JudgeReceive(string receivedata)
         {
+            // 删除特定字符串 "mmwDemo:/ >"
+            receivedata = receivedata.Replace("mmwDemo:/>", string.Empty);
+            // 按照换行符拆分数据
             string[] lines = receivedata.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            // 如果行数大于或等于 3，则去除第一行和最后一行
-            if (lines.Length >= 3)
-            {
-                lines = lines.Skip(1).Take(lines.Length - 2).ToArray();
-            }
-            else
-            {
-                // 如果行数小于 3，则只去除第一行
-                lines = lines.Skip(1).ToArray();
-            }
+            lines = lines.Skip(1).ToArray();
             // 将剩余的行合并成一个新的字符串
             string result = string.Join(Environment.NewLine, lines);
+            result = result.Replace(Environment.NewLine, " ");
             return result;
         }
         private void btncfgPath_Click(object sender, EventArgs e)
@@ -519,22 +495,10 @@ namespace shipdock
 
         private void btnStopLadar_Click(object sender, EventArgs e)
         {
-            userPort.WriteLine("sensorStop \n");
-            Thread.Sleep(50);
-            if (userbufferIndex > 0)
+            userPortCLI = "sensorStop";
+            if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
             {
-                byte[] receiveData = new byte[userbufferIndex];
-                Array.Copy(userbuffer, receiveData, userbufferIndex);
-                userbufferIndex = 0;
-                string reveive = Encoding.ASCII.GetString(receiveData);
-                if (JudgeReceive(reveive).Trim() == "Done")
-                {
-                    UpdateLog("雷达探测已关闭", LogLevel.Info);
-                }
-                else
-                {
-                    UpdateLog(reveive, LogLevel.Error);
-                }
+                UpdateLog("雷达成功关闭", LogLevel.Info);
             }
         }
 
@@ -548,28 +512,16 @@ namespace shipdock
         {
             if (IsChangeStart)
             {
-                userPort.WriteLine("sensorStart \n");
+                userPortCLI = "sensorStart";
                 IsChangeStart = false;
             }
             else
             {
-                userPort.WriteLine("sensorStart 0 \n");
+                userPortCLI = "sensorStart 0";
             }
-            Thread.Sleep(50);
-            if (userbufferIndex > 0)
+            if(SendCheck(userPort, userPortCLI, userPortWait, "Done"))
             {
-                byte[] receiveData = new byte[userbufferIndex];
-                Array.Copy(userbuffer, receiveData, userbufferIndex);
-                userbufferIndex = 0;
-                string reveive = Encoding.ASCII.GetString(receiveData);
-                if (JudgeReceive(reveive).Trim() == "Done")
-                {
-                    UpdateLog("雷达探测已开启", LogLevel.Info);
-                }
-                else
-                {
-                    UpdateLog(reveive, LogLevel.Error);
-                }
+                UpdateLog("雷达成功开启", LogLevel.Info);
             }
         }
 
@@ -589,6 +541,29 @@ namespace shipdock
             {
                 UpdateLog("没有可用的端口！", LogLevel.Warning);
             }
+        }
+        private bool SendCheck(SerialPort port, string command, int WaitTime, string expectedReply)
+        {
+            bool result = false;
+            port.WriteLine(command + " \n");
+            Thread.Sleep(WaitTime);
+            if (userbufferIndex > 0)
+            {
+                byte[] receiveData = new byte[userbufferIndex];
+                Array.Copy(userbuffer, receiveData, userbufferIndex);
+                userbufferIndex = 0;
+                string reveive = JudgeReceive(Encoding.ASCII.GetString(receiveData)).Trim();
+                if (reveive == expectedReply)
+                {
+                    result = true;
+                }
+                else
+                {
+                    UpdateLog(command + " \n" + reveive, LogLevel.Error);
+                    result = false;
+                }
+            }
+            return result;
         }
     }
 }
