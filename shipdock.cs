@@ -10,6 +10,8 @@ namespace shipdock
     public partial class shipdock : Form
     {
         private static byte[] userbuffer = new byte[1024]; // 设置一个字节缓冲区
+
+        
         private static int userbufferIndex = 0;
         private static byte[] databuffer = new byte[1024]; // 设置一个字节缓冲区
         private static int databufferIndex = 0;
