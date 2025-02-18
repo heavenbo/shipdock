@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [Info]   日志已启动     [2025-02-18 10:25:08]
 
 [Info]   日志已启动     [2025-02-18 10:29:16]
@@ -672,4 +673,10 @@ Error: You have provided no configuration, issue "sensorStart 0" OR provide full
 [Info]   雷达成功关闭     [2025-02-18 16:34:23]
 
 [Error]   sensorSt     [2025-02-18 16:36:50]
+
+=======
+[Info]   日志已启动     [2025-02-18 09:35:20]
+
+>>>>>>> 3f3f75a8d9379d78622670f749a421fb2efdfb1f
+[Info]   日志已启动     [2025-02-18 16:58:43]
 
