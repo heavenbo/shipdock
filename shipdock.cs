@@ -16,7 +16,6 @@ namespace shipdock
         private static bool IsLogFolderExist = false;
         private StreamWriter logWriter;
         private bool isLogWriterOpen = false;
-        private bool IsChangeStart = false;
         private Bitmap traBitmap;
         private Graphics traGraphics;
         private PointF rightTop, leftBottom;
@@ -25,7 +24,9 @@ namespace shipdock
         private SerialPort dataPort = new SerialPort();
         //端口相关变量
         private string userPortCLI;
-        private int userPortWait = 30;
+        private int userPortWait = 100;
+        //程序启动
+        private bool IsChangeStart = false;
         private enum LogLevel
         {
             Info,
@@ -362,6 +363,7 @@ namespace shipdock
             {
                 int NumDone = 0;
                 int NumCLI = 0;
+                IsChangeStart = true;
                 // 逐行读取文件内容
                 while ((userPortCLI = reader.ReadLine()) != null)
                 {
@@ -373,8 +375,15 @@ namespace shipdock
                     NumCLI++;
                     // 发送有效的行（非以%开头）
                     if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
-                    {
+                    {                        
                         NumDone++;
+                    }
+                    else
+                    {
+                        if (userPortCLI == "sensorStart")
+                        {
+                            IsChangeStart = false;
+                        }
                     }
                 }
                 if ((float)NumDone / NumCLI > 0.5)
@@ -386,7 +395,6 @@ namespace shipdock
                     UpdateLog("指令发送失败，共发送了" + NumCLI.ToString() + "条指令，" + "共接收了" + NumDone.ToString() + "条Done", LogLevel.Error);
                 }
             }
-            IsChangeStart = true;
         }
 
         private void btnConnectPort_Click(object sender, EventArgs e)
@@ -463,19 +471,7 @@ namespace shipdock
                 UpdateLog(ex.Message, LogLevel.Error);
             }
         }
-        //判断返回信息
-        private string JudgeReceive(string receivedata)
-        {
-            // 删除特定字符串 "mmwDemo:/ >"
-            receivedata = receivedata.Replace("mmwDemo:/>", string.Empty);
-            // 按照换行符拆分数据
-            string[] lines = receivedata.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            lines = lines.Skip(1).ToArray();
-            // 将剩余的行合并成一个新的字符串
-            string result = string.Join(Environment.NewLine, lines);
-            result = result.Replace(Environment.NewLine, " ");
-            return result;
-        }
+
         private void btncfgPath_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -510,7 +506,7 @@ namespace shipdock
 
         private void btnStartLadar_Click(object sender, EventArgs e)
         {
-            if (IsChangeStart)
+            if(IsChangeStart)
             {
                 userPortCLI = "sensorStart";
                 IsChangeStart = false;
@@ -519,7 +515,7 @@ namespace shipdock
             {
                 userPortCLI = "sensorStart 0";
             }
-            if(SendCheck(userPort, userPortCLI, userPortWait, "Done"))
+            if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
             {
                 UpdateLog("雷达成功开启", LogLevel.Info);
             }
@@ -545,24 +541,51 @@ namespace shipdock
         private bool SendCheck(SerialPort port, string command, int WaitTime, string expectedReply)
         {
             bool result = false;
+            if (!port.IsOpen)
+            {
+                return result;
+            }
             port.WriteLine(command + " \n");
             Thread.Sleep(WaitTime);
+            //如果没有收到信息，再次进行等待
+            if (userbufferIndex == 0)
+            {
+                Thread.Sleep(WaitTime);
+            }
             if (userbufferIndex > 0)
             {
                 byte[] receiveData = new byte[userbufferIndex];
                 Array.Copy(userbuffer, receiveData, userbufferIndex);
-                userbufferIndex = 0;
                 string reveive = JudgeReceive(Encoding.ASCII.GetString(receiveData)).Trim();
-                if (reveive == expectedReply)
+                if (reveive.Contains(expectedReply))
                 {
                     result = true;
                 }
                 else
                 {
-                    UpdateLog(command + " \n" + reveive, LogLevel.Error);
+                    UpdateLog(reveive, LogLevel.Error);
+                    //UpdateLog(Encoding.ASCII.GetString(receiveData), LogLevel.Error);
                     result = false;
                 }
+                userbufferIndex = 0;
             }
+            else
+            {
+                UpdateLog(command + "---无回复", LogLevel.Error);
+                result = false;
+            }
+            return result;
+        }
+        //判断返回信息
+        private string JudgeReceive(string receivedata)
+        {
+            receivedata = receivedata.Replace("mmwDemo:/>", string.Empty); // 删除特定字符串
+            // 按照换行符拆分数据
+            string[] lines = receivedata.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            // 用 "---" 拼接每一行
+            string result = string.Join("---", lines);
+            // 去掉前后空白，并返回结果
+            result = result.Trim();
             return result;
         }
     }

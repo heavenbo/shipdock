@@ -623,7 +623,7 @@ namespace shipdock
             cfgwriter.WriteLine("aoaFovCfg -1 -90 90 -90 90 ");
             cfgwriter.Flush();
             //前后删除10%的点
-            cfgwriter.WriteLine("cfarFovCfg -1 8 72.84 ");
+            cfgwriter.WriteLine("cfarFovCfg -1 0 8 72.84 ");
             cfgwriter.Flush();
             //前后删除10%的点
             cfgwriter.WriteLine("cfarFovCfg -1 1 -10.59 10.59 ");

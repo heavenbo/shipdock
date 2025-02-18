@@ -1,0 +1,675 @@
+[Info]   日志已启动     [2025-02-18 10:25:08]
+
+[Info]   日志已启动     [2025-02-18 10:29:16]
+
+[Info]   端口可用数量:2     [2025-02-18 10:29:18]
+
+[Error]   信号灯超时时间已到     [2025-02-18 10:30:03]
+
+[Info]   用户端口已打开     [2025-02-18 10:30:45]
+
+[Info]   数据端口已打开     [2025-02-18 10:30:45]
+
+[Info]   端口可进行正常通信     [2025-02-18 10:30:45]
+
+[Error]   sensorStop  
+Ignored: Sensor is already stopped Done     [2025-02-18 10:30:47]
+
+[Info]   指令发送成功，共发送了27条指令，共接收了26条Done     [2025-02-18 10:30:48]
+
+[Error]   sensorStart     [2025-02-18 10:30:56]
+
+[Info]   日志已启动     [2025-02-18 10:34:30]
+
+[Info]   端口可用数量:2     [2025-02-18 10:35:28]
+
+[Error]   指定不存在的设备。     [2025-02-18 10:36:15]
+
+[Info]   用户端口已打开     [2025-02-18 10:37:02]
+
+[Info]   数据端口已打开     [2025-02-18 10:37:02]
+
+[Info]   端口可进行正常通信     [2025-02-18 10:37:02]
+
+[Error]   sensorStop 
+Ignored: Sensor is already stopped Done     [2025-02-18 10:37:06]
+
+[Error]   sensorStart 
+Exception: ./mss/mmw_cli.c, line 274.     [2025-02-18 10:37:06]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了27条Done     [2025-02-18 10:37:06]
+
+[Info]   串口已关闭     [2025-02-18 10:37:35]
+
+[Info]   日志已启动     [2025-02-18 10:48:36]
+
+[Info]   端口可用数量:2     [2025-02-18 10:51:20]
+
+[Error]   The PortName cannot be empty. (Parameter 'PortName')     [2025-02-18 10:51:20]
+
+[Info]   用户端口已打开     [2025-02-18 10:51:24]
+
+[Info]   数据端口已打开     [2025-02-18 10:51:25]
+
+[Error]   configDataPort 921600 1 
+Done configDataPort 921600 1  Done     [2025-02-18 10:51:25]
+
+[Info]   端口可进行正常通信     [2025-02-18 10:51:25]
+
+[Error]   sensorStop 
+Ignored: Sensor is already stopped Done     [2025-02-18 10:52:10]
+
+[Error]   sensorStart     [2025-02-18 10:52:11]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了27条Done     [2025-02-18 10:52:11]
+
+[Error]   sensorStop 
+Done sensorStop     [2025-02-18 10:52:18]
+
+[Error]   sensorStart 
+sensorStart  Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart" Error -1     [2025-02-18 10:52:23]
+
+[Error]   sensorStop 
+Ignored: Sensor is already stopped Done     [2025-02-18 10:52:29]
+
+[Info]   雷达成功开启     [2025-02-18 10:52:34]
+
+[Info]   日志已启动     [2025-02-18 10:56:23]
+
+[Info]   端口可用数量:2     [2025-02-18 10:56:24]
+
+[Info]   用户端口已打开     [2025-02-18 10:56:28]
+
+[Error]   指定不存在的设备。     [2025-02-18 10:57:06]
+
+[Info]   端口可用数量:4     [2025-02-18 10:57:13]
+
+[Info]   日志已启动     [2025-02-18 10:57:19]
+
+[Info]   端口可用数量:2     [2025-02-18 10:57:20]
+
+[Info]   端口可用数量:2     [2025-02-18 10:57:27]
+
+[Info]   端口可用数量:2     [2025-02-18 10:57:27]
+
+[Info]   用户端口已打开     [2025-02-18 10:57:28]
+
+[Info]   数据端口已打开     [2025-02-18 10:57:28]
+
+[Info]   端口可进行正常通信     [2025-02-18 10:57:28]
+
+[Error]   sensorStop 
+Ignored: Sensor is already stopped Done     [2025-02-18 10:57:35]
+
+[Error]   sensorStart     [2025-02-18 10:57:36]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了27条Done     [2025-02-18 10:57:36]
+
+[Error]   sensorStop 
+Done sensorStop     [2025-02-18 10:57:43]
+
+[Error]   sensorStart 
+sensorStart  Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart" Error -1     [2025-02-18 10:57:45]
+
+[Info]   雷达成功开启     [2025-02-18 10:59:08]
+
+[Info]   日志已启动     [2025-02-18 11:05:57]
+
+[Info]   端口可用数量:2     [2025-02-18 11:05:58]
+
+[Info]   用户端口已打开     [2025-02-18 11:06:02]
+
+[Info]   数据端口已打开     [2025-02-18 11:06:02]
+
+[Info]   端口可进行正常通信     [2025-02-18 11:06:02]
+
+[Error]   sensorStop 
+Ignored: Sensor is already stopped Done     [2025-02-18 11:06:11]
+
+[Error]   sensorStart     [2025-02-18 11:06:12]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了27条Done     [2025-02-18 11:06:12]
+
+[Error]   sensorStop 
+Done sensorStop     [2025-02-18 11:06:17]
+
+[Info]   日志已启动     [2025-02-18 11:07:01]
+
+[Info]   端口可用数量:2     [2025-02-18 11:07:03]
+
+[Info]   用户端口已打开     [2025-02-18 11:07:07]
+
+[Info]   数据端口已打开     [2025-02-18 11:07:07]
+
+[Info]   端口可进行正常通信     [2025-02-18 11:07:08]
+
+[Error]   sensorStop 
+sensorStop 
+Ignored: Sensor is already stopped
+Done
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:07:10]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了28条Done     [2025-02-18 11:07:11]
+
+[Error]   sensorStop 
+sensorStop     [2025-02-18 11:07:23]
+
+[Error]   sensorStart 
+Done
+mmwDemo:/>
+mmwDemo:/>sensorStart 
+Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"
+Error -1
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:07:30]
+
+[Error]   sensorStop 
+sensorStop 
+Ignored: Sensor is already stopped
+Done
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:07:32]
+
+[Info]   雷达成功开启     [2025-02-18 11:07:38]
+
+[Info]   串口已关闭     [2025-02-18 11:07:56]
+
+[Info]   日志已启动     [2025-02-18 11:08:59]
+
+[Info]   端口可用数量:2     [2025-02-18 11:09:00]
+
+[Info]   用户端口已打开     [2025-02-18 11:09:04]
+
+[Info]   数据端口已打开     [2025-02-18 11:09:04]
+
+[Info]   端口可进行正常通信     [2025-02-18 11:09:04]
+
+[Error]   sensorStop 
+sensorStop 
+Ignored: Sensor is already stopped
+Done
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:09:06]
+
+[Error]   sensorStart 
+sensorStart     [2025-02-18 11:09:07]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了27条Done     [2025-02-18 11:09:07]
+
+[Error]   sensorStop 
+Debug: Init Calibration Status = 0x1ffe
+Done
+mmwDemo:/>
+mmwDemo:/>sensorStop     [2025-02-18 11:09:53]
+
+[Error]   sensorStart 
+Done
+mmwDemo:/>
+mmwDemo:/>sensorStart 
+Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"
+Error -1
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:10:05]
+
+[Error]   sensorStop 
+sensorStop 
+Ignored: Sensor is already stopped
+Done
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:10:09]
+
+[Info]   雷达成功开启     [2025-02-18 11:10:13]
+
+[Info]   日志已启动     [2025-02-18 11:12:09]
+
+[Info]   端口可用数量:2     [2025-02-18 11:12:11]
+
+[Info]   用户端口已打开     [2025-02-18 11:12:16]
+
+[Info]   数据端口已打开     [2025-02-18 11:12:16]
+
+[Info]   端口可进行正常通信     [2025-02-18 11:12:16]
+
+[Error]   sensorStop 
+Ignored: Sensor is already stopped
+Done
+mmwDemo:/>
+mmwDemo:/>     [2025-02-18 11:12:20]
+
+[Info]   日志已启动     [2025-02-18 11:18:27]
+
+[Info]   端口可用数量:2     [2025-02-18 11:18:28]
+
+[Info]   用户端口已打开     [2025-02-18 11:18:32]
+
+[Info]   数据端口已打开     [2025-02-18 11:18:32]
+
+[Info]   端口可进行正常通信     [2025-02-18 11:18:32]
+
+[Error]   extended     [2025-02-18 11:18:38]
+
+[Error]   sensorStart     [2025-02-18 11:18:41]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了27条Done     [2025-02-18 11:18:41]
+
+[Info]   雷达成功关闭     [2025-02-18 11:18:50]
+
+[Info]   雷达成功开启     [2025-02-18 11:19:00]
+
+[Info]   雷达成功关闭     [2025-02-18 11:19:05]
+
+[Info]   雷达成功开启     [2025-02-18 11:19:07]
+
+[Info]   日志已启动     [2025-02-18 11:20:33]
+
+[Info]   端口可用数量:2     [2025-02-18 11:20:34]
+
+[Info]   用户端口已打开     [2025-02-18 11:20:39]
+
+[Info]   数据端口已打开     [2025-02-18 11:20:39]
+
+[Error]   端口不可进行正常通信     [2025-02-18 11:20:39]
+
+[Error]   'PortName' cannot be set while the port is open.     [2025-02-18 11:20:44]
+
+[Info]   串口已关闭     [2025-02-18 11:20:46]
+
+[Info]   用户端口已打开     [2025-02-18 11:20:48]
+
+[Info]   数据端口已打开     [2025-02-18 11:20:48]
+
+[Error]   端口不可进行正常通信     [2025-02-18 11:20:49]
+
+[Info]   串口已关闭     [2025-02-18 11:20:51]
+
+[Info]   日志已启动     [2025-02-18 11:22:42]
+
+[Info]   端口可用数量:2     [2025-02-18 11:22:43]
+
+[Info]   用户端口已打开     [2025-02-18 11:22:47]
+
+[Info]   数据端口已打开     [2025-02-18 11:22:47]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 11:22:47]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 11:22:47]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 11:22:47]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 11:22:47]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 11:22:47]
+
+[Error]   端口不可进行正常通信     [2025-02-18 11:23:01]
+
+[Info]   串口已关闭     [2025-02-18 15:05:38]
+
+[Info]   日志已启动     [2025-02-18 15:07:12]
+
+[Info]   端口可用数量:2     [2025-02-18 15:08:02]
+
+[Info]   用户端口已打开     [2025-02-18 15:08:10]
+
+[Info]   数据端口已打开     [2025-02-18 15:08:12]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:08:12]
+
+[Error]   sensorStart     [2025-02-18 15:09:33]
+
+[Error]   ---无回复     [2025-02-18 15:09:59]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了28条Done     [2025-02-18 15:10:25]
+
+[Info]   雷达成功关闭     [2025-02-18 15:10:54]
+
+[Error]   wDemo:/>     [2025-02-18 15:10:57]
+
+[Info]   雷达成功关闭     [2025-02-18 15:11:05]
+
+[Info]   雷达成功开启     [2025-02-18 15:11:07]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:11:09]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:11:20]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:11:31]
+
+[Info]   日志已启动     [2025-02-18 15:12:36]
+
+[Info]   端口可用数量:2     [2025-02-18 15:12:45]
+
+[Info]   用户端口已打开     [2025-02-18 15:12:57]
+
+[Error]   指定不存在的设备。     [2025-02-18 15:14:09]
+
+[Info]   用户端口已打开     [2025-02-18 15:14:13]
+
+[Error]   信号灯超时时间已到     [2025-02-18 15:14:53]
+
+[Info]   端口可用数量:6     [2025-02-18 15:15:07]
+
+[Info]   端口可用数量:6     [2025-02-18 15:15:07]
+
+[Info]   端口可用数量:6     [2025-02-18 15:15:07]
+
+[Info]   端口可用数量:6     [2025-02-18 15:15:07]
+
+[Info]   端口可用数量:6     [2025-02-18 15:15:08]
+
+[Info]   日志已启动     [2025-02-18 15:18:33]
+
+[Info]   端口可用数量:2     [2025-02-18 15:18:35]
+
+[Error]   信号灯超时时间已到     [2025-02-18 15:19:19]
+
+[Error]   指定不存在的设备。     [2025-02-18 15:20:04]
+
+[Info]   用户端口已打开     [2025-02-18 15:20:09]
+
+[Info]   数据端口已打开     [2025-02-18 15:20:10]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:20:10]
+
+[Info]   日志已启动     [2025-02-18 15:29:37]
+
+[Info]   端口可用数量:2     [2025-02-18 15:29:39]
+
+[Info]   用户端口已打开     [2025-02-18 15:29:43]
+
+[Info]   数据端口已打开     [2025-02-18 15:29:43]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:29:43]
+
+[Error]   sensorStart     [2025-02-18 15:29:46]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了28条Done     [2025-02-18 15:29:46]
+
+[Info]   雷达成功关闭     [2025-02-18 15:29:53]
+
+[Info]   日志已启动     [2025-02-18 15:33:01]
+
+[Info]   端口可用数量:2     [2025-02-18 15:33:02]
+
+[Info]   用户端口已打开     [2025-02-18 15:33:10]
+
+[Info]   数据端口已打开     [2025-02-18 15:33:10]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:33:10]
+
+[Error]   sensorStart     [2025-02-18 15:34:04]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了28条Done     [2025-02-18 15:34:04]
+
+[Info]   串口已关闭     [2025-02-18 15:34:09]
+
+[Info]   用户端口已打开     [2025-02-18 15:34:11]
+
+[Info]   数据端口已打开     [2025-02-18 15:34:11]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:34:11]
+
+[Info]   雷达成功关闭     [2025-02-18 15:34:14]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 15:34:20]
+
+[Info]   雷达成功关闭     [2025-02-18 15:34:30]
+
+[Error]   sensorStart 
+Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"
+Error -1
+---     [2025-02-18 15:35:16]
+
+[Info]   雷达成功开启     [2025-02-18 15:35:24]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:35:27]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:35:38]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:05]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:11]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:13]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:14]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:14]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:14]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:14]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:15]
+
+[Error]   sensorStart 0---无回复     [2025-02-18 15:36:24]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:30]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:31]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:31]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:31]
+
+[Info]   串口已关闭     [2025-02-18 15:36:33]
+
+[Info]   用户端口已打开     [2025-02-18 15:36:35]
+
+[Info]   数据端口已打开     [2025-02-18 15:36:35]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:35]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:35]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:35]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:35]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:35]
+
+[Error]   端口不可进行正常通信     [2025-02-18 15:36:35]
+
+[Info]   串口已关闭     [2025-02-18 15:36:38]
+
+[Info]   用户端口已打开     [2025-02-18 15:36:39]
+
+[Info]   数据端口已打开     [2025-02-18 15:36:39]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:39]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:40]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:40]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:40]
+
+[Error]   configDataPort 921600 1---无回复     [2025-02-18 15:36:40]
+
+[Error]   端口不可进行正常通信     [2025-02-18 15:36:40]
+
+[Error]   sensorStart 0---无回复     [2025-02-18 15:36:41]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:42]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:43]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:43]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:36:43]
+
+[Info]   日志已启动     [2025-02-18 15:37:29]
+
+[Info]   端口可用数量:2     [2025-02-18 15:37:30]
+
+[Info]   用户端口已打开     [2025-02-18 15:37:34]
+
+[Info]   数据端口已打开     [2025-02-18 15:37:34]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:37:34]
+
+[Error]   sensorStart     [2025-02-18 15:40:41]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了28条Done     [2025-02-18 15:40:41]
+
+[Error]   sensorStop     [2025-02-18 15:41:16]
+
+[Error]   sensorStart 
+Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"
+Error -1
+---     [2025-02-18 15:42:08]
+
+[Info]   雷达成功关闭     [2025-02-18 15:42:19]
+
+[Info]   雷达成功开启     [2025-02-18 15:42:21]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:23]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:25]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:26]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:26]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:26]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:30]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:30]
+
+[Error]   sensorStop---无回复     [2025-02-18 15:42:30]
+
+[Info]   串口已关闭     [2025-02-18 15:42:43]
+
+[Info]   串口已关闭     [2025-02-18 15:42:44]
+
+[Info]   日志已启动     [2025-02-18 15:48:47]
+
+[Info]   端口可用数量:2     [2025-02-18 15:48:48]
+
+[Info]   用户端口已打开     [2025-02-18 15:48:52]
+
+[Info]   数据端口已打开     [2025-02-18 15:48:53]
+
+[Info]   端口可进行正常通信     [2025-02-18 15:48:53]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 15:48:57]
+
+[Info]   雷达成功关闭     [2025-02-18 15:49:05]
+
+[Error]   sensorStart 
+Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"
+Error -1
+---     [2025-02-18 15:49:07]
+
+[Info]   雷达成功关闭     [2025-02-18 15:49:22]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 15:53:14]
+
+[Info]   雷达成功关闭     [2025-02-18 15:53:24]
+
+[Info]   日志已启动     [2025-02-18 16:04:03]
+
+[Info]   端口可用数量:2     [2025-02-18 16:04:12]
+
+[Info]   用户端口已打开     [2025-02-18 16:04:16]
+
+[Info]   数据端口已打开     [2025-02-18 16:04:16]
+
+[Info]   端口可进行正常通信     [2025-02-18 16:04:17]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 16:04:22]
+
+[Info]   雷达成功关闭     [2025-02-18 16:04:28]
+
+[Info]   雷达成功开启     [2025-02-18 16:04:30]
+
+[Info]   雷达成功关闭     [2025-02-18 16:04:32]
+
+[Error]   sensorStart 
+Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"
+Error -1
+---     [2025-02-18 16:04:34]
+
+[Info]   雷达成功关闭     [2025-02-18 16:04:37]
+
+[Info]   日志已启动     [2025-02-18 16:07:08]
+
+[Info]   端口可用数量:2     [2025-02-18 16:07:10]
+
+[Info]   用户端口已打开     [2025-02-18 16:07:13]
+
+[Info]   数据端口已打开     [2025-02-18 16:07:13]
+
+[Info]   端口可进行正常通信     [2025-02-18 16:07:13]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 16:07:18]
+
+[Info]   雷达成功关闭     [2025-02-18 16:07:25]
+
+[Error]   sensorStart ---Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"---Error -1---mmwDemo:/>---mmwDemo:/>     [2025-02-18 16:07:26]
+
+[Info]   串口已关闭     [2025-02-18 16:07:47]
+
+[Info]   日志已启动     [2025-02-18 16:08:07]
+
+[Info]   端口可用数量:2     [2025-02-18 16:08:08]
+
+[Info]   用户端口已打开     [2025-02-18 16:08:12]
+
+[Info]   数据端口已打开     [2025-02-18 16:08:12]
+
+[Info]   端口可进行正常通信     [2025-02-18 16:08:12]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 16:08:18]
+
+[Info]   雷达成功关闭     [2025-02-18 16:08:25]
+
+[Error]   sensorStart ---Error: You have provided no configuration, issue "sensorStart 0" OR provide full configuration and issue "sensorStart"---Error -1     [2025-02-18 16:08:26]
+
+[Info]   日志已启动     [2025-02-18 16:08:52]
+
+[Info]   端口可用数量:2     [2025-02-18 16:08:53]
+
+[Info]   用户端口已打开     [2025-02-18 16:08:58]
+
+[Info]   数据端口已打开     [2025-02-18 16:08:58]
+
+[Info]   端口可进行正常通信     [2025-02-18 16:08:58]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了29条Done     [2025-02-18 16:09:01]
+
+[Error]   sensorStop     [2025-02-18 16:09:04]
+
+[Info]   串口已关闭     [2025-02-18 16:09:06]
+
+[Info]   日志已启动     [2025-02-18 16:30:08]
+
+[Info]   端口可用数量:2     [2025-02-18 16:30:10]
+
+[Error]   连到系统上的设备没有发挥作用。     [2025-02-18 16:31:00]
+
+[Info]   端口可用数量:2     [2025-02-18 16:31:57]
+
+[Info]   端口可用数量:2     [2025-02-18 16:31:57]
+
+[Info]   端口可用数量:2     [2025-02-18 16:31:57]
+
+[Info]   日志已启动     [2025-02-18 16:32:56]
+
+[Info]   端口可用数量:2     [2025-02-18 16:32:58]
+
+[Info]   用户端口已打开     [2025-02-18 16:33:03]
+
+[Info]   数据端口已打开     [2025-02-18 16:33:04]
+
+[Info]   端口可进行正常通信     [2025-02-18 16:33:04]
+
+[Error]   sensorStart     [2025-02-18 16:33:13]
+
+[Info]   指令发送成功，共发送了29条指令，共接收了28条Done     [2025-02-18 16:33:13]
+
+[Info]   雷达成功关闭     [2025-02-18 16:34:23]
+
+[Error]   sensorSt     [2025-02-18 16:36:50]
+

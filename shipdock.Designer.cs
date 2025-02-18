@@ -161,7 +161,7 @@
             // 
             // btnStartLadar
             // 
-            this.btnStartLadar.Location = new System.Drawing.Point(17, 48);
+            this.btnStartLadar.Location = new System.Drawing.Point(17, 49);
             this.btnStartLadar.Name = "btnStartLadar";
             this.btnStartLadar.Size = new System.Drawing.Size(112, 38);
             this.btnStartLadar.TabIndex = 15;
@@ -430,7 +430,6 @@
             this.Name = "shipdock";
             this.Text = "浮体检测程序";
             this.Load += new System.EventHandler(this.shipdock_Load);
-            this.FormClosing += shipdock_Close;
             this.PortGroups.ResumeLayout(false);
             this.PortGroups.PerformLayout();
             this.groupBox1.ResumeLayout(false);
