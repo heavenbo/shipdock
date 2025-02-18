@@ -606,9 +606,9 @@ namespace shipdock
             }
             cfgwriter.WriteLine("guiMonitor -1 1 1 0 0 0 0 ");
             cfgwriter.Flush();
-            cfgwriter.WriteLine("cfarCfg -1 0 2 8 4 3 0 15.0 0 ");
+            cfgwriter.WriteLine("cfarCfg -1 0 2 8 4 3 0 15.0 1 ");
             cfgwriter.Flush();
-            cfgwriter.WriteLine("cfarCfg -1 1 0 4 2 3 1 15.0 0 ");
+            cfgwriter.WriteLine("cfarCfg -1 1 0 4 2 3 1 15.0 1 ");
             cfgwriter.Flush();
             cfgwriter.WriteLine("multiObjBeamForming -1 1 0.5 ");
             cfgwriter.Flush();
@@ -618,7 +618,7 @@ namespace shipdock
             cfgwriter.Flush();
             cfgwriter.WriteLine("compRangeBiasAndRxChanPhase 0.0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 ");
             cfgwriter.Flush();
-            cfgwriter.WriteLine("measureRangeBiasAndRxChanPhase 0 1. 0.2 ");
+            cfgwriter.WriteLine("measureRangeBiasAndRxChanPhase 0 1.5 0.2 ");
             cfgwriter.Flush();
             cfgwriter.WriteLine("aoaFovCfg -1 -90 90 -90 90 ");
             cfgwriter.Flush();
@@ -630,10 +630,10 @@ namespace shipdock
             cfgwriter.Flush();
             cfgwriter.WriteLine("extendedMaxVelocity -1 0 ");
             cfgwriter.Flush();
-            //cfgwriter.WriteLine("CQRxSatMonitor 0 3 11 121 0 ");
-            //cfgwriter.Flush();
-            //cfgwriter.WriteLine("CQSigImgMonitor 0 127 8 ");
-            //cfgwriter.Flush();
+            cfgwriter.WriteLine("CQRxSatMonitor 0 3 5 121 0 ");
+            cfgwriter.Flush();
+            cfgwriter.WriteLine("CQSigImgMonitor 0 127 4 ");
+            cfgwriter.Flush();
             cfgwriter.WriteLine("analogMonitor 0 0 ");
             cfgwriter.Flush();
             cfgwriter.WriteLine("lvdsStreamCfg -1 0 0 0 ");
