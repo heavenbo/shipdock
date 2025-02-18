@@ -102,7 +102,7 @@ namespace shipdock
                 }
             }
             if (string.IsNullOrWhiteSpace(this.tbCfgPath.Text))
-            {
+            { 
                 this.tbCfgPath.Text = Path.GetFullPath("../../../Properties/default.cfg");
             }
             this.cbUserBaudRate.Text = "115200";
@@ -377,12 +377,16 @@ namespace shipdock
                     if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
                     {                        
                         NumDone++;
+                        if (userPortCLI == "sensorStart")
+                        {
+                            IsChangeStart = false;
+                        }
                     }
                     else
                     {
                         if (userPortCLI == "sensorStart")
                         {
-                            IsChangeStart = false;
+                            IsChangeStart = true;
                         }
                     }
                 }

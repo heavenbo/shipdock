@@ -61,8 +61,7 @@
               "RelativeToolTip": "ParamForm.Designer.cs",
               "ViewState": "AgIAAFECAAAAAAAAAAAvwC4CAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T09:09:08.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-13T09:09:08.213Z"
             },
             {
               "$type": "Document",
@@ -74,20 +73,19 @@
               "RelativeToolTip": "shipdock.Designer.cs",
               "ViewState": "AgIAAKcBAAAAAAAAAAAewLcBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T01:51:24.134Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-12T01:51:24.134Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "shipdock.cs [\u8BBE\u8BA1]",
+              "Title": "shipdock.cs [Design]",
               "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs",
               "RelativeDocumentMoniker": "shipdock.cs",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "shipdock.cs [\u8BBE\u8BA1]",
+              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs [Design]",
+              "RelativeToolTip": "shipdock.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-12T01:49:02.203Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -110,7 +108,7 @@
               "RelativeDocumentMoniker": "shipdock.cs",
               "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs",
               "RelativeToolTip": "shipdock.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAmwGgAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAGgBAAAAAAAAAAAlwIYBAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-20T13:38:40.518Z",
               "EditorCaption": ""
@@ -124,8 +122,7 @@
               "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "ParamForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T13:26:06.843Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-01-22T13:26:06.843Z"
             }
           ]
         }
