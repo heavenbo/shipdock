@@ -4,27 +4,39 @@ using System.IO.Ports;
 using static System.Windows.Forms.DataFormats;
 using System.Threading.Channels;
 using System.Text;
+using System.Timers;
+using System.Threading;
+using System.Diagnostics.Metrics;
 
 namespace shipdock
 {
     public partial class shipdock : Form
     {
-        private static byte[] userbuffer = new byte[1024]; // 设置一个字节缓冲区
-        private static int userbufferIndex = 0;
-        private static byte[] databuffer = new byte[1024]; // 设置一个字节缓冲区
-        private static int databufferIndex = 0;
-        private static bool IsLogFolderExist = false;
-        private StreamWriter logWriter;
-        private bool isLogWriterOpen = false;
+        //画图变量
         private Bitmap traBitmap;
         private Graphics traGraphics;
         private PointF rightTop, leftBottom;
         private float axisX, axisY;
+
+        //日志相关变量
+        private static bool IsLogFolderExist = false;
+        private StreamWriter logWriter;
+        private static bool isLogWriterOpen = false;
+        //user端口相关变量
         private SerialPort userPort = new SerialPort();
+        private static string userPortCLI;
+        private static byte[] userbuffer = new byte[1024]; // 设置一个字节缓冲区
+        private static int userbufferIndex = 0;
+        private int userPortWait = 50;
+        //数据端口相关变量
         private SerialPort dataPort = new SerialPort();
-        //端口相关变量
-        private string userPortCLI;
-        private int userPortWait = 100;
+        static System.Timers.Timer datatimer;
+        private static BinaryWriter dataWriter;
+        private static bool isDataWriterOpen = false;
+        private static Mutex datamutex = new Mutex();
+        private static byte[] databuffer = new byte[2 * 65536]; // 设置一个字节缓冲区
+        private static int databufferIndex = 0;
+        private static byte[] writebuffer = new byte[2 * 65536]; // 设置一个字节缓冲区
         //程序启动
         private bool IsChangeStart = false;
         private enum LogLevel
@@ -78,37 +90,19 @@ namespace shipdock
                     this.IsLog.ForeColor = System.Drawing.Color.Gray;
                 }
             }
-            if (string.IsNullOrWhiteSpace(this.tbDataPath.Text))
-            {
-                this.tbDataPath.Text = Path.GetFullPath("../../../data/");
-                try
-                {
-                    if (!Directory.Exists(this.tbDataPath.Text))
-                    {
-                        // 创建文件夹
-                        Directory.CreateDirectory(this.tbDataPath.Text);
-                        UpdateLog("数据文件夹创建成功", LogLevel.Info);
-                    }
-                    else
-                    {
-                        UpdateLog("数据文件夹已存在", LogLevel.Info);
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    // 捕获异常并输出错误信息
-                    UpdateLog(ex.Message, LogLevel.Error);
-                }
-            }
+            isDataWriterOpen = InitLadarData();
             if (string.IsNullOrWhiteSpace(this.tbCfgPath.Text))
-            { 
+            {
                 this.tbCfgPath.Text = Path.GetFullPath("../../../Properties/default.cfg");
             }
             this.cbUserBaudRate.Text = "115200";
             this.cbDataBaudRate.Text = "921600";
             //添加中断函数
             userPort.DataReceived += new SerialDataReceivedEventHandler(UserPort_DataReceived);
+            dataPort.DataReceived += new SerialDataReceivedEventHandler(DataPort_DataReceived);
+            //设置定时器，定时触发
+            datatimer = new System.Timers.Timer(50);  // 设置周期为100毫秒（0.1秒）
+            datatimer.Elapsed += processData;  // 设置触发事件
             //相关按钮disabled
             this.btnSendParam.Enabled = false;
             this.btnSendParam.ForeColor = System.Drawing.Color.Gray;
@@ -158,6 +152,10 @@ namespace shipdock
         }
         private void shipdock_Close(object sender, FormClosingEventArgs e)
         {
+            //关闭应用
+            datatimer.Stop();
+            userPort.Close();
+            dataPort.Close();
             var confirmForm = new Form();
             confirmForm.StartPosition = FormStartPosition.CenterParent;  // 设置在父窗体中央显示
             var result = MessageBox.Show(this, "确定要退出吗?", "退出确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -374,8 +372,8 @@ namespace shipdock
                     }
                     NumCLI++;
                     // 发送有效的行（非以%开头）
-                    if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
-                    {                        
+                    if (UserSendCheck(userPort, userPortCLI, userPortWait, "Done"))
+                    {
                         NumDone++;
                         if (userPortCLI == "sensorStart")
                         {
@@ -421,6 +419,7 @@ namespace shipdock
                 //Thread CheckPortThread = new Thread(IsConnectPort);
                 //CheckPortThread.Start();
                 IsConnectPort();
+                datatimer.Start();
             }
             catch (Exception ex)
             {
@@ -435,7 +434,7 @@ namespace shipdock
             userPortCLI = "configDataPort " + this.cbDataBaudRate.Text + " 1";
             for (int i = 0; i < 5; i++)
             {
-                if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
+                if (UserSendCheck(userPort, userPortCLI, userPortWait, "Done"))
                 {
                     this.btnConnectPort.Enabled = true;
                     this.btnConnectPort.ForeColor = System.Drawing.Color.Black;
@@ -461,6 +460,16 @@ namespace shipdock
             int bytesToRead = sp.BytesToRead;
             sp.Read(userbuffer, userbufferIndex, bytesToRead);
             userbufferIndex = userbufferIndex + bytesToRead;
+        }
+        private static void DataPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            datamutex.WaitOne();
+            SerialPort sp = (SerialPort)sender;
+            // 获取接收到的数据的长度
+            int bytesToRead = sp.BytesToRead;
+            sp.Read(databuffer, databufferIndex, bytesToRead);
+            databufferIndex = databufferIndex + bytesToRead;
+            datamutex.ReleaseMutex();
         }
         private void btnClosePort_Click(object sender, EventArgs e)
         {
@@ -496,9 +505,10 @@ namespace shipdock
         private void btnStopLadar_Click(object sender, EventArgs e)
         {
             userPortCLI = "sensorStop";
-            if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
+            if (UserSendCheck(userPort, userPortCLI, userPortWait, "Done"))
             {
                 UpdateLog("雷达成功关闭", LogLevel.Info);
+                datatimer.Stop();
             }
         }
 
@@ -510,7 +520,7 @@ namespace shipdock
 
         private void btnStartLadar_Click(object sender, EventArgs e)
         {
-            if(IsChangeStart)
+            if (IsChangeStart)
             {
                 userPortCLI = "sensorStart";
                 IsChangeStart = false;
@@ -519,9 +529,15 @@ namespace shipdock
             {
                 userPortCLI = "sensorStart 0";
             }
-            if (SendCheck(userPort, userPortCLI, userPortWait, "Done"))
+            if (!isDataWriterOpen)
+            {
+                UpdateLog("数据无法进行储存", LogLevel.Error);
+                return;
+            }
+            if (UserSendCheck(userPort, userPortCLI, userPortWait, "Done"))
             {
                 UpdateLog("雷达成功开启", LogLevel.Info);
+                //开始记录数据
             }
         }
 
@@ -542,7 +558,7 @@ namespace shipdock
                 UpdateLog("没有可用的端口！", LogLevel.Warning);
             }
         }
-        private bool SendCheck(SerialPort port, string command, int WaitTime, string expectedReply)
+        private bool UserSendCheck(SerialPort port, string command, int WaitTime, string expectedReply)
         {
             bool result = false;
             if (!port.IsOpen)
@@ -591,6 +607,68 @@ namespace shipdock
             // 去掉前后空白，并返回结果
             result = result.Trim();
             return result;
+        }
+        //data初始化程序
+        private bool InitLadarData()
+        {
+            bool result;
+            if (string.IsNullOrWhiteSpace(this.tbDataPath.Text))
+            {
+                this.tbDataPath.Text = Path.GetFullPath("../../../data/");
+            }
+            try
+            {
+                if (!Directory.Exists(this.tbDataPath.Text))
+                {
+                    // 创建文件夹
+                    Directory.CreateDirectory(this.tbDataPath.Text);
+                    UpdateLog("数据文件夹创建成功", LogLevel.Info);
+                }
+                else
+                {
+                    UpdateLog("数据文件夹已存在", LogLevel.Info);
+                }
+                string DataPathName;
+                //进行datawriter的创建
+                if (!this.tbDataPath.Text.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+                {
+                    DataPathName = this.tbDataPath.Text + System.IO.Path.DirectorySeparatorChar + "Data" + DateTime.Now.ToString("yyyyMMdd") + ".dat";
+                }
+                else
+                {
+                    DataPathName = this.tbDataPath.Text + "Data" + DateTime.Now.ToString("yyyyMMdd") + ".dat";
+                }
+                dataWriter = new BinaryWriter(File.Open(DataPathName, FileMode.Append));  // true 表示追加写入
+                result = true;
+                UpdateLog("数据可进行储存", LogLevel.Info);
+            }
+            catch (Exception ex)
+            {
+                // 捕获异常并输出错误信息
+                UpdateLog(ex.Message, LogLevel.Error);
+                result = false;
+            }
+            return result;
+        }
+        //data处理函数
+        private static void processData(object sender, ElapsedEventArgs e)
+        {
+            datatimer.Stop(); //先关闭定时器
+            int wirtebufferindex = 0;
+            datamutex.WaitOne();
+            if (databufferIndex > 0)
+            {
+                Array.Copy(databuffer, 0, writebuffer, 0, databufferIndex);
+                wirtebufferindex = databufferIndex;
+                databufferIndex = 0;
+            }
+            datamutex.ReleaseMutex();
+            if (wirtebufferindex > 0)
+            {
+                dataWriter.Write(writebuffer, 0, wirtebufferindex);
+                dataWriter.Flush();
+            }            
+            datatimer.Start(); //执行完毕后再开启器
         }
     }
 }

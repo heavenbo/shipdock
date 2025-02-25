@@ -1,33 +1,33 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Microsoft Visual Studio\\work\\shipdock\\",
+  "WorkspaceRootPath": "D:\\Microsoft VS Code\\work\\shipdock\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft visual studio\\work\\shipdock\\shipdock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft vs code\\work\\shipdock\\shipdock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:shipdock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft visual studio\\work\\shipdock\\paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|D:\\Microsoft VS Code\\work\\shipdock\\shipdock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:shipdock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft visual studio\\work\\shipdock\\shipdock.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft vs code\\work\\shipdock\\paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft vs code\\work\\shipdock\\shipdock.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:shipdock.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|D:\\Microsoft Visual Studio\\work\\shipdock\\paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|D:\\Microsoft VS Code\\work\\shipdock\\paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:paramform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft visual studio\\work\\shipdock\\shipdock.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft vs code\\work\\shipdock\\shipdock.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
       "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:shipdock.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft visual studio\\work\\shipdock\\paramform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|d:\\microsoft vs code\\work\\shipdock\\paramform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26B9C857-2456-425E-A3F6-8A6F84727DA3}|shipdock.csproj|solutionrelative:paramform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -38,15 +38,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "shipdock",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj",
               "RelativeDocumentMoniker": "shipdock.csproj",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj",
+              "ToolTip": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj",
               "RelativeToolTip": "shipdock.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-02-13T12:14:39.702Z"
@@ -55,9 +59,9 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "ParamForm.Designer.cs",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.Designer.cs",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\ParamForm.Designer.cs",
               "RelativeDocumentMoniker": "ParamForm.Designer.cs",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.Designer.cs",
+              "ToolTip": "D:\\Microsoft VS Code\\work\\shipdock\\ParamForm.Designer.cs",
               "RelativeToolTip": "ParamForm.Designer.cs",
               "ViewState": "AgIAAFECAAAAAAAAAAAvwC4CAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -67,9 +71,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "shipdock.Designer.cs",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.Designer.cs",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.Designer.cs",
               "RelativeDocumentMoniker": "shipdock.Designer.cs",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.Designer.cs",
+              "ToolTip": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.Designer.cs",
               "RelativeToolTip": "shipdock.Designer.cs",
               "ViewState": "AgIAAKcBAAAAAAAAAAAewLcBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -77,11 +81,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "shipdock.cs [Design]",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.cs",
               "RelativeDocumentMoniker": "shipdock.cs",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs [Design]",
+              "ToolTip": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.cs [Design]",
               "RelativeToolTip": "shipdock.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-12T01:49:02.203Z",
@@ -89,11 +93,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ParamForm.cs",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.cs",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\ParamForm.cs",
               "RelativeDocumentMoniker": "ParamForm.cs",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.cs",
+              "ToolTip": "D:\\Microsoft VS Code\\work\\shipdock\\ParamForm.cs",
               "RelativeToolTip": "ParamForm.cs",
               "ViewState": "AgIAAAcCAAAAAAAAAAAswBgCAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -104,11 +108,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "shipdock.cs",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.cs",
               "RelativeDocumentMoniker": "shipdock.cs",
-              "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs",
+              "ToolTip": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.cs",
               "RelativeToolTip": "shipdock.cs",
-              "ViewState": "AgIAAGgBAAAAAAAAAAAlwIYBAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAI8CAAAAAAAAAAAAAJ4CAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-20T13:38:40.518Z",
               "EditorCaption": ""
@@ -117,10 +121,10 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "ParamForm.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.cs",
+              "DocumentMoniker": "D:\\Microsoft VS Code\\work\\shipdock\\ParamForm.cs",
               "RelativeDocumentMoniker": "ParamForm.cs",
               "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "ParamForm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "..\\..\\..\\Microsoft Visual Studio\\work\\shipdock\\ParamForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-22T13:26:06.843Z"
             }

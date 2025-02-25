@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj": {}
+    "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj": {}
   },
   "projects": {
-    "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj": {
+    "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj",
+        "projectUniqueName": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj",
         "projectName": "shipdock",
-        "projectPath": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj",
+        "projectPath": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Microsoft Visual Studio\\work\\shipdock\\obj\\",
+        "outputPath": "D:\\Microsoft VS Code\\work\\shipdock\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0-windows8.0": {
@@ -75,7 +75,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
