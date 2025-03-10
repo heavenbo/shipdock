@@ -28,895 +28,947 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.tbKnear = new System.Windows.Forms.TextBox();
-            this.tbSampleNear = new System.Windows.Forms.TextBox();
-            this.tbTrNear = new System.Windows.Forms.TextBox();
-            this.tbChirpLoop = new System.Windows.Forms.TextBox();
-            this.tbKfar = new System.Windows.Forms.TextBox();
-            this.tbSampleFar = new System.Windows.Forms.TextBox();
-            this.tbTrFar = new System.Windows.Forms.TextBox();
-            this.tbTidle = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbFrameT = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tbFs = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.CommonParamsGroup = new System.Windows.Forms.GroupBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.tbTxStart = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.tbRxGain = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.tbStartFreq = new System.Windows.Forms.TextBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbStartADC = new System.Windows.Forms.TextBox();
-            this.NearParamsGroup = new System.Windows.Forms.GroupBox();
-            this.FarParamsGroup = new System.Windows.Forms.GroupBox();
-            this.PerfStatsBox = new System.Windows.Forms.GroupBox();
-            this.FarPerfStatsBox = new System.Windows.Forms.GroupBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.tbBfar = new System.Windows.Forms.TextBox();
-            this.tbSfar = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.tbVresFar = new System.Windows.Forms.TextBox();
-            this.tbRresFar = new System.Windows.Forms.TextBox();
-            this.NearPerfStatsBox = new System.Windows.Forms.GroupBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.tbBnear = new System.Windows.Forms.TextBox();
-            this.tbSnear = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.tbVresNear = new System.Windows.Forms.TextBox();
-            this.tbRresNear = new System.Windows.Forms.TextBox();
-            this.DetectModelGroup = new System.Windows.Forms.GroupBox();
-            this.btnAllDetect = new System.Windows.Forms.RadioButton();
-            this.btnFarDetect = new System.Windows.Forms.RadioButton();
-            this.btnNearDetect = new System.Windows.Forms.RadioButton();
-            this.btnSetParams = new System.Windows.Forms.Button();
-            this.btnClosedParams = new System.Windows.Forms.Button();
-            this.ParamsLog = new System.Windows.Forms.TextBox();
-            this.CommonParamsGroup.SuspendLayout();
-            this.NearParamsGroup.SuspendLayout();
-            this.FarParamsGroup.SuspendLayout();
-            this.PerfStatsBox.SuspendLayout();
-            this.FarPerfStatsBox.SuspendLayout();
-            this.NearPerfStatsBox.SuspendLayout();
-            this.DetectModelGroup.SuspendLayout();
-            this.SuspendLayout();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label12 = new Label();
+            label17 = new Label();
+            label20 = new Label();
+            label21 = new Label();
+            label22 = new Label();
+            tbKnear = new TextBox();
+            tbSampleNear = new TextBox();
+            tbChirpLoopNear = new TextBox();
+            tbTr = new TextBox();
+            tbKfar = new TextBox();
+            tbSampleFar = new TextBox();
+            tbChirpLoopFar = new TextBox();
+            tbTidle = new TextBox();
+            label15 = new Label();
+            tbNearFrameT = new TextBox();
+            label18 = new Label();
+            tbFs = new TextBox();
+            label24 = new Label();
+            CommonParamsGroup = new GroupBox();
+            label14 = new Label();
+            label45 = new Label();
+            label25 = new Label();
+            label27 = new Label();
+            tbRxGain = new TextBox();
+            label44 = new Label();
+            tbStartFreq = new TextBox();
+            label43 = new Label();
+            NearParamsGroup = new GroupBox();
+            label19 = new Label();
+            FarParamsGroup = new GroupBox();
+            tbFarFrameT = new TextBox();
+            label1 = new Label();
+            label16 = new Label();
+            label13 = new Label();
+            label6 = new Label();
+            PerfStatsBox = new GroupBox();
+            FarPerfStatsBox = new GroupBox();
+            label41 = new Label();
+            label42 = new Label();
+            tbBfar = new TextBox();
+            tbSfar = new TextBox();
+            label30 = new Label();
+            label31 = new Label();
+            label32 = new Label();
+            label33 = new Label();
+            label34 = new Label();
+            label36 = new Label();
+            tbVresFar = new TextBox();
+            tbRresFar = new TextBox();
+            NearPerfStatsBox = new GroupBox();
+            label39 = new Label();
+            label40 = new Label();
+            tbBnear = new TextBox();
+            tbSnear = new TextBox();
+            label28 = new Label();
+            label29 = new Label();
+            label2 = new Label();
+            label11 = new Label();
+            label23 = new Label();
+            label26 = new Label();
+            tbVresNear = new TextBox();
+            tbRresNear = new TextBox();
+            DetectModelGroup = new GroupBox();
+            btnAllDetect = new RadioButton();
+            btnFarDetect = new RadioButton();
+            btnNearDetect = new RadioButton();
+            btnSetParams = new Button();
+            btnClosedParams = new Button();
+            ParamsLog = new TextBox();
+            CommonParamsGroup.SuspendLayout();
+            NearParamsGroup.SuspendLayout();
+            FarParamsGroup.SuspendLayout();
+            PerfStatsBox.SuspendLayout();
+            FarPerfStatsBox.SuspendLayout();
+            NearPerfStatsBox.SuspendLayout();
+            DetectModelGroup.SuspendLayout();
+            SuspendLayout();
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(75, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 24);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "调频斜率";
+            label3.AutoSize = true;
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(48, 25);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 17);
+            label3.TabIndex = 2;
+            label3.Text = "调频斜率";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(269, 31);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 24);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "MHz/μs";
+            label4.AutoSize = true;
+            label4.Location = new Point(177, 25);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(54, 17);
+            label4.TabIndex = 3;
+            label4.Text = "MHz/μs";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 76);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 24);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "单chirp采样点数";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 120);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 24);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "chirp持续时间";
+            label5.AutoSize = true;
+            label5.Location = new Point(48, 57);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(56, 17);
+            label5.TabIndex = 4;
+            label5.Text = "采样点数";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(68, 32);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 24);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "chirp间隔";
+            label7.AutoSize = true;
+            label7.Location = new Point(43, 23);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 17);
+            label7.TabIndex = 6;
+            label7.Text = "chirp间隔";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(470, 32);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(108, 24);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "单帧chirp数";
+            label8.AutoSize = true;
+            label8.Location = new Point(31, 89);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(73, 17);
+            label8.TabIndex = 7;
+            label8.Text = "单帧chirp数";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(495, 80);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 24);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "采样频率";
+            label9.AutoSize = true;
+            label9.Location = new Point(315, 57);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(56, 17);
+            label9.TabIndex = 8;
+            label9.Text = "采样频率";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(75, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 24);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "单帧时长";
+            label10.AutoSize = true;
+            label10.Location = new Point(72, 123);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(32, 17);
+            label10.TabIndex = 9;
+            label10.Text = "帧长";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(269, 76);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(28, 24);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "个";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(269, 120);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 24);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "μs";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(693, 32);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(28, 24);
-            this.label14.TabIndex = 13;
-            this.label14.Text = "个";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(264, 119);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(29, 24);
-            this.label16.TabIndex = 21;
-            this.label16.Text = "μs";
+            label12.AutoSize = true;
+            label12.Location = new Point(177, 57);
+            label12.Margin = new Padding(2, 0, 2, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(20, 17);
+            label12.TabIndex = 11;
+            label12.Text = "个";
             // 
             // label17
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(264, 73);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(28, 24);
-            this.label17.TabIndex = 20;
-            this.label17.Text = "个";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(25, 120);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(126, 24);
-            this.label19.TabIndex = 18;
-            this.label19.Text = "chirp持续时间";
+            label17.AutoSize = true;
+            label17.Location = new Point(173, 57);
+            label17.Margin = new Padding(2, 0, 2, 0);
+            label17.Name = "label17";
+            label17.Size = new Size(20, 17);
+            label17.TabIndex = 20;
+            label17.Text = "个";
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(11, 76);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(144, 24);
-            this.label20.TabIndex = 17;
-            this.label20.Text = "单chirp采样点数";
+            label20.AutoSize = true;
+            label20.Location = new Point(39, 54);
+            label20.Margin = new Padding(2, 0, 2, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(56, 17);
+            label20.TabIndex = 17;
+            label20.Text = "采样点数";
             // 
             // label21
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(266, 31);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(78, 24);
-            this.label21.TabIndex = 16;
-            this.label21.Text = "MHz/μs";
+            label21.AutoSize = true;
+            label21.Location = new Point(170, 25);
+            label21.Margin = new Padding(2, 0, 2, 0);
+            label21.Name = "label21";
+            label21.Size = new Size(54, 17);
+            label21.TabIndex = 16;
+            label21.Text = "MHz/μs";
             // 
             // label22
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(75, 32);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(82, 24);
-            this.label22.TabIndex = 15;
-            this.label22.Text = "调频斜率";
+            label22.AutoSize = true;
+            label22.Location = new Point(41, 25);
+            label22.Margin = new Padding(2, 0, 2, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(56, 17);
+            label22.TabIndex = 15;
+            label22.Text = "调频斜率";
             // 
             // tbKnear
             // 
-            this.tbKnear.Location = new System.Drawing.Point(170, 31);
-            this.tbKnear.Name = "tbKnear";
-            this.tbKnear.Size = new System.Drawing.Size(94, 30);
-            this.tbKnear.TabIndex = 23;
-            this.tbKnear.TextChanged += new System.EventHandler(this.tbKnear_TextChanged);
+            tbKnear.Location = new Point(108, 22);
+            tbKnear.Margin = new Padding(2);
+            tbKnear.Name = "tbKnear";
+            tbKnear.Size = new Size(61, 23);
+            tbKnear.TabIndex = 23;
+            tbKnear.TextChanged += tbKnear_TextChanged;
             // 
             // tbSampleNear
             // 
-            this.tbSampleNear.Location = new System.Drawing.Point(170, 76);
-            this.tbSampleNear.Name = "tbSampleNear";
-            this.tbSampleNear.Size = new System.Drawing.Size(94, 30);
-            this.tbSampleNear.TabIndex = 24;
-            this.tbSampleNear.TextChanged += new System.EventHandler(this.tbSampleNear_TextChanged);
+            tbSampleNear.Location = new Point(108, 54);
+            tbSampleNear.Margin = new Padding(2);
+            tbSampleNear.Name = "tbSampleNear";
+            tbSampleNear.Size = new Size(61, 23);
+            tbSampleNear.TabIndex = 24;
+            tbSampleNear.TextChanged += tbSampleNear_TextChanged;
             // 
-            // tbTrNear
+            // tbChirpLoopNear
             // 
-            this.tbTrNear.Location = new System.Drawing.Point(170, 120);
-            this.tbTrNear.Name = "tbTrNear";
-            this.tbTrNear.Size = new System.Drawing.Size(94, 30);
-            this.tbTrNear.TabIndex = 25;
-            this.tbTrNear.TextChanged += new System.EventHandler(this.tbTrNear_TextChanged);
+            tbChirpLoopNear.Location = new Point(108, 86);
+            tbChirpLoopNear.Margin = new Padding(2);
+            tbChirpLoopNear.Name = "tbChirpLoopNear";
+            tbChirpLoopNear.Size = new Size(61, 23);
+            tbChirpLoopNear.TabIndex = 25;
+            tbChirpLoopNear.TextChanged += tbChirpLoopNear_TextChanged;
             // 
-            // tbChirpLoop
+            // tbTr
             // 
-            this.tbChirpLoop.Location = new System.Drawing.Point(589, 27);
-            this.tbChirpLoop.Name = "tbChirpLoop";
-            this.tbChirpLoop.Size = new System.Drawing.Size(94, 30);
-            this.tbChirpLoop.TabIndex = 26;
-            this.tbChirpLoop.TextChanged += new System.EventHandler(this.tbChirpLoop_TextChanged);
+            tbTr.Location = new Point(375, 19);
+            tbTr.Margin = new Padding(2);
+            tbTr.Name = "tbTr";
+            tbTr.Size = new Size(61, 23);
+            tbTr.TabIndex = 26;
+            tbTr.TextChanged += tbTr_TextChanged;
             // 
             // tbKfar
             // 
-            this.tbKfar.Location = new System.Drawing.Point(165, 31);
-            this.tbKfar.Name = "tbKfar";
-            this.tbKfar.Size = new System.Drawing.Size(94, 30);
-            this.tbKfar.TabIndex = 27;
-            this.tbKfar.TextChanged += new System.EventHandler(this.tbKfar_TextChanged);
+            tbKfar.Location = new Point(105, 22);
+            tbKfar.Margin = new Padding(2);
+            tbKfar.Name = "tbKfar";
+            tbKfar.Size = new Size(61, 23);
+            tbKfar.TabIndex = 27;
+            tbKfar.TextChanged += tbKfar_TextChanged;
             // 
             // tbSampleFar
             // 
-            this.tbSampleFar.Location = new System.Drawing.Point(165, 76);
-            this.tbSampleFar.Name = "tbSampleFar";
-            this.tbSampleFar.Size = new System.Drawing.Size(94, 30);
-            this.tbSampleFar.TabIndex = 28;
-            this.tbSampleFar.TextChanged += new System.EventHandler(this.tbSampleFar_TextChanged);
+            tbSampleFar.Location = new Point(105, 54);
+            tbSampleFar.Margin = new Padding(2);
+            tbSampleFar.Name = "tbSampleFar";
+            tbSampleFar.Size = new Size(61, 23);
+            tbSampleFar.TabIndex = 28;
+            tbSampleFar.TextChanged += tbSampleFar_TextChanged;
             // 
-            // tbTrFar
+            // tbChirpLoopFar
             // 
-            this.tbTrFar.Location = new System.Drawing.Point(165, 120);
-            this.tbTrFar.Name = "tbTrFar";
-            this.tbTrFar.Size = new System.Drawing.Size(94, 30);
-            this.tbTrFar.TabIndex = 29;
-            this.tbTrFar.TextChanged += new System.EventHandler(this.tbTrFar_TextChanged);
+            tbChirpLoopFar.Location = new Point(105, 86);
+            tbChirpLoopFar.Margin = new Padding(2);
+            tbChirpLoopFar.Name = "tbChirpLoopFar";
+            tbChirpLoopFar.Size = new Size(61, 23);
+            tbChirpLoopFar.TabIndex = 29;
+            tbChirpLoopFar.TextChanged += tbChirpLoopFar_TextChanged;
             // 
             // tbTidle
             // 
-            this.tbTidle.Location = new System.Drawing.Point(170, 27);
-            this.tbTidle.Name = "tbTidle";
-            this.tbTidle.Size = new System.Drawing.Size(94, 30);
-            this.tbTidle.TabIndex = 30;
-            this.tbTidle.TextChanged += new System.EventHandler(this.tbTidle_TextChanged);
+            tbTidle.Location = new Point(108, 19);
+            tbTidle.Margin = new Padding(2);
+            tbTidle.Name = "tbTidle";
+            tbTidle.Size = new Size(61, 23);
+            tbTidle.TabIndex = 30;
+            tbTidle.TextChanged += tbTidle_TextChanged;
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(269, 30);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 24);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "μs";
+            label15.AutoSize = true;
+            label15.Location = new Point(171, 21);
+            label15.Margin = new Padding(2, 0, 2, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(22, 17);
+            label15.TabIndex = 31;
+            label15.Text = "μs";
             // 
-            // tbFrameT
+            // tbNearFrameT
             // 
-            this.tbFrameT.Location = new System.Drawing.Point(170, 75);
-            this.tbFrameT.Name = "tbFrameT";
-            this.tbFrameT.Size = new System.Drawing.Size(94, 30);
-            this.tbFrameT.TabIndex = 32;
-            this.tbFrameT.TextChanged += new System.EventHandler(this.tbFrameT_TextChanged);
+            tbNearFrameT.Location = new Point(108, 120);
+            tbNearFrameT.Margin = new Padding(2);
+            tbNearFrameT.Name = "tbNearFrameT";
+            tbNearFrameT.Size = new Size(61, 23);
+            tbNearFrameT.TabIndex = 32;
+            tbNearFrameT.TextChanged += tbNearFrameT_TextChanged;
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(270, 80);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(35, 24);
-            this.label18.TabIndex = 33;
-            this.label18.Text = "ms";
+            label18.AutoSize = true;
+            label18.Location = new Point(177, 123);
+            label18.Margin = new Padding(2, 0, 2, 0);
+            label18.Name = "label18";
+            label18.Size = new Size(25, 17);
+            label18.TabIndex = 33;
+            label18.Text = "ms";
             // 
             // tbFs
             // 
-            this.tbFs.Location = new System.Drawing.Point(589, 75);
-            this.tbFs.Name = "tbFs";
-            this.tbFs.Size = new System.Drawing.Size(94, 30);
-            this.tbFs.TabIndex = 34;
-            this.tbFs.TextChanged += new System.EventHandler(this.tbFs_TextChanged);
+            tbFs.Location = new Point(375, 53);
+            tbFs.Margin = new Padding(2);
+            tbFs.Name = "tbFs";
+            tbFs.Size = new Size(61, 23);
+            tbFs.TabIndex = 34;
+            tbFs.TextChanged += tbFs_TextChanged;
             // 
             // label24
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(693, 80);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(43, 24);
-            this.label24.TabIndex = 35;
-            this.label24.Text = "kHz";
+            label24.AutoSize = true;
+            label24.Location = new Point(441, 57);
+            label24.Margin = new Padding(2, 0, 2, 0);
+            label24.Name = "label24";
+            label24.Size = new Size(30, 17);
+            label24.TabIndex = 35;
+            label24.Text = "kHz";
             // 
             // CommonParamsGroup
             // 
-            this.CommonParamsGroup.Controls.Add(this.label35);
-            this.CommonParamsGroup.Controls.Add(this.label37);
-            this.CommonParamsGroup.Controls.Add(this.tbTxStart);
-            this.CommonParamsGroup.Controls.Add(this.label25);
-            this.CommonParamsGroup.Controls.Add(this.label27);
-            this.CommonParamsGroup.Controls.Add(this.tbRxGain);
-            this.CommonParamsGroup.Controls.Add(this.label44);
-            this.CommonParamsGroup.Controls.Add(this.tbStartFreq);
-            this.CommonParamsGroup.Controls.Add(this.label43);
-            this.CommonParamsGroup.Controls.Add(this.label38);
-            this.CommonParamsGroup.Controls.Add(this.label1);
-            this.CommonParamsGroup.Controls.Add(this.tbStartADC);
-            this.CommonParamsGroup.Controls.Add(this.tbFs);
-            this.CommonParamsGroup.Controls.Add(this.label24);
-            this.CommonParamsGroup.Controls.Add(this.label7);
-            this.CommonParamsGroup.Controls.Add(this.label8);
-            this.CommonParamsGroup.Controls.Add(this.label18);
-            this.CommonParamsGroup.Controls.Add(this.label9);
-            this.CommonParamsGroup.Controls.Add(this.tbFrameT);
-            this.CommonParamsGroup.Controls.Add(this.label10);
-            this.CommonParamsGroup.Controls.Add(this.label15);
-            this.CommonParamsGroup.Controls.Add(this.label14);
-            this.CommonParamsGroup.Controls.Add(this.tbTidle);
-            this.CommonParamsGroup.Controls.Add(this.tbChirpLoop);
-            this.CommonParamsGroup.Location = new System.Drawing.Point(46, 104);
-            this.CommonParamsGroup.Name = "CommonParamsGroup";
-            this.CommonParamsGroup.Size = new System.Drawing.Size(783, 219);
-            this.CommonParamsGroup.TabIndex = 36;
-            this.CommonParamsGroup.TabStop = false;
-            this.CommonParamsGroup.Text = "基本参数";
+            CommonParamsGroup.Controls.Add(label14);
+            CommonParamsGroup.Controls.Add(label45);
+            CommonParamsGroup.Controls.Add(label25);
+            CommonParamsGroup.Controls.Add(label27);
+            CommonParamsGroup.Controls.Add(tbRxGain);
+            CommonParamsGroup.Controls.Add(label44);
+            CommonParamsGroup.Controls.Add(tbStartFreq);
+            CommonParamsGroup.Controls.Add(label43);
+            CommonParamsGroup.Controls.Add(tbFs);
+            CommonParamsGroup.Controls.Add(label24);
+            CommonParamsGroup.Controls.Add(label7);
+            CommonParamsGroup.Controls.Add(label9);
+            CommonParamsGroup.Controls.Add(label15);
+            CommonParamsGroup.Controls.Add(tbTidle);
+            CommonParamsGroup.Controls.Add(tbTr);
+            CommonParamsGroup.Location = new Point(29, 74);
+            CommonParamsGroup.Margin = new Padding(2);
+            CommonParamsGroup.Name = "CommonParamsGroup";
+            CommonParamsGroup.Padding = new Padding(2);
+            CommonParamsGroup.Size = new Size(498, 128);
+            CommonParamsGroup.TabIndex = 36;
+            CommonParamsGroup.TabStop = false;
+            CommonParamsGroup.Text = "基本参数";
             // 
-            // label35
+            // label14
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(55, 176);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(101, 24);
-            this.label35.TabIndex = 48;
-            this.label35.Text = "Tx开始时间";
+            label14.AutoSize = true;
+            label14.Location = new Point(441, 23);
+            label14.Margin = new Padding(2, 0, 2, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(22, 17);
+            label14.TabIndex = 50;
+            label14.Text = "μs";
             // 
-            // label37
+            // label45
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(269, 176);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(29, 24);
-            this.label37.TabIndex = 47;
-            this.label37.Text = "μs";
-            // 
-            // tbTxStart
-            // 
-            this.tbTxStart.Location = new System.Drawing.Point(170, 172);
-            this.tbTxStart.Name = "tbTxStart";
-            this.tbTxStart.Size = new System.Drawing.Size(94, 30);
-            this.tbTxStart.TabIndex = 46;
-            this.tbTxStart.TextChanged += new System.EventHandler(this.tbStartADC_TextChanged);
+            label45.AutoSize = true;
+            label45.Location = new Point(284, 19);
+            label45.Margin = new Padding(2, 0, 2, 0);
+            label45.Name = "label45";
+            label45.Size = new Size(85, 17);
+            label45.TabIndex = 49;
+            label45.Text = "chirp持续时间";
             // 
             // label25
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(492, 176);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(82, 24);
-            this.label25.TabIndex = 45;
-            this.label25.Text = "接收增益";
+            label25.AutoSize = true;
+            label25.Location = new Point(48, 53);
+            label25.Margin = new Padding(2, 0, 2, 0);
+            label25.Name = "label25";
+            label25.Size = new Size(56, 17);
+            label25.TabIndex = 45;
+            label25.Text = "接收增益";
             // 
             // label27
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(693, 176);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(33, 24);
-            this.label27.TabIndex = 44;
-            this.label27.Text = "dB";
+            label27.AutoSize = true;
+            label27.Location = new Point(171, 59);
+            label27.Margin = new Padding(2, 0, 2, 0);
+            label27.Name = "label27";
+            label27.Size = new Size(24, 17);
+            label27.TabIndex = 44;
+            label27.Text = "dB";
             // 
             // tbRxGain
             // 
-            this.tbRxGain.Location = new System.Drawing.Point(589, 172);
-            this.tbRxGain.Name = "tbRxGain";
-            this.tbRxGain.Size = new System.Drawing.Size(94, 30);
-            this.tbRxGain.TabIndex = 43;
-            this.tbRxGain.TextChanged += new System.EventHandler(this.tbRxGain_TextChanged);
+            tbRxGain.Location = new Point(108, 53);
+            tbRxGain.Margin = new Padding(2);
+            tbRxGain.Name = "tbRxGain";
+            tbRxGain.Size = new Size(61, 23);
+            tbRxGain.TabIndex = 43;
+            tbRxGain.TextChanged += tbRxGain_TextChanged;
             // 
             // label44
             // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(693, 128);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(46, 24);
-            this.label44.TabIndex = 42;
-            this.label44.Text = "GHz";
+            label44.AutoSize = true;
+            label44.Location = new Point(171, 91);
+            label44.Margin = new Padding(2, 0, 2, 0);
+            label44.Name = "label44";
+            label44.Size = new Size(32, 17);
+            label44.TabIndex = 42;
+            label44.Text = "GHz";
             // 
             // tbStartFreq
             // 
-            this.tbStartFreq.Location = new System.Drawing.Point(589, 124);
-            this.tbStartFreq.Name = "tbStartFreq";
-            this.tbStartFreq.Size = new System.Drawing.Size(94, 30);
-            this.tbStartFreq.TabIndex = 41;
-            this.tbStartFreq.TextChanged += new System.EventHandler(this.tbStartFreq_TextChanged);
+            tbStartFreq.Location = new Point(108, 88);
+            tbStartFreq.Margin = new Padding(2);
+            tbStartFreq.Name = "tbStartFreq";
+            tbStartFreq.Size = new Size(61, 23);
+            tbStartFreq.TabIndex = 41;
+            tbStartFreq.TextChanged += tbStartFreq_TextChanged;
             // 
             // label43
             // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(497, 128);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(82, 24);
-            this.label43.TabIndex = 40;
-            this.label43.Text = "起始频率";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(38, 128);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(121, 24);
-            this.label38.TabIndex = 39;
-            this.label38.Text = "ADC开始时间";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(269, 128);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 24);
-            this.label1.TabIndex = 38;
-            this.label1.Text = "μs";
-            // 
-            // tbStartADC
-            // 
-            this.tbStartADC.Location = new System.Drawing.Point(170, 124);
-            this.tbStartADC.Name = "tbStartADC";
-            this.tbStartADC.Size = new System.Drawing.Size(94, 30);
-            this.tbStartADC.TabIndex = 37;
-            this.tbStartADC.TextChanged += new System.EventHandler(this.tbStartADC_TextChanged);
+            label43.AutoSize = true;
+            label43.Location = new Point(48, 88);
+            label43.Margin = new Padding(2, 0, 2, 0);
+            label43.Name = "label43";
+            label43.Size = new Size(56, 17);
+            label43.TabIndex = 40;
+            label43.Text = "起始频率";
             // 
             // NearParamsGroup
             // 
-            this.NearParamsGroup.Controls.Add(this.tbTrNear);
-            this.NearParamsGroup.Controls.Add(this.label3);
-            this.NearParamsGroup.Controls.Add(this.label4);
-            this.NearParamsGroup.Controls.Add(this.label5);
-            this.NearParamsGroup.Controls.Add(this.label6);
-            this.NearParamsGroup.Controls.Add(this.label12);
-            this.NearParamsGroup.Controls.Add(this.tbSampleNear);
-            this.NearParamsGroup.Controls.Add(this.label13);
-            this.NearParamsGroup.Controls.Add(this.tbKnear);
-            this.NearParamsGroup.Location = new System.Drawing.Point(46, 329);
-            this.NearParamsGroup.Name = "NearParamsGroup";
-            this.NearParamsGroup.Size = new System.Drawing.Size(361, 162);
-            this.NearParamsGroup.TabIndex = 37;
-            this.NearParamsGroup.TabStop = false;
-            this.NearParamsGroup.Text = "近距离探测波形";
+            NearParamsGroup.Controls.Add(label19);
+            NearParamsGroup.Controls.Add(tbChirpLoopNear);
+            NearParamsGroup.Controls.Add(label3);
+            NearParamsGroup.Controls.Add(label4);
+            NearParamsGroup.Controls.Add(label5);
+            NearParamsGroup.Controls.Add(label12);
+            NearParamsGroup.Controls.Add(tbSampleNear);
+            NearParamsGroup.Controls.Add(tbKnear);
+            NearParamsGroup.Controls.Add(tbNearFrameT);
+            NearParamsGroup.Controls.Add(label18);
+            NearParamsGroup.Controls.Add(label8);
+            NearParamsGroup.Controls.Add(label10);
+            NearParamsGroup.Location = new Point(29, 206);
+            NearParamsGroup.Margin = new Padding(2);
+            NearParamsGroup.Name = "NearParamsGroup";
+            NearParamsGroup.Padding = new Padding(2);
+            NearParamsGroup.Size = new Size(239, 154);
+            NearParamsGroup.TabIndex = 37;
+            NearParamsGroup.TabStop = false;
+            NearParamsGroup.Text = "近距离探测波形";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(177, 89);
+            label19.Margin = new Padding(2, 0, 2, 0);
+            label19.Name = "label19";
+            label19.Size = new Size(20, 17);
+            label19.TabIndex = 44;
+            label19.Text = "个";
             // 
             // FarParamsGroup
             // 
-            this.FarParamsGroup.Controls.Add(this.tbSampleFar);
-            this.FarParamsGroup.Controls.Add(this.label22);
-            this.FarParamsGroup.Controls.Add(this.label21);
-            this.FarParamsGroup.Controls.Add(this.tbTrFar);
-            this.FarParamsGroup.Controls.Add(this.label20);
-            this.FarParamsGroup.Controls.Add(this.label19);
-            this.FarParamsGroup.Controls.Add(this.tbKfar);
-            this.FarParamsGroup.Controls.Add(this.label17);
-            this.FarParamsGroup.Controls.Add(this.label16);
-            this.FarParamsGroup.Location = new System.Drawing.Point(467, 329);
-            this.FarParamsGroup.Name = "FarParamsGroup";
-            this.FarParamsGroup.Size = new System.Drawing.Size(361, 162);
-            this.FarParamsGroup.TabIndex = 38;
-            this.FarParamsGroup.TabStop = false;
-            this.FarParamsGroup.Text = "远距离探测波形";
+            FarParamsGroup.Controls.Add(tbFarFrameT);
+            FarParamsGroup.Controls.Add(label1);
+            FarParamsGroup.Controls.Add(label16);
+            FarParamsGroup.Controls.Add(label13);
+            FarParamsGroup.Controls.Add(label6);
+            FarParamsGroup.Controls.Add(tbSampleFar);
+            FarParamsGroup.Controls.Add(label22);
+            FarParamsGroup.Controls.Add(label21);
+            FarParamsGroup.Controls.Add(tbChirpLoopFar);
+            FarParamsGroup.Controls.Add(label20);
+            FarParamsGroup.Controls.Add(tbKfar);
+            FarParamsGroup.Controls.Add(label17);
+            FarParamsGroup.Location = new Point(289, 206);
+            FarParamsGroup.Margin = new Padding(2);
+            FarParamsGroup.Name = "FarParamsGroup";
+            FarParamsGroup.Padding = new Padding(2);
+            FarParamsGroup.Size = new Size(238, 154);
+            FarParamsGroup.TabIndex = 38;
+            FarParamsGroup.TabStop = false;
+            FarParamsGroup.Text = "远距离探测波形";
+            // 
+            // tbFarFrameT
+            // 
+            tbFarFrameT.Location = new Point(105, 120);
+            tbFarFrameT.Margin = new Padding(2);
+            tbFarFrameT.Name = "tbFarFrameT";
+            tbFarFrameT.Size = new Size(61, 23);
+            tbFarFrameT.TabIndex = 47;
+            tbFarFrameT.TextChanged += tbFarFrameT_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(172, 123);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(25, 17);
+            label1.TabIndex = 48;
+            label1.Text = "ms";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(63, 123);
+            label16.Margin = new Padding(2, 0, 2, 0);
+            label16.Name = "label16";
+            label16.Size = new Size(32, 17);
+            label16.TabIndex = 46;
+            label16.Text = "帧长";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(173, 89);
+            label13.Margin = new Padding(2, 0, 2, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(20, 17);
+            label13.TabIndex = 45;
+            label13.Text = "个";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(24, 89);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(73, 17);
+            label6.TabIndex = 30;
+            label6.Text = "单帧chirp数";
             // 
             // PerfStatsBox
             // 
-            this.PerfStatsBox.Controls.Add(this.FarPerfStatsBox);
-            this.PerfStatsBox.Controls.Add(this.NearPerfStatsBox);
-            this.PerfStatsBox.Location = new System.Drawing.Point(46, 497);
-            this.PerfStatsBox.Name = "PerfStatsBox";
-            this.PerfStatsBox.Size = new System.Drawing.Size(783, 272);
-            this.PerfStatsBox.TabIndex = 39;
-            this.PerfStatsBox.TabStop = false;
-            this.PerfStatsBox.Text = "性能指标";
+            PerfStatsBox.Controls.Add(FarPerfStatsBox);
+            PerfStatsBox.Controls.Add(NearPerfStatsBox);
+            PerfStatsBox.Location = new Point(29, 364);
+            PerfStatsBox.Margin = new Padding(2);
+            PerfStatsBox.Name = "PerfStatsBox";
+            PerfStatsBox.Padding = new Padding(2);
+            PerfStatsBox.Size = new Size(498, 193);
+            PerfStatsBox.TabIndex = 39;
+            PerfStatsBox.TabStop = false;
+            PerfStatsBox.Text = "性能指标";
             // 
             // FarPerfStatsBox
             // 
-            this.FarPerfStatsBox.Controls.Add(this.label41);
-            this.FarPerfStatsBox.Controls.Add(this.label42);
-            this.FarPerfStatsBox.Controls.Add(this.tbBfar);
-            this.FarPerfStatsBox.Controls.Add(this.tbSfar);
-            this.FarPerfStatsBox.Controls.Add(this.label30);
-            this.FarPerfStatsBox.Controls.Add(this.label31);
-            this.FarPerfStatsBox.Controls.Add(this.label32);
-            this.FarPerfStatsBox.Controls.Add(this.label33);
-            this.FarPerfStatsBox.Controls.Add(this.label34);
-            this.FarPerfStatsBox.Controls.Add(this.label36);
-            this.FarPerfStatsBox.Controls.Add(this.tbVresFar);
-            this.FarPerfStatsBox.Controls.Add(this.tbRresFar);
-            this.FarPerfStatsBox.Location = new System.Drawing.Point(446, 30);
-            this.FarPerfStatsBox.Name = "FarPerfStatsBox";
-            this.FarPerfStatsBox.Size = new System.Drawing.Size(297, 222);
-            this.FarPerfStatsBox.TabIndex = 1;
-            this.FarPerfStatsBox.TabStop = false;
-            this.FarPerfStatsBox.Text = "远距离";
+            FarPerfStatsBox.Controls.Add(label41);
+            FarPerfStatsBox.Controls.Add(label42);
+            FarPerfStatsBox.Controls.Add(tbBfar);
+            FarPerfStatsBox.Controls.Add(tbSfar);
+            FarPerfStatsBox.Controls.Add(label30);
+            FarPerfStatsBox.Controls.Add(label31);
+            FarPerfStatsBox.Controls.Add(label32);
+            FarPerfStatsBox.Controls.Add(label33);
+            FarPerfStatsBox.Controls.Add(label34);
+            FarPerfStatsBox.Controls.Add(label36);
+            FarPerfStatsBox.Controls.Add(tbVresFar);
+            FarPerfStatsBox.Controls.Add(tbRresFar);
+            FarPerfStatsBox.Location = new Point(284, 21);
+            FarPerfStatsBox.Margin = new Padding(2);
+            FarPerfStatsBox.Name = "FarPerfStatsBox";
+            FarPerfStatsBox.Padding = new Padding(2);
+            FarPerfStatsBox.Size = new Size(189, 157);
+            FarPerfStatsBox.TabIndex = 1;
+            FarPerfStatsBox.TabStop = false;
+            FarPerfStatsBox.Text = "远距离";
             // 
             // label41
             // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(61, 30);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(46, 24);
-            this.label41.TabIndex = 50;
-            this.label41.Text = "带宽";
+            label41.AutoSize = true;
+            label41.Location = new Point(39, 21);
+            label41.Margin = new Padding(2, 0, 2, 0);
+            label41.Name = "label41";
+            label41.Size = new Size(32, 17);
+            label41.TabIndex = 50;
+            label41.Text = "带宽";
             // 
             // label42
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(231, 25);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(51, 24);
-            this.label42.TabIndex = 51;
-            this.label42.Text = "MHz";
+            label42.AutoSize = true;
+            label42.Location = new Point(147, 18);
+            label42.Margin = new Padding(2, 0, 2, 0);
+            label42.Name = "label42";
+            label42.Size = new Size(35, 17);
+            label42.TabIndex = 51;
+            label42.Text = "MHz";
             // 
             // tbBfar
             // 
-            this.tbBfar.Location = new System.Drawing.Point(132, 23);
-            this.tbBfar.Name = "tbBfar";
-            this.tbBfar.ReadOnly = true;
-            this.tbBfar.Size = new System.Drawing.Size(94, 30);
-            this.tbBfar.TabIndex = 52;
+            tbBfar.Location = new Point(84, 16);
+            tbBfar.Margin = new Padding(2);
+            tbBfar.Name = "tbBfar";
+            tbBfar.ReadOnly = true;
+            tbBfar.Size = new Size(61, 23);
+            tbBfar.TabIndex = 52;
             // 
             // tbSfar
             // 
-            this.tbSfar.Location = new System.Drawing.Point(134, 164);
-            this.tbSfar.Name = "tbSfar";
-            this.tbSfar.ReadOnly = true;
-            this.tbSfar.Size = new System.Drawing.Size(94, 30);
-            this.tbSfar.TabIndex = 49;
+            tbSfar.Location = new Point(85, 116);
+            tbSfar.Margin = new Padding(2);
+            tbSfar.Name = "tbSfar";
+            tbSfar.ReadOnly = true;
+            tbSfar.Size = new Size(61, 23);
+            tbSfar.TabIndex = 49;
             // 
             // label30
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(27, 167);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(82, 24);
-            this.label30.TabIndex = 47;
-            this.label30.Text = "探测距离";
+            label30.AutoSize = true;
+            label30.Location = new Point(17, 118);
+            label30.Margin = new Padding(2, 0, 2, 0);
+            label30.Name = "label30";
+            label30.Size = new Size(56, 17);
+            label30.TabIndex = 47;
+            label30.Text = "探测距离";
             // 
             // label31
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(233, 73);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(36, 24);
-            this.label31.TabIndex = 48;
-            this.label31.Text = "cm";
+            label31.AutoSize = true;
+            label31.Location = new Point(148, 52);
+            label31.Margin = new Padding(2, 0, 2, 0);
+            label31.Name = "label31";
+            label31.Size = new Size(25, 17);
+            label31.TabIndex = 48;
+            label31.Text = "cm";
             // 
             // label32
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(44, 73);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(64, 24);
-            this.label32.TabIndex = 38;
-            this.label32.Text = "距离元";
+            label32.AutoSize = true;
+            label32.Location = new Point(28, 52);
+            label32.Margin = new Padding(2, 0, 2, 0);
+            label32.Name = "label32";
+            label32.Size = new Size(44, 17);
+            label32.TabIndex = 38;
+            label32.Text = "距离元";
             // 
             // label33
             // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(233, 167);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(27, 24);
-            this.label33.TabIndex = 39;
-            this.label33.Text = "m";
+            label33.AutoSize = true;
+            label33.Location = new Point(148, 118);
+            label33.Margin = new Padding(2, 0, 2, 0);
+            label33.Name = "label33";
+            label33.Size = new Size(19, 17);
+            label33.TabIndex = 39;
+            label33.Text = "m";
             // 
             // label34
             // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(44, 119);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(64, 24);
-            this.label34.TabIndex = 40;
-            this.label34.Text = "速度元";
+            label34.AutoSize = true;
+            label34.Location = new Point(28, 84);
+            label34.Margin = new Padding(2, 0, 2, 0);
+            label34.Name = "label34";
+            label34.Size = new Size(44, 17);
+            label34.TabIndex = 40;
+            label34.Text = "速度元";
             // 
             // label36
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(231, 119);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(43, 24);
-            this.label36.TabIndex = 42;
-            this.label36.Text = "m/s";
+            label36.AutoSize = true;
+            label36.Location = new Point(147, 84);
+            label36.Margin = new Padding(2, 0, 2, 0);
+            label36.Name = "label36";
+            label36.Size = new Size(30, 17);
+            label36.TabIndex = 42;
+            label36.Text = "m/s";
             // 
             // tbVresFar
             // 
-            this.tbVresFar.Location = new System.Drawing.Point(132, 109);
-            this.tbVresFar.Name = "tbVresFar";
-            this.tbVresFar.ReadOnly = true;
-            this.tbVresFar.Size = new System.Drawing.Size(94, 30);
-            this.tbVresFar.TabIndex = 45;
+            tbVresFar.Location = new Point(84, 77);
+            tbVresFar.Margin = new Padding(2);
+            tbVresFar.Name = "tbVresFar";
+            tbVresFar.ReadOnly = true;
+            tbVresFar.Size = new Size(61, 23);
+            tbVresFar.TabIndex = 45;
             // 
             // tbRresFar
             // 
-            this.tbRresFar.Location = new System.Drawing.Point(132, 64);
-            this.tbRresFar.Name = "tbRresFar";
-            this.tbRresFar.ReadOnly = true;
-            this.tbRresFar.Size = new System.Drawing.Size(94, 30);
-            this.tbRresFar.TabIndex = 44;
+            tbRresFar.Location = new Point(84, 45);
+            tbRresFar.Margin = new Padding(2);
+            tbRresFar.Name = "tbRresFar";
+            tbRresFar.ReadOnly = true;
+            tbRresFar.Size = new Size(61, 23);
+            tbRresFar.TabIndex = 44;
             // 
             // NearPerfStatsBox
             // 
-            this.NearPerfStatsBox.Controls.Add(this.label39);
-            this.NearPerfStatsBox.Controls.Add(this.label40);
-            this.NearPerfStatsBox.Controls.Add(this.tbBnear);
-            this.NearPerfStatsBox.Controls.Add(this.tbSnear);
-            this.NearPerfStatsBox.Controls.Add(this.label28);
-            this.NearPerfStatsBox.Controls.Add(this.label29);
-            this.NearPerfStatsBox.Controls.Add(this.label2);
-            this.NearPerfStatsBox.Controls.Add(this.label11);
-            this.NearPerfStatsBox.Controls.Add(this.label23);
-            this.NearPerfStatsBox.Controls.Add(this.label26);
-            this.NearPerfStatsBox.Controls.Add(this.tbVresNear);
-            this.NearPerfStatsBox.Controls.Add(this.tbRresNear);
-            this.NearPerfStatsBox.Location = new System.Drawing.Point(41, 30);
-            this.NearPerfStatsBox.Name = "NearPerfStatsBox";
-            this.NearPerfStatsBox.Size = new System.Drawing.Size(297, 222);
-            this.NearPerfStatsBox.TabIndex = 0;
-            this.NearPerfStatsBox.TabStop = false;
-            this.NearPerfStatsBox.Text = "近距离";
+            NearPerfStatsBox.Controls.Add(label39);
+            NearPerfStatsBox.Controls.Add(label40);
+            NearPerfStatsBox.Controls.Add(tbBnear);
+            NearPerfStatsBox.Controls.Add(tbSnear);
+            NearPerfStatsBox.Controls.Add(label28);
+            NearPerfStatsBox.Controls.Add(label29);
+            NearPerfStatsBox.Controls.Add(label2);
+            NearPerfStatsBox.Controls.Add(label11);
+            NearPerfStatsBox.Controls.Add(label23);
+            NearPerfStatsBox.Controls.Add(label26);
+            NearPerfStatsBox.Controls.Add(tbVresNear);
+            NearPerfStatsBox.Controls.Add(tbRresNear);
+            NearPerfStatsBox.Location = new Point(26, 21);
+            NearPerfStatsBox.Margin = new Padding(2);
+            NearPerfStatsBox.Name = "NearPerfStatsBox";
+            NearPerfStatsBox.Padding = new Padding(2);
+            NearPerfStatsBox.Size = new Size(189, 157);
+            NearPerfStatsBox.TabIndex = 0;
+            NearPerfStatsBox.TabStop = false;
+            NearPerfStatsBox.Text = "近距离";
             // 
             // label39
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(60, 30);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(46, 24);
-            this.label39.TabIndex = 38;
-            this.label39.Text = "带宽";
+            label39.AutoSize = true;
+            label39.Location = new Point(38, 21);
+            label39.Margin = new Padding(2, 0, 2, 0);
+            label39.Name = "label39";
+            label39.Size = new Size(32, 17);
+            label39.TabIndex = 38;
+            label39.Text = "带宽";
             // 
             // label40
             // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(237, 30);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(51, 24);
-            this.label40.TabIndex = 39;
-            this.label40.Text = "MHz";
+            label40.AutoSize = true;
+            label40.Location = new Point(151, 21);
+            label40.Margin = new Padding(2, 0, 2, 0);
+            label40.Name = "label40";
+            label40.Size = new Size(35, 17);
+            label40.TabIndex = 39;
+            label40.Text = "MHz";
             // 
             // tbBnear
             // 
-            this.tbBnear.Location = new System.Drawing.Point(129, 23);
-            this.tbBnear.Name = "tbBnear";
-            this.tbBnear.ReadOnly = true;
-            this.tbBnear.Size = new System.Drawing.Size(94, 30);
-            this.tbBnear.TabIndex = 40;
+            tbBnear.Location = new Point(82, 16);
+            tbBnear.Margin = new Padding(2);
+            tbBnear.Name = "tbBnear";
+            tbBnear.ReadOnly = true;
+            tbBnear.Size = new Size(61, 23);
+            tbBnear.TabIndex = 40;
             // 
             // tbSnear
             // 
-            this.tbSnear.Location = new System.Drawing.Point(129, 164);
-            this.tbSnear.Name = "tbSnear";
-            this.tbSnear.ReadOnly = true;
-            this.tbSnear.Size = new System.Drawing.Size(94, 30);
-            this.tbSnear.TabIndex = 37;
+            tbSnear.Location = new Point(82, 116);
+            tbSnear.Margin = new Padding(2);
+            tbSnear.Name = "tbSnear";
+            tbSnear.ReadOnly = true;
+            tbSnear.Size = new Size(61, 23);
+            tbSnear.TabIndex = 37;
             // 
             // label28
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(24, 164);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(82, 24);
-            this.label28.TabIndex = 35;
-            this.label28.Text = "探测距离";
+            label28.AutoSize = true;
+            label28.Location = new Point(15, 116);
+            label28.Margin = new Padding(2, 0, 2, 0);
+            label28.Name = "label28";
+            label28.Size = new Size(56, 17);
+            label28.TabIndex = 35;
+            label28.Text = "探测距离";
             // 
             // label29
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(229, 164);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(27, 24);
-            this.label29.TabIndex = 36;
-            this.label29.Text = "m";
+            label29.AutoSize = true;
+            label29.Location = new Point(146, 116);
+            label29.Margin = new Padding(2, 0, 2, 0);
+            label29.Name = "label29";
+            label29.Size = new Size(19, 17);
+            label29.TabIndex = 36;
+            label29.Text = "m";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 24);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "距离元";
+            label2.AutoSize = true;
+            label2.Location = new Point(26, 54);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(44, 17);
+            label2.TabIndex = 26;
+            label2.Text = "距离元";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(237, 76);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(36, 24);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "cm";
+            label11.AutoSize = true;
+            label11.Location = new Point(151, 54);
+            label11.Margin = new Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(25, 17);
+            label11.TabIndex = 27;
+            label11.Text = "cm";
             // 
             // label23
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(41, 123);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(64, 24);
-            this.label23.TabIndex = 28;
-            this.label23.Text = "速度元";
+            label23.AutoSize = true;
+            label23.Location = new Point(26, 87);
+            label23.Margin = new Padding(2, 0, 2, 0);
+            label23.Name = "label23";
+            label23.Size = new Size(44, 17);
+            label23.TabIndex = 28;
+            label23.Text = "速度元";
             // 
             // label26
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(237, 123);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(43, 24);
-            this.label26.TabIndex = 30;
-            this.label26.Text = "m/s";
+            label26.AutoSize = true;
+            label26.Location = new Point(151, 87);
+            label26.Margin = new Padding(2, 0, 2, 0);
+            label26.Name = "label26";
+            label26.Size = new Size(30, 17);
+            label26.TabIndex = 30;
+            label26.Text = "m/s";
             // 
             // tbVresNear
             // 
-            this.tbVresNear.Location = new System.Drawing.Point(129, 120);
-            this.tbVresNear.Name = "tbVresNear";
-            this.tbVresNear.ReadOnly = true;
-            this.tbVresNear.Size = new System.Drawing.Size(94, 30);
-            this.tbVresNear.TabIndex = 33;
+            tbVresNear.Location = new Point(82, 85);
+            tbVresNear.Margin = new Padding(2);
+            tbVresNear.Name = "tbVresNear";
+            tbVresNear.ReadOnly = true;
+            tbVresNear.Size = new Size(61, 23);
+            tbVresNear.TabIndex = 33;
             // 
             // tbRresNear
             // 
-            this.tbRresNear.Location = new System.Drawing.Point(129, 73);
-            this.tbRresNear.Name = "tbRresNear";
-            this.tbRresNear.ReadOnly = true;
-            this.tbRresNear.Size = new System.Drawing.Size(94, 30);
-            this.tbRresNear.TabIndex = 32;
+            tbRresNear.Location = new Point(82, 52);
+            tbRresNear.Margin = new Padding(2);
+            tbRresNear.Name = "tbRresNear";
+            tbRresNear.ReadOnly = true;
+            tbRresNear.Size = new Size(61, 23);
+            tbRresNear.TabIndex = 32;
             // 
             // DetectModelGroup
             // 
-            this.DetectModelGroup.Controls.Add(this.btnAllDetect);
-            this.DetectModelGroup.Controls.Add(this.btnFarDetect);
-            this.DetectModelGroup.Controls.Add(this.btnNearDetect);
-            this.DetectModelGroup.Location = new System.Drawing.Point(46, 25);
-            this.DetectModelGroup.Name = "DetectModelGroup";
-            this.DetectModelGroup.Size = new System.Drawing.Size(783, 73);
-            this.DetectModelGroup.TabIndex = 40;
-            this.DetectModelGroup.TabStop = false;
-            this.DetectModelGroup.Text = "探测模式";
+            DetectModelGroup.Controls.Add(btnAllDetect);
+            DetectModelGroup.Controls.Add(btnFarDetect);
+            DetectModelGroup.Controls.Add(btnNearDetect);
+            DetectModelGroup.Location = new Point(29, 18);
+            DetectModelGroup.Margin = new Padding(2);
+            DetectModelGroup.Name = "DetectModelGroup";
+            DetectModelGroup.Padding = new Padding(2);
+            DetectModelGroup.Size = new Size(498, 52);
+            DetectModelGroup.TabIndex = 40;
+            DetectModelGroup.TabStop = false;
+            DetectModelGroup.Text = "探测模式";
             // 
             // btnAllDetect
             // 
-            this.btnAllDetect.AutoSize = true;
-            this.btnAllDetect.Checked = true;
-            this.btnAllDetect.Location = new System.Drawing.Point(586, 37);
-            this.btnAllDetect.Name = "btnAllDetect";
-            this.btnAllDetect.Size = new System.Drawing.Size(107, 28);
-            this.btnAllDetect.TabIndex = 2;
-            this.btnAllDetect.TabStop = true;
-            this.btnAllDetect.Text = "兼顾模式";
-            this.btnAllDetect.UseVisualStyleBackColor = true;
-            this.btnAllDetect.CheckedChanged += new System.EventHandler(this.btnAllDetect_CheckedChanged);
+            btnAllDetect.AutoSize = true;
+            btnAllDetect.Checked = true;
+            btnAllDetect.Location = new Point(373, 26);
+            btnAllDetect.Margin = new Padding(2);
+            btnAllDetect.Name = "btnAllDetect";
+            btnAllDetect.Size = new Size(74, 21);
+            btnAllDetect.TabIndex = 2;
+            btnAllDetect.TabStop = true;
+            btnAllDetect.Text = "兼顾模式";
+            btnAllDetect.UseVisualStyleBackColor = true;
+            btnAllDetect.CheckedChanged += btnAllDetect_CheckedChanged;
             // 
             // btnFarDetect
             // 
-            this.btnFarDetect.AutoSize = true;
-            this.btnFarDetect.Location = new System.Drawing.Point(313, 37);
-            this.btnFarDetect.Name = "btnFarDetect";
-            this.btnFarDetect.Size = new System.Drawing.Size(125, 28);
-            this.btnFarDetect.TabIndex = 1;
-            this.btnFarDetect.Text = "远距离探测";
-            this.btnFarDetect.UseVisualStyleBackColor = true;
-            this.btnFarDetect.CheckedChanged += new System.EventHandler(this.btnFarDetect_CheckedChanged);
+            btnFarDetect.AutoSize = true;
+            btnFarDetect.Location = new Point(199, 26);
+            btnFarDetect.Margin = new Padding(2);
+            btnFarDetect.Name = "btnFarDetect";
+            btnFarDetect.Size = new Size(86, 21);
+            btnFarDetect.TabIndex = 1;
+            btnFarDetect.Text = "远距离探测";
+            btnFarDetect.UseVisualStyleBackColor = true;
+            btnFarDetect.CheckedChanged += btnFarDetect_CheckedChanged;
             // 
             // btnNearDetect
             // 
-            this.btnNearDetect.AutoSize = true;
-            this.btnNearDetect.Location = new System.Drawing.Point(41, 37);
-            this.btnNearDetect.Name = "btnNearDetect";
-            this.btnNearDetect.Size = new System.Drawing.Size(125, 28);
-            this.btnNearDetect.TabIndex = 0;
-            this.btnNearDetect.Text = "近距离探测";
-            this.btnNearDetect.UseVisualStyleBackColor = true;
-            this.btnNearDetect.CheckedChanged += new System.EventHandler(this.btnNearDetect_CheckedChanged);
+            btnNearDetect.AutoSize = true;
+            btnNearDetect.Location = new Point(26, 26);
+            btnNearDetect.Margin = new Padding(2);
+            btnNearDetect.Name = "btnNearDetect";
+            btnNearDetect.Size = new Size(86, 21);
+            btnNearDetect.TabIndex = 0;
+            btnNearDetect.Text = "近距离探测";
+            btnNearDetect.UseVisualStyleBackColor = true;
+            btnNearDetect.CheckedChanged += btnNearDetect_CheckedChanged;
             // 
             // btnSetParams
             // 
-            this.btnSetParams.Location = new System.Drawing.Point(586, 810);
-            this.btnSetParams.Name = "btnSetParams";
-            this.btnSetParams.Size = new System.Drawing.Size(112, 34);
-            this.btnSetParams.TabIndex = 41;
-            this.btnSetParams.Text = "应用";
-            this.btnSetParams.UseVisualStyleBackColor = true;
-            this.btnSetParams.Click += new System.EventHandler(this.btnSetParams_Click);
+            btnSetParams.Location = new Point(373, 574);
+            btnSetParams.Margin = new Padding(2);
+            btnSetParams.Name = "btnSetParams";
+            btnSetParams.Size = new Size(71, 24);
+            btnSetParams.TabIndex = 41;
+            btnSetParams.Text = "应用";
+            btnSetParams.UseVisualStyleBackColor = true;
+            btnSetParams.Click += btnSetParams_Click;
             // 
             // btnClosedParams
             // 
-            this.btnClosedParams.Location = new System.Drawing.Point(721, 810);
-            this.btnClosedParams.Name = "btnClosedParams";
-            this.btnClosedParams.Size = new System.Drawing.Size(112, 34);
-            this.btnClosedParams.TabIndex = 42;
-            this.btnClosedParams.Text = "完成";
-            this.btnClosedParams.UseVisualStyleBackColor = true;
-            this.btnClosedParams.Click += new System.EventHandler(this.btnClosedParams_Click);
+            btnClosedParams.Location = new Point(459, 574);
+            btnClosedParams.Margin = new Padding(2);
+            btnClosedParams.Name = "btnClosedParams";
+            btnClosedParams.Size = new Size(71, 24);
+            btnClosedParams.TabIndex = 42;
+            btnClosedParams.Text = "完成";
+            btnClosedParams.UseVisualStyleBackColor = true;
+            btnClosedParams.Click += btnClosedParams_Click;
             // 
             // ParamsLog
             // 
-            this.ParamsLog.Location = new System.Drawing.Point(72, 817);
-            this.ParamsLog.Name = "ParamsLog";
-            this.ParamsLog.ReadOnly = true;
-            this.ParamsLog.Size = new System.Drawing.Size(320, 30);
-            this.ParamsLog.TabIndex = 43;
+            ParamsLog.Location = new Point(46, 579);
+            ParamsLog.Margin = new Padding(2);
+            ParamsLog.Name = "ParamsLog";
+            ParamsLog.ReadOnly = true;
+            ParamsLog.Size = new Size(205, 23);
+            ParamsLog.TabIndex = 43;
             // 
             // ParamForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 875);
-            this.Controls.Add(this.ParamsLog);
-            this.Controls.Add(this.btnClosedParams);
-            this.Controls.Add(this.btnSetParams);
-            this.Controls.Add(this.DetectModelGroup);
-            this.Controls.Add(this.PerfStatsBox);
-            this.Controls.Add(this.FarParamsGroup);
-            this.Controls.Add(this.NearParamsGroup);
-            this.Controls.Add(this.CommonParamsGroup);
-            this.Name = "ParamForm";
-            this.Text = "参数设置";
-            this.Load += new System.EventHandler(this.ParamForm_Load);
-            this.CommonParamsGroup.ResumeLayout(false);
-            this.CommonParamsGroup.PerformLayout();
-            this.NearParamsGroup.ResumeLayout(false);
-            this.NearParamsGroup.PerformLayout();
-            this.FarParamsGroup.ResumeLayout(false);
-            this.FarParamsGroup.PerformLayout();
-            this.PerfStatsBox.ResumeLayout(false);
-            this.FarPerfStatsBox.ResumeLayout(false);
-            this.FarPerfStatsBox.PerformLayout();
-            this.NearPerfStatsBox.ResumeLayout(false);
-            this.NearPerfStatsBox.PerformLayout();
-            this.DetectModelGroup.ResumeLayout(false);
-            this.DetectModelGroup.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(544, 620);
+            Controls.Add(ParamsLog);
+            Controls.Add(btnClosedParams);
+            Controls.Add(btnSetParams);
+            Controls.Add(DetectModelGroup);
+            Controls.Add(PerfStatsBox);
+            Controls.Add(FarParamsGroup);
+            Controls.Add(NearParamsGroup);
+            Controls.Add(CommonParamsGroup);
+            Margin = new Padding(2);
+            Name = "ParamForm";
+            Text = "参数设置";
+            Load += ParamForm_Load;
+            CommonParamsGroup.ResumeLayout(false);
+            CommonParamsGroup.PerformLayout();
+            NearParamsGroup.ResumeLayout(false);
+            NearParamsGroup.PerformLayout();
+            FarParamsGroup.ResumeLayout(false);
+            FarParamsGroup.PerformLayout();
+            PerfStatsBox.ResumeLayout(false);
+            FarPerfStatsBox.ResumeLayout(false);
+            FarPerfStatsBox.PerformLayout();
+            NearPerfStatsBox.ResumeLayout(false);
+            NearPerfStatsBox.PerformLayout();
+            DetectModelGroup.ResumeLayout(false);
+            DetectModelGroup.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -924,30 +976,25 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private Label label6;
         private Label label7;
         private Label label8;
         private Label label9;
         private Label label10;
         private Label label12;
-        private Label label13;
-        private Label label14;
-        private Label label16;
         private Label label17;
-        private Label label19;
         private Label label20;
         private Label label21;
         private Label label22;
         private TextBox tbKnear;
         private TextBox tbSampleNear;
-        private TextBox tbTrNear;
-        private TextBox tbChirpLoop;
+        private TextBox tbChirpLoopNear;
+        private TextBox tbTr;
         private TextBox tbKfar;
         private TextBox tbSampleFar;
-        private TextBox tbTrFar;
+        private TextBox tbChirpLoopFar;
         private TextBox tbTidle;
         private Label label15;
-        private TextBox tbFrameT;
+        private TextBox tbNearFrameT;
         private Label label18;
         private TextBox tbFs;
         private Label label24;
@@ -982,9 +1029,6 @@
         private Button btnSetParams;
         private Button btnClosedParams;
         private TextBox ParamsLog;
-        private TextBox tbStartADC;
-        private Label label1;
-        private Label label38;
         private Label label39;
         private Label label40;
         private TextBox tbBnear;
@@ -994,11 +1038,16 @@
         private Label label43;
         private Label label44;
         private TextBox tbStartFreq;
-        private Label label35;
-        private Label label37;
-        private TextBox tbTxStart;
         private Label label25;
         private Label label27;
         private TextBox tbRxGain;
+        private Label label45;
+        private Label label6;
+        private Label label14;
+        private Label label19;
+        private Label label13;
+        private TextBox tbFarFrameT;
+        private Label label1;
+        private Label label16;
     }
 }

@@ -12,7 +12,7 @@ namespace shipdock.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -74,24 +74,24 @@ namespace shipdock.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double ChirpLoop {
+        public double Tr {
             get {
-                return ((double)(this["ChirpLoop"]));
+                return ((double)(this["Tr"]));
             }
             set {
-                this["ChirpLoop"] = value;
+                this["Tr"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double FrameT {
+        public double NearFrameT {
             get {
-                return ((double)(this["FrameT"]));
+                return ((double)(this["NearFrameT"]));
             }
             set {
-                this["FrameT"] = value;
+                this["NearFrameT"] = value;
             }
         }
         
@@ -122,12 +122,12 @@ namespace shipdock.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double TrNear {
+        public double ChirpLoopNear {
             get {
-                return ((double)(this["TrNear"]));
+                return ((double)(this["ChirpLoopNear"]));
             }
             set {
-                this["TrNear"] = value;
+                this["ChirpLoopNear"] = value;
             }
         }
         
@@ -158,12 +158,12 @@ namespace shipdock.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double TrFar {
+        public double ChirpLoopFar {
             get {
-                return ((double)(this["TrFar"]));
+                return ((double)(this["ChirpLoopFar"]));
             }
             set {
-                this["TrFar"] = value;
+                this["ChirpLoopFar"] = value;
             }
         }
         
@@ -236,6 +236,18 @@ namespace shipdock.Properties {
             }
             set {
                 this["DetectModel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double FarFrameT {
+            get {
+                return ((double)(this["FarFrameT"]));
+            }
+            set {
+                this["FarFrameT"] = value;
             }
         }
     }

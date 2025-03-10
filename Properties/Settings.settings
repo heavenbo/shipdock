@@ -14,10 +14,10 @@
     <Setting Name="Fs" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ChirpLoop" Type="System.Double" Scope="User">
+    <Setting Name="Tr" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="FrameT" Type="System.Double" Scope="User">
+    <Setting Name="NearFrameT" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="NearK" Type="System.Double" Scope="User">
@@ -26,7 +26,7 @@
     <Setting Name="SampleNear" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="TrNear" Type="System.Double" Scope="User">
+    <Setting Name="ChirpLoopNear" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="FarK" Type="System.Double" Scope="User">
@@ -35,7 +35,7 @@
     <Setting Name="SampleFar" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="TrFar" Type="System.Double" Scope="User">
+    <Setting Name="ChirpLoopFar" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="StartADC" Type="System.Double" Scope="User">
@@ -54,6 +54,9 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DetectModel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FarFrameT" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>

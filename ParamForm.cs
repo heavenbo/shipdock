@@ -20,22 +20,28 @@ namespace shipdock
         private const double dx = 1.8161e-3;
         private int Nant = 4;
         double pi = 3.1415926;
-        int DetectModel;
+        private enum DetectModel
+        {
+            nearDetect = 1,
+            farDetect,
+            allDetect
+        };
+        private DetectModel detectModel;
         //雷达波形参数
         private double StartFreq;
         private double Tidle;
         private double Fs;
-        private double ChirpLoop;
-        private double FrameT;
+        private double Tr;
+        private double NearFrameT, FarFrameT;
         private double NearK;
         private double SampleNear;
-        private double TrNear;
+        private double ChirpLoopNear;
         private double FarK;
         private double SampleFar;
-        private double TrFar;
-        private double StartADC;
+        private double ChirpLoopFar;
+        private double StartADC = 6;
         private double RxGain;
-        private double TxStart;
+        private double TxStart = 1;
         //性能指标
         private double NearB, FarB;
         private double RresNear, RresFar;
@@ -48,26 +54,25 @@ namespace shipdock
 
         private void ParamForm_Load(object sender, EventArgs e)
         {
-            this.DetectModel = Properties.Settings.Default.DetectModel;
-            if (this.DetectModel != 0)
+            this.detectModel = (DetectModel)Properties.Settings.Default.DetectModel;
+            if (this.detectModel != 0)
             {
-                this.btnNearDetect.Checked = DetectModel == 1;
-                this.btnFarDetect.Checked = DetectModel == 2;
-                this.btnAllDetect.Checked = DetectModel == 3;
+                this.btnNearDetect.Checked = detectModel == DetectModel.nearDetect;
+                this.btnFarDetect.Checked = detectModel == DetectModel.farDetect;
+                this.btnAllDetect.Checked = detectModel == DetectModel.allDetect;
             }
             this.tbTidle.Text = Properties.Settings.Default.Tidle.ToString();
             this.tbFs.Text = Properties.Settings.Default.Fs.ToString();
-            this.tbChirpLoop.Text = Properties.Settings.Default.ChirpLoop.ToString();
-            this.tbFrameT.Text = Properties.Settings.Default.FrameT.ToString();
+            this.tbTr.Text = Properties.Settings.Default.Tr.ToString();
+            this.tbNearFrameT.Text = Properties.Settings.Default.NearFrameT.ToString();
+            this.tbFarFrameT.Text = Properties.Settings.Default.FarFrameT.ToString();
             this.tbKnear.Text = Properties.Settings.Default.NearK.ToString();
             this.tbSampleNear.Text = Properties.Settings.Default.SampleNear.ToString();
-            this.tbTrNear.Text = Properties.Settings.Default.TrNear.ToString();
+            this.tbChirpLoopNear.Text = Properties.Settings.Default.ChirpLoopNear.ToString();
             this.tbKfar.Text = Properties.Settings.Default.FarK.ToString();
             this.tbSampleFar.Text = Properties.Settings.Default.SampleFar.ToString();
-            this.tbTrFar.Text = Properties.Settings.Default.TrFar.ToString();
-            this.tbStartADC.Text = Properties.Settings.Default.StartADC.ToString();
+            this.tbChirpLoopFar.Text = Properties.Settings.Default.ChirpLoopFar.ToString();
             this.tbStartFreq.Text = Properties.Settings.Default.StartFreq.ToString();
-            this.tbTxStart.Text = Properties.Settings.Default.TxStart.ToString();
             this.tbRxGain.Text = Properties.Settings.Default.RxGain.ToString();
         }
         private void btnNearDetect_CheckedChanged(object sender, EventArgs e)
@@ -252,33 +257,44 @@ namespace shipdock
             }
         }
 
-        private void tbChirpLoop_TextChanged(object sender, EventArgs e)
+        private void tbTr_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbChirpLoop.Text))
+            if (string.IsNullOrEmpty(tbTr.Text))
                 return;
-            char lastChar = tbChirpLoop.Text[tbChirpLoop.Text.Length - 1];
+            char lastChar = tbTr.Text[tbTr.Text.Length - 1];
             if (lastChar == 'e' || lastChar == '-')
                 return;
             // 判断文本内容是否可以转换为有效的 double 类型
-            if (!double.TryParse(this.tbChirpLoop.Text, out double result))
+            if (!double.TryParse(this.tbTr.Text, out double result))
             {
-                this.tbChirpLoop.Text = string.Empty;  // 清空文本
+                this.tbTr.Text = string.Empty;  // 清空文本
             }
         }
 
-        private void tbFrameT_TextChanged(object sender, EventArgs e)
+        private void tbNearFrameT_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbFrameT.Text))
+            if (string.IsNullOrEmpty(tbNearFrameT.Text))
                 return;
-            char lastChar = tbFrameT.Text[tbFrameT.Text.Length - 1];
+            char lastChar = tbNearFrameT.Text[tbNearFrameT.Text.Length - 1];
             if (lastChar == 'e' || lastChar == '-')
                 return;
-            if (!double.TryParse(this.tbFrameT.Text, out double result))
+            if (!double.TryParse(this.tbNearFrameT.Text, out double result))
             {
-                this.tbFrameT.Text = string.Empty;  // 清空文本
+                this.tbNearFrameT.Text = string.Empty;  // 清空文本
             }
         }
-
+        private void tbFarFrameT_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbFarFrameT.Text))
+                return;
+            char lastChar = tbFarFrameT.Text[tbFarFrameT.Text.Length - 1];
+            if (lastChar == 'e' || lastChar == '-')
+                return;
+            if (!double.TryParse(this.tbFarFrameT.Text, out double result))
+            {
+                this.tbFarFrameT.Text = string.Empty;  // 清空文本
+            }
+        }
         private void tbFs_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbFs.Text))
@@ -355,53 +371,29 @@ namespace shipdock
             }
         }
 
-        private void tbTrNear_TextChanged(object sender, EventArgs e)
+        private void tbChirpLoopNear_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbTrNear.Text))
+            if (string.IsNullOrEmpty(tbChirpLoopNear.Text))
                 return;
-            char lastChar = tbTrNear.Text[tbTrNear.Text.Length - 1];
+            char lastChar = tbChirpLoopNear.Text[tbChirpLoopNear.Text.Length - 1];
             if (lastChar == 'e' || lastChar == '-')
                 return;
-            if (!double.TryParse(this.tbTrNear.Text, out double result))
+            if (!double.TryParse(this.tbChirpLoopNear.Text, out double result))
             {
-                this.tbTrNear.Text = string.Empty;  // 清空文本
+                this.tbChirpLoopNear.Text = string.Empty;  // 清空文本
             }
         }
 
-        private void tbTrFar_TextChanged(object sender, EventArgs e)
+        private void tbChirpLoopFar_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbTrFar.Text))
+            if (string.IsNullOrEmpty(tbChirpLoopFar.Text))
                 return;
-            char lastChar = tbTrFar.Text[tbTrFar.Text.Length - 1];
+            char lastChar = tbChirpLoopFar.Text[tbChirpLoopFar.Text.Length - 1];
             if (lastChar == 'e' || lastChar == '-')
                 return;
-            if (!double.TryParse(this.tbTrFar.Text, out double result))
+            if (!double.TryParse(this.tbChirpLoopFar.Text, out double result))
             {
-                this.tbTrFar.Text = string.Empty;  // 清空文本
-            }
-        }
-        private void tbStartADC_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbStartADC.Text))
-                return;
-            char lastChar = tbStartADC.Text[tbStartADC.Text.Length - 1];
-            if (lastChar == 'e' || lastChar == '-')
-                return;
-            if (!double.TryParse(this.tbStartADC.Text, out double result))
-            {
-                this.tbStartADC.Text = string.Empty;  // 清空文本
-            }
-        }
-        private void tbTxStart_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbTxStart.Text))
-                return;
-            char lastChar = tbTxStart.Text[tbTxStart.Text.Length - 1];
-            if (lastChar == 'e' || lastChar == '-')
-                return;
-            if (!double.TryParse(this.tbTxStart.Text, out double result))
-            {
-                this.tbTxStart.Text = string.Empty;  // 清空文本
+                this.tbChirpLoopFar.Text = string.Empty;  // 清空文本
             }
         }
 
@@ -421,41 +413,40 @@ namespace shipdock
         {
             try
             {
-                this.DetectModel = (this.btnNearDetect.Checked ? 1 : 0) + (this.btnFarDetect.Checked ? 2 : 0) + (this.btnAllDetect.Checked ? 3 : 0);
+                this.detectModel = (DetectModel)((this.btnNearDetect.Checked ? 1 : 0) + (this.btnFarDetect.Checked ? 2 : 0) + (this.btnAllDetect.Checked ? 3 : 0));
                 this.Tidle = double.Parse(this.tbTidle.Text);
                 this.Fs = double.Parse(this.tbFs.Text);
-                this.ChirpLoop = double.Parse(this.tbChirpLoop.Text);
-                this.FrameT = double.Parse(this.tbFrameT.Text);
+                this.Tr = double.Parse(this.tbTr.Text);
+                this.NearFrameT = double.Parse(this.tbNearFrameT.Text);
+                this.FarFrameT = double.Parse(this.tbFarFrameT.Text);
                 this.NearK = double.Parse(this.tbKnear.Text);
                 this.SampleNear = double.Parse(this.tbSampleNear.Text);
-                this.TrNear = double.Parse(this.tbTrNear.Text);
+                this.ChirpLoopNear = double.Parse(this.tbChirpLoopNear.Text);
                 this.FarK = double.Parse(this.tbKfar.Text);
                 this.SampleFar = double.Parse(this.tbSampleFar.Text);
-                this.TrFar = double.Parse(this.tbTrFar.Text);
-                this.StartADC = double.Parse(this.tbStartADC.Text);
+                this.ChirpLoopFar = double.Parse(this.tbChirpLoopFar.Text);
                 this.StartFreq = double.Parse(this.tbStartFreq.Text);
                 this.RxGain = double.Parse(this.tbRxGain.Text);
-                this.TxStart = double.Parse(this.tbTxStart.Text);
                 //计算性能指标
 
                 double EffBwNear = this.NearK * 1e12 * this.SampleNear / (Fs * 1e3);
                 double lambda_near = SpeedOfLight / (StartFreq * 1e9 + EffBwNear / 2);
-                this.NearB = this.NearK * this.TrNear;
+                this.NearB = this.NearK * this.Tr;
                 this.RresNear = SpeedOfLight / (2 * EffBwNear);
                 this.NearS = this.SampleNear * this.RresNear;
 
                 double EffBwFar = this.FarK * 1e12 * this.SampleFar / (Fs * 1e3);
                 double LambdaFar = SpeedOfLight / (StartFreq * 1e9 + EffBwFar / 2);
-                this.FarB = this.FarK * this.TrFar;
+                this.FarB = this.FarK * this.Tr;
                 this.RresFar = SpeedOfLight / (2 * EffBwFar);
                 this.FarS = this.SampleFar * this.RresFar;
                 if (this.btnNearDetect.Checked || this.btnAllDetect.Checked)
                 {
-                    this.VresNear = lambda_near / (ChirpLoop * (Tidle + TrNear) * 1e-6 * 2);
+                    this.VresNear = lambda_near / (ChirpLoopNear * (Tidle + Tr) * 1e-6 * 2);
                 }
                 else if (this.btnFarDetect.Checked || this.btnAllDetect.Checked)
                 {
-                    this.VresFar = LambdaFar / (ChirpLoop * (Tidle + TrFar) * 1e-6 * 2);
+                    this.VresFar = LambdaFar / (ChirpLoopFar * (Tidle + Tr) * 1e-6 * 2);
                 }
             }
             catch (FormatException)
@@ -468,27 +459,22 @@ namespace shipdock
                 ParamsLog.Text = ("[Error] chirp间隔应至少大于Tx开始时间6μs！");
                 return;
             }
-            else if (this.FrameT * 1e3 <= (this.TrFar + this.Tidle) * this.ChirpLoop && this.DetectModel == 2)
+            else if (this.FarFrameT * 1e3 <= (this.Tr + this.Tidle) * this.ChirpLoopFar && this.detectModel != DetectModel.nearDetect)
             {
                 ParamsLog.Text = ("[Error] 帧时间小于（chirp时间+chirp间隔）*chirp数！");
                 return;
             }
-            else if (this.FrameT * 1e3 <= (this.TrNear + this.Tidle) * this.ChirpLoop && this.DetectModel == 1)
+            else if (this.NearFrameT * 1e3 <= (this.Tr + this.Tidle) * this.ChirpLoopNear && this.detectModel != DetectModel.farDetect)
             {
                 ParamsLog.Text = ("[Error] 帧时间小于（chirp时间+chirp间隔）*chirp数！");
                 return;
             }
-            else if (this.FrameT * 1e3 <= (this.TrFar + this.Tidle + this.TrNear + this.Tidle) * this.ChirpLoop / 2 && this.btnAllDetect.Checked)
-            {
-                ParamsLog.Text = ("[Error] 帧时间小于（chirp时间+chirp间隔）*chirp数！");
-                return;
-            }
-            else if (this.TrFar <= this.SampleFar / this.Fs * 1e3 + this.StartADC && this.DetectModel != 1)
+            else if (this.Tr <= this.SampleFar / this.Fs * 1e3 + this.StartADC && this.detectModel != DetectModel.farDetect)
             {
                 ParamsLog.Text = ("[Error] chirp时间小于(chirp采样点数/采样频率)+ADC开始时间！");
                 return;
             }
-            else if (this.TrNear <= this.SampleNear / this.Fs * 1e3 + this.StartADC && this.DetectModel != 2)
+            else if (this.Tr <= this.SampleNear / this.Fs * 1e3 + this.StartADC && this.detectModel != DetectModel.nearDetect)
             {
                 ParamsLog.Text = ("[Error] chirp时间小于(chirp采样点数/采样频率)+ADC开始时间！");
                 return;
@@ -498,9 +484,14 @@ namespace shipdock
                 ParamsLog.Text = ("[Error] 超出雷达频率范围（77GHz,81GHz）");
                 return;
             }
-            else if ((int)this.ChirpLoop % 2 == 1 || ChirpLoop > 256 || ChirpLoop < 0)
+            else if ((int)this.ChirpLoopNear % 2 == 1 || ChirpLoopNear >= 256 || ChirpLoopNear < 16 || (int)this.ChirpLoopFar % 2 == 1 || ChirpLoopFar >= 256 || ChirpLoopFar < 16)
             {
-                ParamsLog.Text = ("[Error] chirp数应为偶数，并且应小于256");
+                ParamsLog.Text = ("[Error] chirp数应为偶数，并且应在（16,156）之中");
+                return;
+            }
+            else if (this.detectModel == DetectModel.allDetect && (this.SampleFar * this.ChirpLoopFar + this.ChirpLoopNear * this.SampleNear) * 4 > 32 * 1024)
+            {
+                ParamsLog.Text = ("[Error] 运行内存超过32K");
                 return;
             }
             //显示
@@ -543,17 +534,18 @@ namespace shipdock
             {
                 ParamsLog.Text = ("参数设置成功！");
                 //存储
-                Properties.Settings.Default.DetectModel = this.DetectModel;
+                Properties.Settings.Default.DetectModel = (int)this.detectModel;
                 Properties.Settings.Default.Tidle = this.Tidle;
                 Properties.Settings.Default.Fs = this.Fs;
-                Properties.Settings.Default.ChirpLoop = this.ChirpLoop;
-                Properties.Settings.Default.FrameT = this.FrameT;
+                Properties.Settings.Default.Tr = this.Tr;
+                Properties.Settings.Default.NearFrameT = this.NearFrameT;
+                Properties.Settings.Default.FarFrameT = this.FarFrameT;
                 Properties.Settings.Default.NearK = this.NearK;
                 Properties.Settings.Default.SampleNear = this.SampleNear;
-                Properties.Settings.Default.TrNear = this.TrNear;
+                Properties.Settings.Default.ChirpLoopNear = this.ChirpLoopNear;
                 Properties.Settings.Default.FarK = this.FarK;
                 Properties.Settings.Default.SampleFar = this.SampleFar;
-                Properties.Settings.Default.TrFar = this.TrFar;
+                Properties.Settings.Default.ChirpLoopFar = this.ChirpLoopFar;
                 Properties.Settings.Default.StartADC = this.StartADC;
                 Properties.Settings.Default.StartFreq = this.StartFreq;
                 Properties.Settings.Default.TxStart = this.TxStart;
@@ -567,77 +559,111 @@ namespace shipdock
         {
             File.WriteAllText(Properties.Settings.Default.CfgPath, string.Empty);
             StreamWriter cfgwriter = new StreamWriter(Properties.Settings.Default.CfgPath, append: true);
-            cfgwriter.WriteLine("sensorStop ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("flushCfg ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("dfeDataOutputMode " + "1 ");
-            cfgwriter.Flush();
+            if (this.detectModel == DetectModel.allDetect)
+            {
+                cfgwriter.WriteLine("%这是用于兼顾模式下的参数配置 ");
+                cfgwriter.WriteLine("sensorStop ");
+                cfgwriter.WriteLine("flushCfg ");
+                cfgwriter.WriteLine("dfeDataOutputMode " + "3 ");
+                cfgwriter.Flush();
+            }
+            else
+            {
+                if (this.detectModel == DetectModel.farDetect)
+                {
+                    cfgwriter.WriteLine("%这是用于远距离模式下的参数配置 ");
+                }
+                else
+                {
+                    cfgwriter.WriteLine("%这是用于近距离模式下的参数配置 ");
+                }
+                cfgwriter.WriteLine("sensorStop ");
+                cfgwriter.WriteLine("flushCfg ");
+                cfgwriter.WriteLine("dfeDataOutputMode " + "1 ");
+                cfgwriter.Flush();
+            }
+
             cfgwriter.WriteLine("channelCfg 15 1 0 ");
-            cfgwriter.Flush();
             cfgwriter.WriteLine("adcCfg 2 1 ");
-            cfgwriter.Flush();
             cfgwriter.WriteLine("adcbufCfg -1 0 1 1 1 ");
+            cfgwriter.WriteLine("lowPower 0 0 ");
             cfgwriter.Flush();
-            cfgwriter.WriteLine("lowPower 0 1 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine($"profileCfg 0 {this.StartFreq} {this.Tidle} {this.StartADC} {this.TrNear} 0 0 {this.NearK} {this.TxStart} {this.SampleNear} {this.Fs} 0 0 {this.RxGain} ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine($"profileCfg 1 {this.StartFreq} {this.Tidle} {this.StartADC} {this.TrFar} 0 0 {this.FarK} {this.TxStart} {this.SampleFar} {this.Fs} 0 0 {this.RxGain} ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("chirpCfg 0 0 0 0 0 0 0 1 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("chirpCfg 1 1 1 0 0 0 0 1 ");
-            cfgwriter.Flush();
-            if (this.DetectModel == 1)
+            if (this.detectModel != DetectModel.farDetect)
             {
-                cfgwriter.WriteLine($"frameCfg 0 0 32 0 {this.FrameT} 1 0 ");
+                cfgwriter.WriteLine($"profileCfg 0 {this.StartFreq} {this.Tidle} {this.StartADC} {this.Tr} 0 0 {this.NearK} {this.TxStart} {this.SampleNear} {this.Fs} 0 0 {this.RxGain} ");
+                cfgwriter.Flush();
+                cfgwriter.WriteLine("chirpCfg 0 0 0 0 0 0 0 1 ");
                 cfgwriter.Flush();
             }
-            else if (this.DetectModel == 2)
+            else
             {
-                cfgwriter.WriteLine($"frameCfg 1 1 32 0 {this.FrameT} 1 0 ");
+                cfgwriter.WriteLine($"profileCfg 0 {this.StartFreq} {this.Tidle} {this.StartADC} {this.Tr} 0 0 {this.FarK} {this.TxStart} {this.SampleFar} {this.Fs} 0 0 {this.RxGain} ");
+                cfgwriter.Flush();
+                cfgwriter.WriteLine("chirpCfg 0 0 0 0 0 0 0 1 ");
                 cfgwriter.Flush();
             }
-            else if (this.DetectModel == 3)
+            if (this.detectModel == DetectModel.allDetect)
             {
-                cfgwriter.WriteLine($"frameCfg 0 1 32 0 {this.FrameT} 1 0 ");
+                cfgwriter.WriteLine($"profileCfg 1 {this.StartFreq} {this.Tidle} {this.StartADC} {this.Tr} 0 0 {this.FarK} {this.TxStart} {this.SampleFar} {this.Fs} 0 0 {this.RxGain} ");
+                cfgwriter.WriteLine("chirpCfg 1 1 1 0 0 0 0 1 ");
+                cfgwriter.WriteLine("advFrameCfg 2 0 0 1 0 ");
+                cfgwriter.WriteLine($"subFrameCfg 0 0 0 1 {this.ChirpLoopNear} {this.NearFrameT} 0 1 1 {this.NearFrameT} ");
+                cfgwriter.WriteLine($"subFrameCfg 1 0 1 1 {this.ChirpLoopFar} {this.FarFrameT} 0 1 1 {this.FarFrameT} ");
+                cfgwriter.WriteLine("guiMonitor 0 1 1 0 0 0 0 ");
+                cfgwriter.WriteLine("guiMonitor 1 1 1 0 0 0 0 ");
+                cfgwriter.WriteLine("cfarCfg 0 0 2 8 4 3 0 15.0 1 ");
+                cfgwriter.WriteLine("cfarCfg 0 1 0 4 2 3 1 15.0 1 ");
+                cfgwriter.WriteLine("cfarCfg 1 0 2 8 4 3 0 15.0 1 ");
+                cfgwriter.WriteLine("cfarCfg 1 1 0 4 2 3 1 15.0 1 ");
+                cfgwriter.WriteLine("multiObjBeamForming 0 1 0.5 ");
+                cfgwriter.WriteLine("multiObjBeamForming 1 1 0.5 ");
+                //int binNear = Math.Min((int)(SampleNear * 0.05),16);
+                //cfgwriter.WriteLine($"calibDcRangeSig 0 0 {-binNear} {binNear} 256 ");
+                cfgwriter.WriteLine($"calibDcRangeSig 0 0 -5 8 256 ");
+                //int binFar = Math.Min((int)(SampleFar * 0.05), 16);
+                cfgwriter.WriteLine($"calibDcRangeSig 1 0 -5 8 256 ");
+                cfgwriter.WriteLine("aoaFovCfg -1 -90 90 -90 90 ");
+                cfgwriter.WriteLine($"cfarFovCfg 0 0 {NearS * 0.1:F2}  {NearS - NearS * 0.1:F2} ");
+                cfgwriter.WriteLine($"cfarFovCfg 1 0 {FarS * 0.1:F2}  {FarS - FarS * 0.1:F2} ");
+                cfgwriter.WriteLine($"cfarFovCfg 0 1 -40.58 40.58 ");
+                cfgwriter.WriteLine($"cfarFovCfg 1 1 -40.58 40.58 ");
+                cfgwriter.WriteLine("CQRxSatMonitor  0   3   4   19  0 ");
+                cfgwriter.WriteLine("CQSigImgMonitor 0   31  4 ");
+                cfgwriter.WriteLine("CQRxSatMonitor  1   3   4   19  0 ");
+                cfgwriter.WriteLine("CQSigImgMonitor 1   31  4 ");
                 cfgwriter.Flush();
             }
-            cfgwriter.WriteLine("guiMonitor -1 1 1 0 0 0 0 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("cfarCfg -1 0 2 8 4 3 0 15.0 1 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("cfarCfg -1 1 0 4 2 3 1 15.0 1 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("multiObjBeamForming -1 1 0.5 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("calibDcRangeSig -1 0 -5 8 256 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("clutterRemoval -1 0 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("compRangeBiasAndRxChanPhase 0.0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("measureRangeBiasAndRxChanPhase 0 1.5 0.2 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("aoaFovCfg -1 -90 90 -90 90 ");
-            cfgwriter.Flush();
-            //前后删除10%的点
-            cfgwriter.WriteLine("cfarFovCfg -1 0 8 72.84 ");
-            cfgwriter.Flush();
-            //前后删除10%的点
-            cfgwriter.WriteLine("cfarFovCfg -1 1 -10.59 10.59 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("extendedMaxVelocity -1 0 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("CQRxSatMonitor 0 3 5 121 0 ");
-            cfgwriter.Flush();
-            cfgwriter.WriteLine("CQSigImgMonitor 0 127 4 ");
-            cfgwriter.Flush();
+            else
+            {
+                int chirploop = detectModel == DetectModel.nearDetect ? (int)ChirpLoopNear : (int)ChirpLoopFar;
+                double frameT = detectModel == DetectModel.nearDetect ? NearFrameT : FarFrameT;
+                cfgwriter.WriteLine($"frameCfg 0 0 {chirploop} 0 {frameT:F2} 1 0 ");
+                cfgwriter.WriteLine("guiMonitor -1 1 1 1 0 0 0 ");
+                cfgwriter.WriteLine("cfarCfg -1 0 2 8 4 3 0 15.0 1 ");
+                cfgwriter.WriteLine("cfarCfg -1 1 0 4 2 3 1 15.0 1 ");
+                cfgwriter.WriteLine("multiObjBeamForming -1 1 0.5 ");
+                int NumPoint = this.detectModel == DetectModel.nearDetect ? (int)this.SampleFar : (int)this.SampleNear;
+                //int binNum = Math.Min((int)(NumPoint * 0.05), 16);
+                //cfgwriter.WriteLine($"calibDcRangeSig -1 0 {-binNum} {binNum} 256 ");
+                cfgwriter.WriteLine("calibDcRangeSig -1 0 -5 8 256 ");
+                cfgwriter.WriteLine("aoaFovCfg -1 -90 90 -90 90 ");
+                double S = this.detectModel == DetectModel.nearDetect ? NearS : FarS;
+                cfgwriter.WriteLine($"cfarFovCfg -1 0 {S * 0.1:F2}  {S - S * 0.1:F2} ");
+                cfgwriter.WriteLine($"cfarFovCfg -1 1 -40.58 40.58 ");
+                int profileType = this.detectModel == DetectModel.nearDetect ? 0 : 1;
+                cfgwriter.WriteLine($"CQRxSatMonitor  {profileType}   3   4   19  0 ");
+                cfgwriter.WriteLine($"CQSigImgMonitor {profileType}   31  4 ");
+                cfgwriter.Flush();
+            }
             cfgwriter.WriteLine("analogMonitor 0 0 ");
-            cfgwriter.Flush();
             cfgwriter.WriteLine("lvdsStreamCfg -1 0 0 0 ");
-            cfgwriter.Flush();
+
+            cfgwriter.WriteLine("clutterRemoval -1 0 ");
+
+            cfgwriter.WriteLine("compRangeBiasAndRxChanPhase 0.0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 ");
+            cfgwriter.WriteLine("measureRangeBiasAndRxChanPhase 0 1.5 0.2 ");
+
+            cfgwriter.WriteLine("extendedMaxVelocity -1 0 ");
             cfgwriter.WriteLine("calibData 0 0 0 ");
             cfgwriter.Flush();
             cfgwriter.Close();
@@ -646,5 +672,7 @@ namespace shipdock
         {
             this.Close();
         }
+
+
     }
 }

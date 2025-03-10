@@ -28,424 +28,436 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Log = new System.Windows.Forms.RichTextBox();
-            this.btnLog = new System.Windows.Forms.Button();
-            this.tbLogPath = new System.Windows.Forms.TextBox();
-            this.IsLog = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbDataPath = new System.Windows.Forms.TextBox();
-            this.btnData = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbUserPort = new System.Windows.Forms.ComboBox();
-            this.btnStartLadar = new System.Windows.Forms.Button();
-            this.btnSendParam = new System.Windows.Forms.Button();
-            this.btnSetParam = new System.Windows.Forms.Button();
-            this.btnStopLadar = new System.Windows.Forms.Button();
-            this.PortGroups = new System.Windows.Forms.GroupBox();
-            this.btnRefreshPort = new System.Windows.Forms.Button();
-            this.btnClosePort = new System.Windows.Forms.Button();
-            this.cbDataBaudRate = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbDataPort = new System.Windows.Forms.ComboBox();
-            this.btnConnectPort = new System.Windows.Forms.Button();
-            this.cbUserBaudRate = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btncfgPath = new System.Windows.Forms.Button();
-            this.tbCfgPath = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pbTrajectory = new System.Windows.Forms.PictureBox();
-            this.ParamsGroup = new System.Windows.Forms.GroupBox();
-            this.ProgramStart = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.PortGroups.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTrajectory)).BeginInit();
-            this.ParamsGroup.SuspendLayout();
-            this.SuspendLayout();
+            RtbLog = new RichTextBox();
+            btnLog = new Button();
+            tbLogPath = new TextBox();
+            IsLog = new CheckBox();
+            label3 = new Label();
+            tbDataPath = new TextBox();
+            btnData = new Button();
+            label2 = new Label();
+            cbUserPort = new ComboBox();
+            btnStartLadar = new Button();
+            btnSendParam = new Button();
+            btnSetParam = new Button();
+            btnStopLadar = new Button();
+            PortGroups = new GroupBox();
+            btnRefreshPort = new Button();
+            btnClosePort = new Button();
+            cbDataBaudRate = new ComboBox();
+            label1 = new Label();
+            label6 = new Label();
+            cbDataPort = new ComboBox();
+            btnConnectPort = new Button();
+            cbUserBaudRate = new ComboBox();
+            label4 = new Label();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            btncfgPath = new Button();
+            tbCfgPath = new TextBox();
+            label7 = new Label();
+            pbTrajectory = new PictureBox();
+            ParamsGroup = new GroupBox();
+            label5 = new Label();
+            PortGroups.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbTrajectory).BeginInit();
+            ParamsGroup.SuspendLayout();
+            SuspendLayout();
             // 
-            // Log
+            // RtbLog
             // 
-            this.Log.Location = new System.Drawing.Point(24, 387);
-            this.Log.Name = "Log";
-            this.Log.ReadOnly = true;
-            this.Log.Size = new System.Drawing.Size(711, 402);
-            this.Log.TabIndex = 4;
-            this.Log.Text = "";
+            RtbLog.Location = new Point(15, 274);
+            RtbLog.Margin = new Padding(2);
+            RtbLog.Name = "RtbLog";
+            RtbLog.ReadOnly = true;
+            RtbLog.Size = new Size(454, 286);
+            RtbLog.TabIndex = 4;
+            RtbLog.Text = "";
             // 
             // btnLog
             // 
-            this.btnLog.AutoSize = true;
-            this.btnLog.Enabled = false;
-            this.btnLog.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLog.Location = new System.Drawing.Point(420, 118);
-            this.btnLog.Name = "btnLog";
-            this.btnLog.Size = new System.Drawing.Size(90, 40);
-            this.btnLog.TabIndex = 7;
-            this.btnLog.Text = "浏览";
-            this.btnLog.UseVisualStyleBackColor = true;
-            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            btnLog.AutoSize = true;
+            btnLog.Enabled = false;
+            btnLog.ForeColor = SystemColors.ControlText;
+            btnLog.Location = new Point(267, 84);
+            btnLog.Margin = new Padding(2);
+            btnLog.Name = "btnLog";
+            btnLog.Size = new Size(57, 28);
+            btnLog.TabIndex = 7;
+            btnLog.Text = "浏览";
+            btnLog.UseVisualStyleBackColor = true;
+            btnLog.Click += btnLog_Click;
             // 
             // tbLogPath
             // 
-            this.tbLogPath.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.tbLogPath.Enabled = false;
-            this.tbLogPath.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tbLogPath.Location = new System.Drawing.Point(130, 123);
-            this.tbLogPath.Name = "tbLogPath";
-            this.tbLogPath.Size = new System.Drawing.Size(281, 30);
-            this.tbLogPath.TabIndex = 6;
-            this.tbLogPath.TextChanged += new System.EventHandler(this.tbLogPath_TextChanged);
+            tbLogPath.BackColor = SystemColors.ScrollBar;
+            tbLogPath.Enabled = false;
+            tbLogPath.ForeColor = SystemColors.ControlText;
+            tbLogPath.Location = new Point(83, 87);
+            tbLogPath.Margin = new Padding(2);
+            tbLogPath.Name = "tbLogPath";
+            tbLogPath.Size = new Size(178, 23);
+            tbLogPath.TabIndex = 6;
+            tbLogPath.TextChanged += tbLogPath_TextChanged;
             // 
             // IsLog
             // 
-            this.IsLog.AutoSize = true;
-            this.IsLog.Checked = true;
-            this.IsLog.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.IsLog.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.IsLog.Location = new System.Drawing.Point(6, 126);
-            this.IsLog.Name = "IsLog";
-            this.IsLog.Size = new System.Drawing.Size(108, 28);
-            this.IsLog.TabIndex = 8;
-            this.IsLog.Text = "日志系统";
-            this.IsLog.UseVisualStyleBackColor = true;
-            this.IsLog.CheckedChanged += new System.EventHandler(this.IsLog_CheckedChanged);
+            IsLog.AutoSize = true;
+            IsLog.Checked = true;
+            IsLog.CheckState = CheckState.Checked;
+            IsLog.ForeColor = SystemColors.GrayText;
+            IsLog.Location = new Point(4, 89);
+            IsLog.Margin = new Padding(2);
+            IsLog.Name = "IsLog";
+            IsLog.Size = new Size(75, 21);
+            IsLog.TabIndex = 8;
+            IsLog.Text = "日志系统";
+            IsLog.UseVisualStyleBackColor = true;
+            IsLog.CheckedChanged += IsLog_CheckedChanged;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 24);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "数据文件";
+            label3.AutoSize = true;
+            label3.Location = new Point(17, 18);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 17);
+            label3.TabIndex = 10;
+            label3.Text = "数据文件";
             // 
             // tbDataPath
             // 
-            this.tbDataPath.Location = new System.Drawing.Point(130, 21);
-            this.tbDataPath.Name = "tbDataPath";
-            this.tbDataPath.Size = new System.Drawing.Size(277, 30);
-            this.tbDataPath.TabIndex = 11;
-            this.tbDataPath.TextChanged += new System.EventHandler(this.tbDataPath_TextChanged);
+            tbDataPath.Location = new Point(83, 15);
+            tbDataPath.Margin = new Padding(2);
+            tbDataPath.Name = "tbDataPath";
+            tbDataPath.Size = new Size(178, 23);
+            tbDataPath.TabIndex = 11;
+            tbDataPath.TextChanged += tbDataPath_TextChanged;
             // 
             // btnData
             // 
-            this.btnData.AutoSize = true;
-            this.btnData.Location = new System.Drawing.Point(420, 17);
-            this.btnData.Name = "btnData";
-            this.btnData.Size = new System.Drawing.Size(90, 40);
-            this.btnData.TabIndex = 12;
-            this.btnData.Text = "浏览";
-            this.btnData.UseVisualStyleBackColor = true;
-            this.btnData.Click += new System.EventHandler(this.btnData_Click);
+            btnData.AutoSize = true;
+            btnData.Location = new Point(267, 12);
+            btnData.Margin = new Padding(2);
+            btnData.Name = "btnData";
+            btnData.Size = new Size(57, 28);
+            btnData.TabIndex = 12;
+            btnData.Text = "浏览";
+            btnData.UseVisualStyleBackColor = true;
+            btnData.Click += btnData_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 24);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "User端口";
+            label2.AutoSize = true;
+            label2.Location = new Point(4, 22);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 17);
+            label2.TabIndex = 13;
+            label2.Text = "User端口";
             // 
             // cbUserPort
             // 
-            this.cbUserPort.FormattingEnabled = true;
-            this.cbUserPort.Location = new System.Drawing.Point(105, 27);
-            this.cbUserPort.Name = "cbUserPort";
-            this.cbUserPort.Size = new System.Drawing.Size(103, 32);
-            this.cbUserPort.TabIndex = 14;
+            cbUserPort.FormattingEnabled = true;
+            cbUserPort.Location = new Point(67, 19);
+            cbUserPort.Margin = new Padding(2);
+            cbUserPort.Name = "cbUserPort";
+            cbUserPort.Size = new Size(67, 25);
+            cbUserPort.TabIndex = 14;
             // 
             // btnStartLadar
             // 
-            this.btnStartLadar.Location = new System.Drawing.Point(17, 49);
-            this.btnStartLadar.Name = "btnStartLadar";
-            this.btnStartLadar.Size = new System.Drawing.Size(112, 38);
-            this.btnStartLadar.TabIndex = 15;
-            this.btnStartLadar.Text = "程序启动";
-            this.btnStartLadar.UseVisualStyleBackColor = true;
-            this.btnStartLadar.Click += new System.EventHandler(this.btnStartLadar_Click);
+            btnStartLadar.Location = new Point(11, 35);
+            btnStartLadar.Margin = new Padding(2);
+            btnStartLadar.Name = "btnStartLadar";
+            btnStartLadar.Size = new Size(71, 27);
+            btnStartLadar.TabIndex = 15;
+            btnStartLadar.Text = "程序启动";
+            btnStartLadar.UseVisualStyleBackColor = true;
+            btnStartLadar.Click += btnStartLadar_Click;
             // 
             // btnSendParam
             // 
-            this.btnSendParam.AutoSize = true;
-            this.btnSendParam.Location = new System.Drawing.Point(31, 113);
-            this.btnSendParam.Name = "btnSendParam";
-            this.btnSendParam.Size = new System.Drawing.Size(145, 48);
-            this.btnSendParam.TabIndex = 16;
-            this.btnSendParam.Text = "传输参数";
-            this.btnSendParam.UseVisualStyleBackColor = true;
-            this.btnSendParam.Click += new System.EventHandler(this.btnSendParam_Click);
+            btnSendParam.AutoSize = true;
+            btnSendParam.Location = new Point(20, 80);
+            btnSendParam.Margin = new Padding(2);
+            btnSendParam.Name = "btnSendParam";
+            btnSendParam.Size = new Size(92, 34);
+            btnSendParam.TabIndex = 16;
+            btnSendParam.Text = "传输参数";
+            btnSendParam.UseVisualStyleBackColor = true;
+            btnSendParam.Click += btnSendParam_Click;
             // 
             // btnSetParam
             // 
-            this.btnSetParam.AutoSize = true;
-            this.btnSetParam.Location = new System.Drawing.Point(31, 43);
-            this.btnSetParam.Name = "btnSetParam";
-            this.btnSetParam.Size = new System.Drawing.Size(145, 48);
-            this.btnSetParam.TabIndex = 17;
-            this.btnSetParam.Text = "设置参数";
-            this.btnSetParam.UseVisualStyleBackColor = true;
-            this.btnSetParam.Click += new System.EventHandler(this.btnSetParam_Click);
+            btnSetParam.AutoSize = true;
+            btnSetParam.Location = new Point(20, 30);
+            btnSetParam.Margin = new Padding(2);
+            btnSetParam.Name = "btnSetParam";
+            btnSetParam.Size = new Size(92, 34);
+            btnSetParam.TabIndex = 17;
+            btnSetParam.Text = "设置参数";
+            btnSetParam.UseVisualStyleBackColor = true;
+            btnSetParam.Click += btnSetParam_Click;
             // 
             // btnStopLadar
             // 
-            this.btnStopLadar.AutoSize = true;
-            this.btnStopLadar.Location = new System.Drawing.Point(17, 117);
-            this.btnStopLadar.Name = "btnStopLadar";
-            this.btnStopLadar.Size = new System.Drawing.Size(112, 36);
-            this.btnStopLadar.TabIndex = 18;
-            this.btnStopLadar.Text = "程序停止";
-            this.btnStopLadar.UseVisualStyleBackColor = true;
-            this.btnStopLadar.Click += new System.EventHandler(this.btnStopLadar_Click);
+            btnStopLadar.AutoSize = true;
+            btnStopLadar.Location = new Point(11, 83);
+            btnStopLadar.Margin = new Padding(2);
+            btnStopLadar.Name = "btnStopLadar";
+            btnStopLadar.Size = new Size(71, 27);
+            btnStopLadar.TabIndex = 18;
+            btnStopLadar.Text = "程序停止";
+            btnStopLadar.UseVisualStyleBackColor = true;
+            btnStopLadar.Click += btnStopLadar_Click;
             // 
             // PortGroups
             // 
-            this.PortGroups.Controls.Add(this.btnRefreshPort);
-            this.PortGroups.Controls.Add(this.btnClosePort);
-            this.PortGroups.Controls.Add(this.cbDataBaudRate);
-            this.PortGroups.Controls.Add(this.label1);
-            this.PortGroups.Controls.Add(this.label6);
-            this.PortGroups.Controls.Add(this.cbDataPort);
-            this.PortGroups.Controls.Add(this.btnConnectPort);
-            this.PortGroups.Controls.Add(this.cbUserBaudRate);
-            this.PortGroups.Controls.Add(this.label4);
-            this.PortGroups.Controls.Add(this.label2);
-            this.PortGroups.Controls.Add(this.cbUserPort);
-            this.PortGroups.Location = new System.Drawing.Point(24, 28);
-            this.PortGroups.Name = "PortGroups";
-            this.PortGroups.Size = new System.Drawing.Size(449, 174);
-            this.PortGroups.TabIndex = 19;
-            this.PortGroups.TabStop = false;
-            this.PortGroups.Text = "端口连接";
+            PortGroups.Controls.Add(btnRefreshPort);
+            PortGroups.Controls.Add(btnClosePort);
+            PortGroups.Controls.Add(cbDataBaudRate);
+            PortGroups.Controls.Add(label1);
+            PortGroups.Controls.Add(label6);
+            PortGroups.Controls.Add(cbDataPort);
+            PortGroups.Controls.Add(btnConnectPort);
+            PortGroups.Controls.Add(cbUserBaudRate);
+            PortGroups.Controls.Add(label4);
+            PortGroups.Controls.Add(label2);
+            PortGroups.Controls.Add(cbUserPort);
+            PortGroups.Location = new Point(15, 20);
+            PortGroups.Margin = new Padding(2);
+            PortGroups.Name = "PortGroups";
+            PortGroups.Padding = new Padding(2);
+            PortGroups.Size = new Size(286, 123);
+            PortGroups.TabIndex = 19;
+            PortGroups.TabStop = false;
+            PortGroups.Text = "端口连接";
             // 
             // btnRefreshPort
             // 
-            this.btnRefreshPort.Location = new System.Drawing.Point(46, 119);
-            this.btnRefreshPort.Name = "btnRefreshPort";
-            this.btnRefreshPort.Size = new System.Drawing.Size(112, 42);
-            this.btnRefreshPort.TabIndex = 23;
-            this.btnRefreshPort.Text = "刷新";
-            this.btnRefreshPort.UseVisualStyleBackColor = true;
-            this.btnRefreshPort.Click += new System.EventHandler(this.btnRefreshPort_Click);
+            btnRefreshPort.Location = new Point(29, 84);
+            btnRefreshPort.Margin = new Padding(2);
+            btnRefreshPort.Name = "btnRefreshPort";
+            btnRefreshPort.Size = new Size(71, 30);
+            btnRefreshPort.TabIndex = 23;
+            btnRefreshPort.Text = "刷新";
+            btnRefreshPort.UseVisualStyleBackColor = true;
+            btnRefreshPort.Click += btnRefreshPort_Click;
             // 
             // btnClosePort
             // 
-            this.btnClosePort.Location = new System.Drawing.Point(310, 119);
-            this.btnClosePort.Name = "btnClosePort";
-            this.btnClosePort.Size = new System.Drawing.Size(112, 42);
-            this.btnClosePort.TabIndex = 22;
-            this.btnClosePort.Text = "关闭";
-            this.btnClosePort.UseVisualStyleBackColor = true;
-            this.btnClosePort.Click += new System.EventHandler(this.btnClosePort_Click);
+            btnClosePort.Location = new Point(197, 84);
+            btnClosePort.Margin = new Padding(2);
+            btnClosePort.Name = "btnClosePort";
+            btnClosePort.Size = new Size(71, 30);
+            btnClosePort.TabIndex = 22;
+            btnClosePort.Text = "关闭";
+            btnClosePort.UseVisualStyleBackColor = true;
+            btnClosePort.Click += btnClosePort_Click;
             // 
             // cbDataBaudRate
             // 
-            this.cbDataBaudRate.FormattingEnabled = true;
-            this.cbDataBaudRate.Items.AddRange(new object[] {
-            "4800",
-            "9600",
-            "19200",
-            "38400",
-            "57600",
-            "115200",
-            "921600"});
-            this.cbDataBaudRate.Location = new System.Drawing.Point(328, 73);
-            this.cbDataBaudRate.Name = "cbDataBaudRate";
-            this.cbDataBaudRate.Size = new System.Drawing.Size(103, 32);
-            this.cbDataBaudRate.TabIndex = 21;
+            cbDataBaudRate.FormattingEnabled = true;
+            cbDataBaudRate.Items.AddRange(new object[] { "4800", "9600", "19200", "38400", "57600", "115200", "921600" });
+            cbDataBaudRate.Location = new Point(209, 52);
+            cbDataBaudRate.Margin = new Padding(2);
+            cbDataBaudRate.Name = "cbDataBaudRate";
+            cbDataBaudRate.Size = new Size(67, 25);
+            cbDataBaudRate.TabIndex = 21;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(253, 78);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 24);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "波特率";
+            label1.AutoSize = true;
+            label1.Location = new Point(161, 55);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(44, 17);
+            label1.TabIndex = 20;
+            label1.Text = "波特率";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(234, 31);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 24);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "数据端口";
+            label6.AutoSize = true;
+            label6.Location = new Point(149, 22);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(56, 17);
+            label6.TabIndex = 18;
+            label6.Text = "数据端口";
             // 
             // cbDataPort
             // 
-            this.cbDataPort.FormattingEnabled = true;
-            this.cbDataPort.Location = new System.Drawing.Point(328, 27);
-            this.cbDataPort.Name = "cbDataPort";
-            this.cbDataPort.Size = new System.Drawing.Size(103, 32);
-            this.cbDataPort.TabIndex = 19;
+            cbDataPort.FormattingEnabled = true;
+            cbDataPort.Location = new Point(209, 19);
+            cbDataPort.Margin = new Padding(2);
+            cbDataPort.Name = "cbDataPort";
+            cbDataPort.Size = new Size(67, 25);
+            cbDataPort.TabIndex = 19;
             // 
             // btnConnectPort
             // 
-            this.btnConnectPort.Location = new System.Drawing.Point(176, 119);
-            this.btnConnectPort.Name = "btnConnectPort";
-            this.btnConnectPort.Size = new System.Drawing.Size(112, 42);
-            this.btnConnectPort.TabIndex = 17;
-            this.btnConnectPort.Text = "连接";
-            this.btnConnectPort.UseVisualStyleBackColor = true;
-            this.btnConnectPort.Click += new System.EventHandler(this.btnConnectPort_Click);
+            btnConnectPort.Location = new Point(112, 84);
+            btnConnectPort.Margin = new Padding(2);
+            btnConnectPort.Name = "btnConnectPort";
+            btnConnectPort.Size = new Size(71, 30);
+            btnConnectPort.TabIndex = 17;
+            btnConnectPort.Text = "连接";
+            btnConnectPort.UseVisualStyleBackColor = true;
+            btnConnectPort.Click += btnConnectPort_Click;
             // 
             // cbUserBaudRate
             // 
-            this.cbUserBaudRate.FormattingEnabled = true;
-            this.cbUserBaudRate.Items.AddRange(new object[] {
-            "4800",
-            "9600",
-            "19200",
-            "38400",
-            "57600",
-            "115200",
-            "921600"});
-            this.cbUserBaudRate.Location = new System.Drawing.Point(105, 73);
-            this.cbUserBaudRate.Name = "cbUserBaudRate";
-            this.cbUserBaudRate.Size = new System.Drawing.Size(103, 32);
-            this.cbUserBaudRate.TabIndex = 16;
+            cbUserBaudRate.FormattingEnabled = true;
+            cbUserBaudRate.Items.AddRange(new object[] { "4800", "9600", "19200", "38400", "57600", "115200", "921600" });
+            cbUserBaudRate.Location = new Point(67, 52);
+            cbUserBaudRate.Margin = new Padding(2);
+            cbUserBaudRate.Name = "cbUserBaudRate";
+            cbUserBaudRate.Size = new Size(67, 25);
+            cbUserBaudRate.TabIndex = 16;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 24);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "波特率";
+            label4.AutoSize = true;
+            label4.Location = new Point(19, 55);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(44, 17);
+            label4.TabIndex = 15;
+            label4.Text = "波特率";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnStartLadar);
-            this.groupBox1.Controls.Add(this.btnStopLadar);
-            this.groupBox1.Location = new System.Drawing.Point(24, 208);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(157, 174);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "程序控制";
+            groupBox1.Controls.Add(btnStartLadar);
+            groupBox1.Controls.Add(btnStopLadar);
+            groupBox1.Location = new Point(15, 147);
+            groupBox1.Margin = new Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(2);
+            groupBox1.Size = new Size(100, 123);
+            groupBox1.TabIndex = 20;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "程序控制";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btncfgPath);
-            this.groupBox2.Controls.Add(this.tbCfgPath);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.IsLog);
-            this.groupBox2.Controls.Add(this.btnData);
-            this.groupBox2.Controls.Add(this.btnLog);
-            this.groupBox2.Controls.Add(this.tbDataPath);
-            this.groupBox2.Controls.Add(this.tbLogPath);
-            this.groupBox2.Location = new System.Drawing.Point(200, 208);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(534, 174);
-            this.groupBox2.TabIndex = 21;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "文件";
+            groupBox2.Controls.Add(btncfgPath);
+            groupBox2.Controls.Add(tbCfgPath);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(IsLog);
+            groupBox2.Controls.Add(btnData);
+            groupBox2.Controls.Add(btnLog);
+            groupBox2.Controls.Add(tbDataPath);
+            groupBox2.Controls.Add(tbLogPath);
+            groupBox2.Location = new Point(127, 147);
+            groupBox2.Margin = new Padding(2);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(2);
+            groupBox2.Size = new Size(340, 123);
+            groupBox2.TabIndex = 21;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "文件";
             // 
             // btncfgPath
             // 
-            this.btncfgPath.AutoSize = true;
-            this.btncfgPath.Location = new System.Drawing.Point(420, 67);
-            this.btncfgPath.Name = "btncfgPath";
-            this.btncfgPath.Size = new System.Drawing.Size(90, 40);
-            this.btncfgPath.TabIndex = 15;
-            this.btncfgPath.Text = "浏览";
-            this.btncfgPath.UseVisualStyleBackColor = true;
-            this.btncfgPath.Click += new System.EventHandler(this.btncfgPath_Click);
+            btncfgPath.AutoSize = true;
+            btncfgPath.Location = new Point(267, 47);
+            btncfgPath.Margin = new Padding(2);
+            btncfgPath.Name = "btncfgPath";
+            btncfgPath.Size = new Size(57, 28);
+            btncfgPath.TabIndex = 15;
+            btncfgPath.Text = "浏览";
+            btncfgPath.UseVisualStyleBackColor = true;
+            btncfgPath.Click += btncfgPath_Click;
             // 
             // tbCfgPath
             // 
-            this.tbCfgPath.Location = new System.Drawing.Point(134, 72);
-            this.tbCfgPath.Name = "tbCfgPath";
-            this.tbCfgPath.Size = new System.Drawing.Size(277, 30);
-            this.tbCfgPath.TabIndex = 14;
-            this.tbCfgPath.TextChanged += new System.EventHandler(this.tbCfgPath_TextChanged);
+            tbCfgPath.Location = new Point(83, 51);
+            tbCfgPath.Margin = new Padding(2);
+            tbCfgPath.Name = "tbCfgPath";
+            tbCfgPath.Size = new Size(178, 23);
+            tbCfgPath.TabIndex = 14;
+            tbCfgPath.TextChanged += tbCfgPath_TextChanged;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(27, 76);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 24);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "参数文件";
+            label7.AutoSize = true;
+            label7.Location = new Point(17, 54);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(56, 17);
+            label7.TabIndex = 13;
+            label7.Text = "参数文件";
             // 
             // pbTrajectory
             // 
-            this.pbTrajectory.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pbTrajectory.Location = new System.Drawing.Point(761, 92);
-            this.pbTrajectory.Name = "pbTrajectory";
-            this.pbTrajectory.Size = new System.Drawing.Size(644, 576);
-            this.pbTrajectory.TabIndex = 23;
-            this.pbTrajectory.TabStop = false;
+            pbTrajectory.BackColor = SystemColors.ButtonHighlight;
+            pbTrajectory.Location = new Point(473, 59);
+            pbTrajectory.Margin = new Padding(2);
+            pbTrajectory.Name = "pbTrajectory";
+            pbTrajectory.Size = new Size(431, 488);
+            pbTrajectory.TabIndex = 23;
+            pbTrajectory.TabStop = false;
             // 
             // ParamsGroup
             // 
-            this.ParamsGroup.Controls.Add(this.btnSetParam);
-            this.ParamsGroup.Controls.Add(this.btnSendParam);
-            this.ParamsGroup.Location = new System.Drawing.Point(534, 28);
-            this.ParamsGroup.Name = "ParamsGroup";
-            this.ParamsGroup.Size = new System.Drawing.Size(193, 174);
-            this.ParamsGroup.TabIndex = 22;
-            this.ParamsGroup.TabStop = false;
-            this.ParamsGroup.Text = "参数";
-            // 
-            // ProgramStart
-            // 
-            this.ProgramStart.Location = new System.Drawing.Point(761, 707);
-            this.ProgramStart.Name = "ProgramStart";
-            this.ProgramStart.ReadOnly = true;
-            this.ProgramStart.Size = new System.Drawing.Size(642, 30);
-            this.ProgramStart.TabIndex = 24;
+            ParamsGroup.Controls.Add(btnSetParam);
+            ParamsGroup.Controls.Add(btnSendParam);
+            ParamsGroup.Location = new Point(340, 20);
+            ParamsGroup.Margin = new Padding(2);
+            ParamsGroup.Name = "ParamsGroup";
+            ParamsGroup.Padding = new Padding(2);
+            ParamsGroup.Size = new Size(123, 123);
+            ParamsGroup.TabIndex = 22;
+            ParamsGroup.TabStop = false;
+            ParamsGroup.Text = "参数";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft YaHei UI", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(916, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(289, 67);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "浮体轨迹图";
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft YaHei UI", 26F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(583, 11);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(195, 46);
+            label5.TabIndex = 25;
+            label5.Text = "浮体轨迹图";
             // 
             // shipdock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1438, 788);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.ProgramStart);
-            this.Controls.Add(this.pbTrajectory);
-            this.Controls.Add(this.ParamsGroup);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.PortGroups);
-            this.Controls.Add(this.Log);
-            this.Name = "shipdock";
-            this.Text = "浮体检测程序";
-            this.Load += new System.EventHandler(this.shipdock_Load);
-            this.PortGroups.ResumeLayout(false);
-            this.PortGroups.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTrajectory)).EndInit();
-            this.ParamsGroup.ResumeLayout(false);
-            this.ParamsGroup.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(915, 558);
+            Controls.Add(label5);
+            Controls.Add(pbTrajectory);
+            Controls.Add(ParamsGroup);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(PortGroups);
+            Controls.Add(RtbLog);
+            Margin = new Padding(2);
+            Name = "shipdock";
+            Text = "浮体检测程序";
+            Load += shipdock_Load;
+            PortGroups.ResumeLayout(false);
+            PortGroups.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbTrajectory).EndInit();
+            ParamsGroup.ResumeLayout(false);
+            ParamsGroup.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
-        private RichTextBox Log;
+        private RichTextBox RtbLog;
         private Button btnLog;
         private TextBox tbLogPath;
         private CheckBox IsLog;
@@ -466,7 +478,6 @@
         private GroupBox groupBox2;
         private GroupBox ParamsGroup;
         private PictureBox pbTrajectory;
-        private TextBox ProgramStart;
         private Label label5;
         private ComboBox cbDataBaudRate;
         private Label label1;
