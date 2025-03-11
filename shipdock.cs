@@ -185,7 +185,7 @@ namespace shipdock
             axisYAdjusted = axisY;
             for (int i = 1; i <= 10; i++)
             {
-                PointY[i - 1] = new PointF(CenterP.X - 25, CenterP.Y - i * 50 / axisY);
+                PointY[i - 1] = new PointF(CenterP.X + 5, CenterP.Y - i * 50 / axisY);
                 axisGraphics.DrawString((i * 50).ToString(), new Font("宋体", 9), Brushes.Black, new PointF(PointY[i - 1].X, PointY[i - 1].Y - 5));
                 axisGraphics.DrawLine(Pens.Black, CenterP.X - 3, CenterP.Y - i * 50 / axisY, CenterP.X, CenterP.Y - i * 50 / axisY);
             }
@@ -356,7 +356,7 @@ namespace shipdock
                         (int)(rect.Width),  // 更新区域的宽度
                         (int)(rect.Height)  // 更新区域的高度
                     );
-                    graphics.Clear(Color.Transparent);
+                    
                     graphics.FillEllipse(brush, rect);
                     // 加锁确保线程安全
                     bmpmutex.WaitOne();
@@ -872,23 +872,24 @@ namespace shipdock
                 snrAverage = snrAverage + PointInfo[2 * i] / numDetectedObj;
             }
             //进行清空
-            for (int j = 0; j < drawPoint.Count; j++)
-            {
-                DrawChart(pbTrajectory, pointGraphics, drawPoint[j], 3, new SolidBrush(((Bitmap)pbTrajectory.Image).GetPixel(0, 0)));
-            }
+            //for (int j = 0; j < drawPoint.Count; j++)
+            //{
+            //    DrawChart(pbTrajectory, pointGraphics, drawPoint[j], 3, new SolidBrush(((Bitmap)pbTrajectory.Image).GetPixel(0, 0)));
+            //}
+            pointGraphics.Clear(Color.Transparent);
             drawPoint.Clear();
             for (int i = 0; i < numDetectedObj; i++)
             {
-                if (PointInfo[2 * i] < snrAverage)
+                if (PointInfo[2 * i] < snrAverage||(Math.Abs(axisPoint[2 * i]) < 1e-6 && Math.Abs(axisPoint[2 * i + 1]) < 1e-6))
                 {
                     continue;
                 }
-                PointF pixelPoint = new PointF((axisPoint[2 * i] - RealLeftBottom.X) / axisXAdjusted + pbLeftBottom.X, pbLeftBottom.Y - (axisPoint[2 * i + 1] - RealLeftBottom.Y) / axisXAdjusted);
+                PointF pixelPoint = new PointF((axisPoint[2 * i] - RealLeftBottom.X) / axisXAdjusted + pbLeftBottom.X, pbLeftBottom.Y - (axisPoint[2 * i + 1] - RealLeftBottom.Y) / axisYAdjusted);
                 if (drawPoint.Count == 0)
                 {
                     drawPoint.Add(pixelPoint);
                     DrawChart(pbTrajectory, pointGraphics, pixelPoint, 3, Brushes.Black);
-                    UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
+                    //UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
                 }
                 else
                 {
@@ -905,7 +906,7 @@ namespace shipdock
                     {
                         drawPoint.Add(pixelPoint);
                         DrawChart(pbTrajectory, pointGraphics, pixelPoint, 3, Brushes.Black);
-                        UpdateLog("point; "+(new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
+                        //UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
                     }
                 }
             }
@@ -919,7 +920,7 @@ namespace shipdock
             // 根据滚轮方向调整缩放比例
             float factor = 0;
             if (e.Delta < 0) factor = 1 + zoomStep;  // 放大
-            else if (e.Delta > 0) factor = scaleFactor > 0.1 ? 1 / (1 + zoomStep) : 1; // 缩小，但不会小于 zoomStep
+            else if (e.Delta > 0) factor = scaleFactor > 0.05 ? 1 / (1 + zoomStep) : 1; // 缩小，但不会小于 zoomStep
             scaleFactor = scaleFactor * factor;
             // 计算真实坐标范围和精度
             axisXAdjusted = axisX * scaleFactor;
