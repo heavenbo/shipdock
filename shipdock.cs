@@ -458,7 +458,6 @@ namespace shipdock
                     // 发送有效的行（非以%开头）
                     if (userPortCLI == "sensorStart")
                     {
-                        datatimer.Start();
                         if (UserSendCheck(userPort, userPortCLI, 1000, 200, "Done"))
                         {
                             NumDone++;
