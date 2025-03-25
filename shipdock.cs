@@ -14,11 +14,14 @@ using System.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
 using Microsoft.VisualBasic.Devices;
+using System.Reflection;
 namespace shipdock
 {
     public partial class shipdock : Form
     {
         //画图变量
+        List<KalmanFilter> kalmanFilters = new List<KalmanFilter>();
+        List<Trajectory> trajectories = new List<Trajectory>();
         private Bitmap axisBitmap, pointBitmap, finalBitmap;
         private Graphics axisGraphics, pointGraphics, finalGraphics;
         private PointF pbRightTop, pbLeftBottom;
@@ -55,7 +58,6 @@ namespace shipdock
         Task backgroundTask;
         private List<byte> framebuffer = new List<byte>();
         private List<byte> frame = new List<byte>();
-        List<PointF> drawPoint = new List<PointF>();
         uint frameIndex = 0;
         //程序启动
         private bool IsChangeStart = false;
@@ -327,42 +329,6 @@ namespace shipdock
                     logWriter.Flush();  // 确保实时写入文件
                 }
                 RtbLog.ScrollToCaret();
-            }
-        }
-        //标记船只
-        private void DrawChart(PictureBox pb, Graphics graphics, PointF center, float radius, Brush brush)
-        {
-            if (pb.InvokeRequired)
-            {
-                // 如果在非 UI 线程，使用 Invoke 切换到 UI 线程
-                pb.Invoke(new Action<PictureBox, Graphics, PointF, float, Brush>(DrawChart), new object[] { pb, graphics, center, radius, brush });
-            }
-            else
-            {
-                // 检查圆心是否在 PictureBox 的有效区域内
-                if (center.X > pbLeftBottom.X && center.Y < pbLeftBottom.Y && center.X < pbRightTop.X && center.Y > pbRightTop.Y)
-                {
-                    // 计算圆的外接矩形
-                    RectangleF rect = new RectangleF(
-                        center.X - radius, // 左上角 X
-                        center.Y - radius, // 左上角 Y
-                        radius * 2,        // 宽度
-                        radius * 2         // 高度
-                    );
-                    // 计算需要刷新的区域
-                    Rectangle updateRect = new Rectangle(
-                        (int)(rect.X),      // 更新区域的左上角 X
-                        (int)(rect.Y),      // 更新区域的左上角 Y
-                        (int)(rect.Width),  // 更新区域的宽度
-                        (int)(rect.Height)  // 更新区域的高度
-                    );
-                    
-                    graphics.FillEllipse(brush, rect);
-                    // 加锁确保线程安全
-                    bmpmutex.WaitOne();
-                    MergeLayers();
-                    bmpmutex.ReleaseMutex();
-                }
             }
         }
         private void tbLogPath_TextChanged(object sender, EventArgs e)
@@ -637,7 +603,6 @@ namespace shipdock
             if (ports.Length > 0)
             {
                 cbUserPort.Items.AddRange(ports);
-
                 cbDataPort.Items.AddRange(ports);
                 UpdateLog("端口可用数量:" + ports.Length.ToString(), LogLevel.Info);
             }
@@ -709,7 +674,7 @@ namespace shipdock
             return result;
         }
         //data处理函数
-        private void SaveData(object sender, ElapsedEventArgs e)
+        private void SaveData(object? sender, ElapsedEventArgs e)
         {
             datatimer.Stop(); //先关闭定时器
             string DataPathName;
@@ -778,11 +743,6 @@ namespace shipdock
                 }
                 startDataIndex = (startDataIndex + 1) % databuffer.Length;
             }
-            //if (wirtebufferindex > 0)
-            //{
-            //    dataWriter.Write(databuffer, 0, wirtebufferindex);
-            //    dataWriter.Flush();
-            //}
             datatimer.Start(); //执行完毕后再开启器
         }
         private void ProcessData(List<byte> frame)
@@ -791,7 +751,7 @@ namespace shipdock
             {
                 return;
             }
-            long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             byte[] timestampBytes = BitConverter.GetBytes(timestamp);
             //进行内存调整,调整8到20位的存储
             for (int i = 8; i < 20; i++)
@@ -861,7 +821,7 @@ namespace shipdock
                 index = index + 2;
                 PointInfo[i] = BinaryPrimitives.ReadUInt16LittleEndian(numList.ToArray());
             }
-            //进行绘图
+            //进行选点
             if (framenumber % 10 != 0)
             {
                 return;
@@ -871,16 +831,11 @@ namespace shipdock
             {
                 snrAverage = snrAverage + PointInfo[2 * i] / numDetectedObj;
             }
-            //进行清空
-            //for (int j = 0; j < drawPoint.Count; j++)
-            //{
-            //    DrawChart(pbTrajectory, pointGraphics, drawPoint[j], 3, new SolidBrush(((Bitmap)pbTrajectory.Image).GetPixel(0, 0)));
-            //}
             pointGraphics.Clear(Color.Transparent);
-            drawPoint.Clear();
+            List<PointF> drawPoint = new List<PointF>();
             for (int i = 0; i < numDetectedObj; i++)
             {
-                if (PointInfo[2 * i] < snrAverage||(Math.Abs(axisPoint[2 * i]) < 1e-6 && Math.Abs(axisPoint[2 * i + 1]) < 1e-6))
+                if (PointInfo[2 * i] < snrAverage || (Math.Abs(axisPoint[2 * i]) < 1e-6 && Math.Abs(axisPoint[2 * i + 1]) < 1e-6))
                 {
                     continue;
                 }
@@ -888,7 +843,6 @@ namespace shipdock
                 if (drawPoint.Count == 0)
                 {
                     drawPoint.Add(pixelPoint);
-                    DrawChart(pbTrajectory, pointGraphics, pixelPoint, 3, Brushes.Black);
                     //UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
                 }
                 else
@@ -905,11 +859,29 @@ namespace shipdock
                     if (canAdd)
                     {
                         drawPoint.Add(pixelPoint);
-                        DrawChart(pbTrajectory, pointGraphics, pixelPoint, 3, Brushes.Black);
                         //UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
                     }
                 }
             }
+            //进行画图
+            if (trajectories.Count == 0)
+            {
+                PointF nearest = drawPoint.OrderBy(p => Trajectory.Distance(p, new PointF(0, 0))).First();//选择最近的点
+                trajectories.Add(new Trajectory(Color.Blue, Color.Black, pbLeftBottom, pbRightTop, nearest, q: 1, r: 10));
+                trajectories[1].AddPoint(pbTrajectory, nearest, pointGraphics);
+            }
+            else
+            {
+                PointF lastPoint = trajectories[1].getLastPoint();
+                PointF nearest = drawPoint.OrderBy(p => Trajectory.Distance(p, lastPoint)).First();//选择最近的点
+                if (Trajectory.Distance(lastPoint,nearest)<7)
+                {
+                    trajectories[1].AddPoint(pbTrajectory, nearest, pointGraphics);
+                }
+            }
+            bmpmutex.WaitOne();
+            MergeLayers();
+            bmpmutex.ReleaseMutex();
         }
         private void PictureBox_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -971,7 +943,9 @@ namespace shipdock
                     axisGraphics.DrawString(text.ToString(), new Font("宋体", 9), Brushes.Black, new PointF(PointX[i + 5].X - 10, PointX[i + 5].Y));
                 }
             }
+            bmpmutex.WaitOne();
             MergeLayers();
+            bmpmutex.ReleaseMutex();
         }
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1023,7 +997,9 @@ namespace shipdock
                     axisGraphics.DrawString(text.ToString(), new Font("宋体", 9), Brushes.Black, new PointF(PointX[i + 5].X - 10, PointX[i + 5].Y));
                 }
             }
+            bmpmutex.WaitOne();
             MergeLayers();
+            bmpmutex.ReleaseMutex();
         }
         private void MergeLayers()
         {

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rBLS0ajo+jI=",
+  "dgSpecHash": "z0l8zCYCLk0=",
   "success": true,
-  "projectFilePath": "D:\\Microsoft VS Code\\work\\shipdock\\shipdock.csproj",
+  "projectFilePath": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
