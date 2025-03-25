@@ -424,7 +424,6 @@ namespace shipdock
                     // 发送有效的行（非以%开头）
                     if (userPortCLI == "sensorStart")
                     {
-                        datatimer.Start();
                         if (UserSendCheck(userPort, userPortCLI, 1000, 200, "Done"))
                         {
                             NumDone++;
@@ -1006,7 +1005,6 @@ namespace shipdock
             finalGraphics.Clear(Color.Transparent);
             finalGraphics.DrawImage(axisBitmap, 0, 0); // 绘制坐标轴
             finalGraphics.DrawImage(pointBitmap, 0, 0); // 绘制目标点
-
             // 更新 PictureBox 显示
             pbTrajectory.Image = finalBitmap;
         }
