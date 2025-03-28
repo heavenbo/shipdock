@@ -17,6 +17,8 @@ namespace shipdock
         //    StreamWriter writer = new StreamWriter(filePath, true);
         //    writer.AutoFlush = true; // 立即写入文件
         //    // 初始化卡尔曼滤波器，初始位置 (0,0)，Q=1，R=10
+
+
         //    KalmanFilter kf = new KalmanFilter(0, 0, q: 1, r: 10);
 
         //    // 模拟输入点 (每个时间点的测量值)

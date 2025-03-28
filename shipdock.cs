@@ -15,6 +15,8 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
 using Microsoft.VisualBasic.Devices;
 using System.Reflection;
+using System.Collections.Generic;
+using System;
 namespace shipdock
 {
     public partial class shipdock : Form
@@ -149,8 +151,8 @@ namespace shipdock
             //相关按钮disabled
             this.btnSendParam.Enabled = false;
             this.btnSendParam.ForeColor = System.Drawing.Color.Gray;
-            this.btnStartLadar.Enabled = false;
-            this.btnStartLadar.ForeColor = System.Drawing.Color.Gray;
+            //this.btnStartLadar.Enabled = false;
+            //this.btnStartLadar.ForeColor = System.Drawing.Color.Gray;
             this.btnStopLadar.Enabled = false;
             this.btnStopLadar.ForeColor = System.Drawing.Color.Gray;
 
@@ -517,16 +519,16 @@ namespace shipdock
             SerialPort sp = (SerialPort)sender;
             // 获取接收到的数据的长度
             int bytesToRead = sp.BytesToRead;
-            if (endDataIndex + bytesToRead > 2 * 65536)
+            if (endDataIndex + bytesToRead > databuffer.Length)
             {
-                sp.Read(databuffer, endDataIndex, 2 * 65536 - endDataIndex);
-                sp.Read(databuffer, 0, endDataIndex + bytesToRead - 2 * 65536);
+                sp.Read(databuffer, endDataIndex, databuffer.Length - endDataIndex);
+                sp.Read(databuffer, 0, endDataIndex + bytesToRead - databuffer.Length);
             }
             else
             {
                 sp.Read(databuffer, endDataIndex, bytesToRead);
             }
-            endDataIndex = (endDataIndex + bytesToRead) % (2 * 65536);
+            endDataIndex = (endDataIndex + bytesToRead) % (databuffer.Length);
         }
         private void btnClosePort_Click(object sender, EventArgs e)
         {
@@ -577,21 +579,64 @@ namespace shipdock
 
         private void btnStartLadar_Click(object sender, EventArgs e)
         {
-            if (IsChangeStart)
+            //if (IsChangeStart)
+            //{
+            //    userPortCLI = "sensorStart";
+            //    IsChangeStart = false;
+            //}
+            //else
+            //{
+            //    userPortCLI = "sensorStart 0";
+            //}
+            //if (UserSendCheck(userPort, userPortCLI, 1000, 200, "Done"))
+            //{
+            //    UpdateLog("雷达成功开启", LogLevel.Info);
+            //    datatimer.Start();
+            //    //开始记录数据
+            //}
+            Task.Run(() =>
             {
-                userPortCLI = "sensorStart";
-                IsChangeStart = false;
-            }
-            else
-            {
-                userPortCLI = "sensorStart 0";
-            }
-            if (UserSendCheck(userPort, userPortCLI, 1000, 200, "Done"))
-            {
-                UpdateLog("雷达成功开启", LogLevel.Info);
+                string filePath = "D:\\Matlab\\work\\radar\\shipdock\\Softweare\\mmwave_20250326\\斜线\\5.dat"; // 你的文件路径
                 datatimer.Start();
-                //开始记录数据
-            }
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    UpdateLog("文件长：" + fs.Length.ToString(), LogLevel.Info);
+                    while (fs.Position < fs.Length - 40)
+                    {
+                        int readlength = 12;
+                        if (endDataIndex + readlength > databuffer.Length)
+                        {
+                            fs.Read(databuffer, endDataIndex, databuffer.Length - endDataIndex);
+                            fs.Read(databuffer, 0, endDataIndex + readlength - databuffer.Length);
+                        }
+                        else
+                        {
+                            fs.Read(databuffer, endDataIndex, readlength);
+                        }
+                        byte[] numList = new byte[4];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            numList[i] = databuffer[(endDataIndex + 8 + i) % databuffer.Length];
+                        }
+                        endDataIndex = (endDataIndex + readlength) % databuffer.Length;
+                        //读取剩余包长
+                        int framelength = (int)BinaryPrimitives.ReadUInt32LittleEndian(numList);
+                        readlength = framelength - 12;
+                        if (endDataIndex + readlength > databuffer.Length)
+                        {
+                            fs.Read(databuffer, endDataIndex, databuffer.Length - endDataIndex);
+                            fs.Read(databuffer, 0, endDataIndex + readlength - databuffer.Length);
+                        }
+                        else
+                        {
+                            fs.Read(databuffer, endDataIndex, readlength);
+                        }
+                        endDataIndex = (endDataIndex + readlength) % databuffer.Length;
+                        Thread.Sleep(39);
+                    }
+                }
+                UpdateLog("读取完毕", LogLevel.Info);
+            });
         }
 
         private void btnRefreshPort_Click(object sender, EventArgs e)
@@ -722,9 +767,9 @@ namespace shipdock
                     && databuffer[(startDataIndex + 6) % databuffer.Length] == 8 && databuffer[(startDataIndex + 7) % databuffer.Length] == 7)
                 {
                     byte[] subbuffer = new byte[4];
-                    for (int j = 12; j < 16; j++)
+                    for (int j = 0; j < 4; j++)
                     {
-                        subbuffer[j - 12] = databuffer[(startDataIndex + j) % databuffer.Length];
+                        subbuffer[j] = databuffer[(startDataIndex + 8 + j) % databuffer.Length];//以前是加12的
                     }
                     frameIndex = BinaryPrimitives.ReadUInt32LittleEndian(subbuffer);
                 }
@@ -733,6 +778,7 @@ namespace shipdock
                     framebuffer.Add(databuffer[startDataIndex]);
                     frameIndex--;
                 }
+                startDataIndex = (startDataIndex + 1) % databuffer.Length;
                 if (framebuffer.Count != 0 && frameIndex == 0)
                 {
                     if (backgroundTask != null) backgroundTask.Wait();
@@ -740,10 +786,11 @@ namespace shipdock
                     backgroundTask = Task.Run(() => ProcessData(frame));
                     framebuffer.Clear();
                 }
-                startDataIndex = (startDataIndex + 1) % databuffer.Length;
+
             }
             datatimer.Start(); //执行完毕后再开启器
         }
+        int[] notdetect = new int[100];
         private void ProcessData(List<byte> frame)
         {
             if (frame.Count == 0)
@@ -753,17 +800,17 @@ namespace shipdock
             long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             byte[] timestampBytes = BitConverter.GetBytes(timestamp);
             //进行内存调整,调整8到20位的存储
-            for (int i = 8; i < 20; i++)
-            {
-                if (i < 12)
-                {
-                    frame[i] = frame[i + 4];
-                }
-                else
-                {
-                    frame[i] = timestampBytes[i - 12];
-                }
-            }
+            //for (int i = 8; i < 20; i++)
+            //{
+            //    if (i < 12)
+            //    {
+            //        frame[i] = frame[i + 4];
+            //    }
+            //    else
+            //    {
+            //        frame[i] = timestampBytes[i - 12];
+            //    }
+            //}
             if (frame.Count < 40) return;
             int index = 8;
             List<byte> numList = frame.GetRange(index, 4);
@@ -778,14 +825,14 @@ namespace shipdock
             uint framenumber = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
             index = 28;
             numList = frame.GetRange(index, 4);
-            index = index + 4;
             uint numDetectedObj = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
-            numList = frame.GetRange(index + 4, 4);
             index = index + 4;
+            numList = frame.GetRange(index, 4);
             uint numTLVs = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
-            numList = frame.GetRange(index + 4, 4);
             index = index + 4;
+            numList = frame.GetRange(index, 4);
             uint subFrameNumber = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
+            index = index + 4;
             numList = frame.GetRange(index, 4);
             index = index + 4;
             uint tlvType1 = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
@@ -813,11 +860,11 @@ namespace shipdock
             numList = frame.GetRange(index, 4);
             index = index + 4;
             uint tlvLength2 = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
-            UInt16[] PointInfo = new UInt16[2 * numDetectedObj];
-            for (int i = 0; i < 2 * numDetectedObj; i++)
+            UInt16[] PointInfo = new UInt16[numDetectedObj];
+            for (int i = 0; i < numDetectedObj; i++)
             {
                 numList = frame.GetRange(index, 2);
-                index = index + 2;
+                index = index + 4;
                 PointInfo[i] = BinaryPrimitives.ReadUInt16LittleEndian(numList.ToArray());
             }
             //进行选点
@@ -828,28 +875,34 @@ namespace shipdock
             double snrAverage = 0;
             for (int i = 0; i < numDetectedObj; i++)
             {
-                snrAverage = snrAverage + PointInfo[2 * i] / numDetectedObj;
+                snrAverage = snrAverage + PointInfo[i] / numDetectedObj;
             }
-            pointGraphics.Clear(Color.Transparent);
-            List<PointF> drawPoint = new List<PointF>();
+            if (framenumber % 800 == 0)
+            {
+                trajectories.Clear();
+                trajectories.Capacity = 0;
+                pointGraphics.Clear(Color.Transparent);
+
+            }
+            var PointList = new List<(PointF point, double snr)>();
             for (int i = 0; i < numDetectedObj; i++)
             {
-                if (PointInfo[2 * i] < snrAverage || (Math.Abs(axisPoint[2 * i]) < 1e-6 && Math.Abs(axisPoint[2 * i + 1]) < 1e-6))
+                if (PointInfo[i] < snrAverage || (Math.Abs(axisPoint[2 * i]) < 1e-6 && Math.Abs(axisPoint[2 * i + 1]) < 1e-6))
                 {
                     continue;
                 }
-                PointF pixelPoint = new PointF((axisPoint[2 * i] - RealLeftBottom.X) / axisXAdjusted + pbLeftBottom.X, pbLeftBottom.Y - (axisPoint[2 * i + 1] - RealLeftBottom.Y) / axisYAdjusted);
-                if (drawPoint.Count == 0)
+                PointF newpoint = new PointF(axisPoint[2 * i], axisPoint[2 * i + 1]);
+                if (PointList.Count == 0)
                 {
-                    drawPoint.Add(pixelPoint);
-                    //UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
+                    PointList.Add((newpoint, PointInfo[i]));
+                    UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
                 }
                 else
                 {
                     bool canAdd = true;
-                    foreach (var p in drawPoint)
+                    foreach (var p in PointList)
                     {
-                        if ((p.X - pixelPoint.X) * (p.X - pixelPoint.X) + (p.Y - pixelPoint.Y) * (p.Y - pixelPoint.Y) <= 9)
+                        if ((p.point.X - newpoint.X) * (p.point.X - newpoint.X) + (p.point.Y - newpoint.Y) * (p.point.Y - newpoint.Y) <= 9)
                         {
                             canAdd = false;
                             break;
@@ -857,25 +910,46 @@ namespace shipdock
                     }
                     if (canAdd)
                     {
-                        drawPoint.Add(pixelPoint);
-                        //UpdateLog("point; " + (new PointF(axisPoint[2 * i], axisPoint[2 * i + 1])).ToString(), LogLevel.Info);
+                        PointList.Add((newpoint, PointInfo[i]));
+                        UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
                     }
                 }
             }
             //进行画图
-            if (trajectories.Count == 0)
+            //选择近距离信号最强的作为信号点
+            if (subFrameNumber == 0 && PointList.Count != 0)
             {
-                PointF nearest = drawPoint.OrderBy(p => Trajectory.Distance(p, new PointF(0, 0))).First();//选择最近的点
-                trajectories.Add(new Trajectory(Color.Blue, Color.Black, pbLeftBottom, pbRightTop, nearest, q: 1, r: 10));
-                trajectories[1].AddPoint(pbTrajectory, nearest, pointGraphics);
-            }
-            else
-            {
-                PointF lastPoint = trajectories[1].getLastPoint();
-                PointF nearest = drawPoint.OrderBy(p => Trajectory.Distance(p, lastPoint)).First();//选择最近的点
-                if (Trajectory.Distance(lastPoint,nearest)<7)
+                if (trajectories.Count == 0)
                 {
-                    trajectories[1].AddPoint(pbTrajectory, nearest, pointGraphics);
+
+                    var maxItem = PointList.OrderByDescending(item => item.snr).First();
+                    PointF target = maxItem.point;//选择最近的点
+                    PointF pixelPoint = new PointF((target.X - RealLeftBottom.X) / axisXAdjusted + pbLeftBottom.X, pbLeftBottom.Y - (target.Y - RealLeftBottom.Y) / axisYAdjusted);
+                    trajectories.Add(new Trajectory(Color.Blue, Color.Red, pbLeftBottom, pbRightTop, target, q: 1, r: 10));
+                    trajectories[0].AddPoint(pbTrajectory, pixelPoint, pointGraphics);
+                    trajectories[0].realPoint.Add(target);
+                }
+                else
+                {
+
+                    PointF lastPoint = trajectories[0].realPoint[^1];
+                    PointF target = PointList.OrderBy(p => Trajectory.Distance(p.point, lastPoint)).First().point;//选择最近的点
+                    if (Trajectory.Distance(lastPoint, target) < 7)
+                    {
+                        trajectories[0].realPoint.Add(target);
+                        PointF pixelPoint = new PointF((target.X - RealLeftBottom.X) / axisXAdjusted + pbLeftBottom.X, pbLeftBottom.Y - (target.Y - RealLeftBottom.Y) / axisYAdjusted);
+                        trajectories[0].AddPoint(pbTrajectory, pixelPoint, pointGraphics);
+                    }
+                    else
+                    {
+                        notdetect[0] = notdetect[0] + 1;
+                        if (notdetect[0] > 3)
+                        {
+                            //trajectories[0].Exists=false;
+                            trajectories.RemoveAt(0);
+                            UpdateLog("无轨迹", LogLevel.Info);
+                        }
+                    }
                 }
             }
             bmpmutex.WaitOne();
