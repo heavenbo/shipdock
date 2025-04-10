@@ -151,8 +151,8 @@ namespace shipdock
             //相关按钮disabled
             this.btnSendParam.Enabled = false;
             this.btnSendParam.ForeColor = System.Drawing.Color.Gray;
-            //this.btnStartLadar.Enabled = false;
-            //this.btnStartLadar.ForeColor = System.Drawing.Color.Gray;
+            this.btnStartLadar.Enabled = false;
+            this.btnStartLadar.ForeColor = System.Drawing.Color.Gray;
             this.btnStopLadar.Enabled = false;
             this.btnStopLadar.ForeColor = System.Drawing.Color.Gray;
 
@@ -579,66 +579,22 @@ namespace shipdock
 
         private void btnStartLadar_Click(object sender, EventArgs e)
         {
-            //if (IsChangeStart)
-            //{
-            //    userPortCLI = "sensorStart";
-            //    IsChangeStart = false;
-            //}
-            //else
-            //{
-            //    userPortCLI = "sensorStart 0";
-            //}
-            //if (UserSendCheck(userPort, userPortCLI, 1000, 200, "Done"))
-            //{
-            //    UpdateLog("雷达成功开启", LogLevel.Info);
-            //    datatimer.Start();
-            //    //开始记录数据
-            //}
-            Task.Run(() =>
+            if (IsChangeStart)
             {
-                string filePath = "D:\\Matlab\\work\\radar\\shipdock\\Softweare\\mmwave_20250326\\斜线\\5.dat"; // 你的文件路径
+                userPortCLI = "sensorStart";
+                IsChangeStart = false;
+            }
+            else
+            {
+                userPortCLI = "sensorStart 0";
+            }
+            if (UserSendCheck(userPort, userPortCLI, 1000, 200, "Done"))
+            {
+                UpdateLog("雷达成功开启", LogLevel.Info);
                 datatimer.Start();
-                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                {
-                    UpdateLog("文件长：" + fs.Length.ToString(), LogLevel.Info);
-                    while (fs.Position < fs.Length - 40)
-                    {
-                        int readlength = 12;
-                        if (endDataIndex + readlength > databuffer.Length)
-                        {
-                            fs.Read(databuffer, endDataIndex, databuffer.Length - endDataIndex);
-                            fs.Read(databuffer, 0, endDataIndex + readlength - databuffer.Length);
-                        }
-                        else
-                        {
-                            fs.Read(databuffer, endDataIndex, readlength);
-                        }
-                        byte[] numList = new byte[4];
-                        for (int i = 0; i < 4; i++)
-                        {
-                            numList[i] = databuffer[(endDataIndex + 8 + i) % databuffer.Length];
-                        }
-                        endDataIndex = (endDataIndex + readlength) % databuffer.Length;
-                        //读取剩余包长
-                        int framelength = (int)BinaryPrimitives.ReadUInt32LittleEndian(numList);
-                        readlength = framelength - 12;
-                        if (endDataIndex + readlength > databuffer.Length)
-                        {
-                            fs.Read(databuffer, endDataIndex, databuffer.Length - endDataIndex);
-                            fs.Read(databuffer, 0, endDataIndex + readlength - databuffer.Length);
-                        }
-                        else
-                        {
-                            fs.Read(databuffer, endDataIndex, readlength);
-                        }
-                        endDataIndex = (endDataIndex + readlength) % databuffer.Length;
-                        Thread.Sleep(39);
-                    }
-                }
-                UpdateLog("读取完毕", LogLevel.Info);
-            });
+                //开始记录数据
+            }
         }
-
         private void btnRefreshPort_Click(object sender, EventArgs e)
         {
             string[] ports = SerialPort.GetPortNames();
@@ -734,14 +690,18 @@ namespace shipdock
             if (!Directory.Exists(DataPathName))
             {
                 Directory.CreateDirectory(DataPathName);
+                UpdateLog(DataPathName, LogLevel.Info);
             }
+
             DataPathName = DataPathName + "\\Data" + DateTime.Now.ToString("yyyyMMddHH") + ".dat";
+
             if (dataWriter != null)
             {
                 if (dataWriter.BaseStream is FileStream fs)
                 {
                     if (fs.Name != DataPathName)
                     {
+                        dataWriter.Close();
                         dataWriter = new BinaryWriter(File.Open(DataPathName, FileMode.Append));
                     }
                 }
@@ -769,7 +729,7 @@ namespace shipdock
                     byte[] subbuffer = new byte[4];
                     for (int j = 0; j < 4; j++)
                     {
-                        subbuffer[j] = databuffer[(startDataIndex + 8 + j) % databuffer.Length];//以前是加12的
+                        subbuffer[j] = databuffer[(startDataIndex + 12 + j) % databuffer.Length];//以前是加12的
                     }
                     frameIndex = BinaryPrimitives.ReadUInt32LittleEndian(subbuffer);
                 }
@@ -800,17 +760,17 @@ namespace shipdock
             long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             byte[] timestampBytes = BitConverter.GetBytes(timestamp);
             //进行内存调整,调整8到20位的存储
-            //for (int i = 8; i < 20; i++)
-            //{
-            //    if (i < 12)
-            //    {
-            //        frame[i] = frame[i + 4];
-            //    }
-            //    else
-            //    {
-            //        frame[i] = timestampBytes[i - 12];
-            //    }
-            //}
+            for (int i = 8; i < 20; i++)
+            {
+                if (i < 12)
+                {
+                    frame[i] = frame[i + 4];
+                }
+                else
+                {
+                    frame[i] = timestampBytes[i - 12];
+                }
+            }
             if (frame.Count < 40) return;
             int index = 8;
             List<byte> numList = frame.GetRange(index, 4);
@@ -820,6 +780,7 @@ namespace shipdock
                 return;
             }
             dataWriter.Write(frame.ToArray());
+            dataWriter.Flush();
             index = 20;
             numList = frame.GetRange(index, 4);
             uint framenumber = BinaryPrimitives.ReadUInt32LittleEndian(numList.ToArray());
@@ -895,7 +856,7 @@ namespace shipdock
                 if (PointList.Count == 0)
                 {
                     PointList.Add((newpoint, PointInfo[i]));
-                    UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
+                    //UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
                 }
                 else
                 {
@@ -911,7 +872,7 @@ namespace shipdock
                     if (canAdd)
                     {
                         PointList.Add((newpoint, PointInfo[i]));
-                        UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
+                        //UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
                     }
                 }
             }
@@ -947,7 +908,7 @@ namespace shipdock
                         {
                             //trajectories[0].Exists=false;
                             trajectories.RemoveAt(0);
-                            UpdateLog("无轨迹", LogLevel.Info);
+                            //UpdateLog("无轨迹", LogLevel.Info);
                         }
                     }
                 }

@@ -59,3 +59,4 @@ D:\Microsoft VS Code\work\shipdock\obj\Debug\net6.0-windows8.0\shipdock.pdb
 D:\Microsoft VS Code\work\shipdock\obj\Debug\net6.0-windows8.0\shipdock.genruntimeconfig.cache
 D:\Microsoft VS Code\work\shipdock\obj\Debug\net6.0-windows8.0\ref\shipdock.dll
 D:\Microsoft Visual Studio\work\shipdock\bin\Debug\net6.0-windows8.0\MathNet.Numerics.dll
+D:\Microsoft VS Code\work\shipdock\bin\Debug\net6.0-windows8.0\MathNet.Numerics.dll

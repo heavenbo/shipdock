@@ -34,12 +34,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 5,
@@ -50,8 +46,7 @@
               "RelativeToolTip": "KalmanFilter.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAAwDQAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T09:16:50.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T09:16:50.13Z"
             },
             {
               "$type": "Document",
@@ -63,8 +58,7 @@
               "RelativeToolTip": "Trajectory .cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAQwC8AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T07:50:32.369Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T07:50:32.369Z"
             },
             {
               "$type": "Document",
@@ -76,8 +70,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T14:24:40.65Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-22T14:24:40.65Z"
             },
             {
               "$type": "Document",
@@ -87,7 +80,7 @@
               "RelativeDocumentMoniker": "shipdock.cs",
               "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs",
               "RelativeToolTip": "shipdock.cs",
-              "ViewState": "AgIAAEMCAAAAAAAAAAAIwFYCAAB3AAAAAAAAAA==",
+              "ViewState": "AgIAAP4DAAAAAAAAAAAAAA0DAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-20T13:38:40.518Z",
               "EditorCaption": ""
@@ -102,8 +95,7 @@
               "RelativeToolTip": "ParamForm.Designer.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAswBwAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-13T09:09:08.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-13T09:09:08.213Z"
             },
             {
               "$type": "Document",
@@ -114,8 +106,7 @@
               "ToolTip": "D:\\Microsoft Visual Studio\\work\\shipdock\\shipdock.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "shipdock.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T01:49:02.203Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-02-12T01:49:02.203Z"
             }
           ]
         }
