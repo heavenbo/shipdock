@@ -856,7 +856,7 @@ namespace shipdock
                 if (PointList.Count == 0)
                 {
                     PointList.Add((newpoint, PointInfo[i]));
-                    //UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
+                    UpdateLog("point:" + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
                 }
                 else
                 {
@@ -872,7 +872,7 @@ namespace shipdock
                     if (canAdd)
                     {
                         PointList.Add((newpoint, PointInfo[i]));
-                        //UpdateLog("point; " + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
+                        UpdateLog("point:" + PointList[^1].point.ToString() + "snr: " + PointInfo[i].ToString(), LogLevel.Info);
                     }
                 }
             }
